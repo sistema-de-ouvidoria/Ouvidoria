@@ -29,11 +29,9 @@ class ManifestacaoFactory extends AbstractFactory {
                 . $manifestacao->getTipo() . "', '"
                 . $manifestacao->getAssunto() . "','"
                 . $manifestacao->getMensagem()."','"
-                . $manifestacao->getSigilo()."',$IDUsuario,'"
+                . (int)$manifestacao->getSigilo()."',$IDUsuario,'"
                 . $manifestacao->getDataManifestacao()."')";
-                var_dump($query);
-                $teste = mysqli_query($connection,$query);
-                var_dump($teste);
+
                 if (mysqli_query($connection,$query)) {
                     $result = true;
                 } else {
@@ -43,10 +41,8 @@ class ManifestacaoFactory extends AbstractFactory {
                 echo $exc->getMessage();
                 $result = false;
             }
-
             return $result;
     }
 
 }
-
 ?>

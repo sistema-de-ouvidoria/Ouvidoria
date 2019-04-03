@@ -24,8 +24,8 @@ include('model/ManifestacaoManager.php');
             default:
                 $this->home();
                 break;
-            }
         }
+    }
 
         public function home() {
         	require('view/criarManifestacao.php');
@@ -35,7 +35,7 @@ include('model/ManifestacaoManager.php');
             if (isset($_POST['sent'])){
 
                 $tipo = $_POST['tipo'];
-                $sigilo = $_POST['sigilo']? true : false;
+                $sigilo = isset($_POST['sigilo']) ? true : false;
                 $assunto = $_POST['assunto'];
                 $mensagem = $_POST['mensagem'];
                 $dataManifestacao = date('Y/d/m');
@@ -69,6 +69,4 @@ include('model/ManifestacaoManager.php');
                 require_once('index.php');
             }
         }
-
-
 }
