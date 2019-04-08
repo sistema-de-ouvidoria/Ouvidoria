@@ -26,7 +26,8 @@ class ManifestacaoManager {
 			//$this->manifestacao->setDiretorioArquivo($diretorio);
 		//}
 		
-		$sucess = $this->factory->salvar($manifestacao);
+		return $this->factory->salvar($manifestacao);
+
     }
 
 

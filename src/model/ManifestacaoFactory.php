@@ -25,23 +25,30 @@ class ManifestacaoFactory extends AbstractFactory {
     $IDUsuario = 0;
 
         try {
-            $query = "INSERT INTO manifestacao (Tipo, Assunto, Mensagem, Sigilo,IDUsuario,DataManifestacao) VALUES ('"
-                . $manifestacao->getTipo() . "', '"
+            $query = "INSERT INTO manifestacao (id_tipo_manifestacao,id_cidadao,assunto,mensagem,sigilo,data_manifestacao) VALUES ('"
+                . $manifestacao->getId_tipo_manifestacao() . "','"
+                . $IDUsuario . "','"
                 . $manifestacao->getAssunto() . "','"
-                . $manifestacao->getMensagem()."','"
-                . (int)$manifestacao->getSigilo()."',$IDUsuario,'"
+                . $manifestacao->getMensagem() . "','"
+                . (int)$manifestacao->getSigilo()."','"
                 . $manifestacao->getDataManifestacao()."')";
 
                 if (mysqli_query($connection,$query)) {
+                    $idGerado = mysqli_insert_id($connection);
                     $result = true;
                 } else {
+                    echo "deu ruim";
                     $result = false;
                 }
             } catch (PDOException $exc) {
                 echo $exc->getMessage();
                 $result = false;
             }
-            return $result;
+            if($result){
+                return $idGerado;
+            }
+                else
+                    return false;
     }
 
 }

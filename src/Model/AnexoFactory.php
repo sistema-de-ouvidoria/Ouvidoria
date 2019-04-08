@@ -15,10 +15,13 @@ class AnexoFactory extends AbstractFactory
         $anexo = $obj;
 
         try {
-            $query = "INSERT INTO anexo (nome_anexo, caminho, nome_real) VALUES ('"
-                . $anexo->getNomeAnexo() . "', '"
-                . $anexo->getCaminho() . "'','"
-                . $anexo->getNomeReal()."')";
+            $query = "INSERT INTO anexo (id_anexo, id_manifestacao, caminho,nome_anexo) VALUES ('"
+                . $anexo->getIdAnexo() . "', '"
+                . $anexo->getIdManifestacao() . "','"
+                . $anexo->getCaminho()."','"
+                . $anexo->getNomeAnexo()."')";
+
+                var_dump($query);
 
             if (mysqli_query($connection,$query)) {
                 $result = true;

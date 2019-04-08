@@ -4,12 +4,9 @@ class Situacao{
     protected $id_situacao;
     protected $nome_situacao;
 
-    function __construct($id_situacao,$nome_situacao) {
-        $this->id_situacao = $id_situacao;
-        $this->nome_situacao = $nome_situacao;
+    function __construct() {
 
     }
-
     public function getId_situacao(){
         return $this->id_situacao;
     }
