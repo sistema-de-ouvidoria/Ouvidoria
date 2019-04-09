@@ -33,8 +33,7 @@ CREATE TABLE IF NOT EXISTS `anexo` (
   `id_anexo` varchar(255) NOT NULL,
   `caminho` varchar(255) DEFAULT NULL,
   `nome_anexo` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id_anexo`),
-  KEY `fk_manifestacao` (`id_manifestacao`)
+  PRIMARY KEY (`id_anexo`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
