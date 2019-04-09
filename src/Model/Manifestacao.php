@@ -2,24 +2,24 @@
 class Manifestacao{
     protected $id_manifestacao;
     protected $id_tipo_manifestacao;
-    protected $id_cidadao;
-    protected $id_ouvidor;
-    protected $id_adm_publico;
+    protected $cidadao_cpf;
     protected $id_situacao;
     protected $assunto;
     protected $mensagem;
     protected $sigilo;
-    //protected $diretorioArquivo = array();
     protected $dataManifestacao;
     protected $data_resposta;
+    protected $id_anexo;
 
-    function __construct($tipo,$assunto,$mensagem,$sigilo,$dataManifestacao) {
+    function __construct($tipo,$assunto,$mensagem,$sigilo,$dataManifestacao, $cidadao_cpf, $id_situacao, $id_anexo) {
         $this->id_tipo_manifestacao = $tipo;
         $this->assunto = $assunto;
         $this->mensagem = $mensagem;
         $this->sigilo = $sigilo;
         $this->dataManifestacao = $dataManifestacao;
-
+        $this->cidadao_cpf = $cidadao_cpf;
+        $this->id_situacao = $id_situacao;
+        $this->id_anexo = $id_anexo;
     }
 
     public function setDiretorioArquivo(array $diretorioArquivo){
@@ -51,28 +51,12 @@ class Manifestacao{
         $this->id_tipo_manifestacao = $id_tipo_manifestacao;
     }
 
-    public function getId_cidadao(){
-        return $this->id_cidadao;
+    public function getCidadao_cpf(){
+        return $this->cidadao_cpf;
     }
 
-    public function setId_cidadao(usuario $id_cidadao){
-        $this->id_cidadao = $id_cidadao;
-    }
-
-    public function getId_ouvidor(){
-        return $this->id_ouvidor;
-    }
-
-    public function setId_ouvidor(usuario $id_ouvidor){
-        $this->id_ouvidor = $id_ouvidor;
-    }
-
-    public function getId_adm_publico(){
-        return $this->id_adm_publico;
-    }
-
-    public function setId_adm_publico(usuario $id_adm_publico){
-        $this->id_adm_publico = $id_adm_publico;
+    public function setCidadao_cpf(usuario $cidadao_cpf){
+        $this->cidadao_cpf = $cidadao_cpf;
     }
 
     public function getId_situacao(){
@@ -121,6 +105,14 @@ class Manifestacao{
 
     public function setData_resposta($data_resposta){
         $this->data_resposta = $data_resposta;
+    }
+
+    public function getIdAnexo(){
+        return $this->id_anexo;
+    }
+
+    public function setIdAnexo(string $id_anexo){
+        $this->id_anexo = $id_anexo;
     }
 }
 ?>

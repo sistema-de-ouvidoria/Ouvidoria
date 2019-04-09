@@ -6,9 +6,8 @@ class Anexo{
     protected $caminho;
     protected $nome_anexo;
 
-    function __construct(string $id_anexo,int $id_manifestacao,string $caminho,string $nome_anexo) {
+    function __construct(string $id_anexo,string $caminho,string $nome_anexo) {
         $this->id_anexo = $id_anexo;
-        $this->id_manifestacao = $id_manifestacao;
         $this->caminho = $caminho;
         $this->nome_anexo = $nome_anexo;
     }

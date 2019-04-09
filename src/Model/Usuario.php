@@ -1,6 +1,6 @@
 <?php
 
-class Manifestacao{
+class Usuario{
     protected $cpf;
     protected $id_tipo_usuario;
     protected $nome;

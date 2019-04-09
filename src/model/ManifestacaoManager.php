@@ -11,7 +11,8 @@ class ManifestacaoManager {
         $this->factory = new ManifestacaoFactory();
     }
 
-    public function salvaManifestacao(string $tipo,string $assunto,string $mensagem,bool $sigilo,string $dataManifestacao){
+    public function salvaManifestacao(string $tipo,string $assunto,string $mensagem,bool $sigilo,string $dataManifestacao,
+									  string $cidadao_cpf, int $situacao, string $id_anexo){
     	if (!isset($tipo) || $tipo == "" ) {
 			throw new Exception("O campo <strong>tipo</strong> deve ser preenchido!");
 		} elseif (!isset($assunto) || $assunto == "") {
@@ -21,11 +22,9 @@ class ManifestacaoManager {
 		}
 		
 
-		$manifestacao = new Manifestacao($tipo, $assunto, $mensagem, $sigilo,$dataManifestacao);
-		//foreach ($diretorios as $diretorio) {
-			//$this->manifestacao->setDiretorioArquivo($diretorio);
-		//}
-		
+		$manifestacao = new Manifestacao($tipo, $assunto, $mensagem, $sigilo,$dataManifestacao,
+			$cidadao_cpf, $situacao,$id_anexo);
+
 		return $this->factory->salvar($manifestacao);
 
     }

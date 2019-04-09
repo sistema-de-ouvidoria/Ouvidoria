@@ -1,6 +1,6 @@
 <?php
 require ('model/Connection.php');
-$query = "SELECT id_tipo_manifestacao,nome_tipo_manifestacao from tipomanifestacao";
+$query = "SELECT * from tipomanifestacao";
 $tipos = mysqli_query($connection,$query);
 ?>
 <!DOCTYPE html>
@@ -63,7 +63,7 @@ $tipos = mysqli_query($connection,$query);
 
             <form enctype="multipart/form-data" action="?function=criarManifestacao" method="POST">     
                 <p>Descreva abaixo o conteúdo de sua manifestação. Se você quiser, é possível inserir anexos para melhor fundamentar sua manifestação.</p>        
-                <label>Tpo de manifestacao:</label>
+                <label>Tipo de manifestacao:</label>
                 <?php
                     $tipoSelecionado = null;
                     echo "<select name = 'tipo'>";
@@ -95,7 +95,7 @@ $tipos = mysqli_query($connection,$query);
                 <div id="texto-explicativo" style="font-size: 12px">
                     (Optar pelo sigilo garante que seus dados serão acessados somente pela ouvidoria e orgãos responsáveis pela sua manifestação.)
                 </div>   
-                <label><strong>Maifestacão sigilosa: </strong></label>
+                <label><strong>Manifestacão sigilosa: </strong></label>
                 <input type="checkbox" name="sigilo" value="true">Sim<br>
                 <br>
                 <input name="sent" type="submit" value="Enviar" class="float-right btn btn-outline-success btn-lg active"/>    
