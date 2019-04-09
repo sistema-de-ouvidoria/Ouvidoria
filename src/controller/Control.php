@@ -2,6 +2,7 @@
 include('model/ManifestacaoManager.php');
 include('model/AnexoManager.php');
 include('model/TipoManager.php');
+include ('model/UsuarioManager.php');
  class Control {
 
     private $manager;
@@ -11,6 +12,7 @@ include('model/TipoManager.php');
         $this->manifestacaoManager = new ManifestacaoManager();
         $this->anexoManager = new Anexomanager();
         $this->tipoManager = new TipoManager();
+        $this->usuarioManager = new UsuarioManager();
     }
 
     public function init() {
@@ -45,7 +47,7 @@ include('model/TipoManager.php');
             $assunto = $_POST['assunto'];
             $mensagem = $_POST['mensagem'];
             $dataManifestacao = date('Y/m/d');
-            $cidadao = '12345678910';
+            $cpf_usuario = '12345678910';
             $situacao = 1;
             $idAnexo = "";
 
@@ -62,8 +64,12 @@ include('model/TipoManager.php');
             }
 
             try {
-                if($this->manifestacaoManager->salvaManifestacao($tipo, $assunto, $mensagem, $sigilo, $dataManifestacao, $cidadao, $situacao, $idAnexo)){
-                    echo "<script type=\"text/javascript\">alert(\"Sua manifestação foi criada com sucesso!\");window.location.href=\"index.php\";</script>"; 
+                $idGerado = $this->manifestacaoManager->salvaManifestacao($tipo, $assunto, $mensagem, $sigilo, $dataManifestacao, $cpf_usuario, $situacao, $idAnexo);
+                if($idGerado != null){
+                    //echo "<script type=\"text/javascript\">alert(\"Sua manifestação foi criada com sucesso!\");window.location.href=\"index.php\";</script>";
+                    $nome_usuario = $this->usuarioManager->buscaUsuario($cpf_usuario);
+                    $protocolo_manifestacao = $idGerado; 
+                    require('view/sucesso.php');
                 }
                 
             } catch (Exception $e) {

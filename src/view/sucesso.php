@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <title>Criar Manifestação</title>
-        <meta charset="utf-8">
+<html>
+<head>
+	<meta charset="utf-8">
         <meta http-equiv=”content-type” content="text/html;" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="keywords" content="tags, que, eu, quiser, usar, para, os, robos, do, google" />
-        <title>Fala aÍ</title>
+        <title>Manifestacação criada com sucesso</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <style type="text/css">
+        	div.msg{
+        	text-align: center;
+        	margin-left:10px;
+        	font-size: 30px;
+        }
+        	strong.sucesso{
+        		color: green;
+        	}
+        </style>
 
 
         <!-- BOOTSTRAP -->
@@ -23,10 +33,10 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-    </head>
-    <body>
+</head>
+<body>
 
-        <!--MENU SUPERIOR -->
+	<!--MENU SUPERIOR -->
       
             <nav class="navbar navbar-dark navbar-expand-lg bg-dark" > 
                 <!--BOTÃO SANDUICHE-->
@@ -48,55 +58,14 @@
             </nav>
 
         <!--FIM MENU SUPERIOR --> 
-
-        <!--INICIO DO FORMULÁRIO -->
-
-      
         <br>
-        <div id="manifestacao" style="margin-left: 1cm">
-            <h3>Manifestação</h3>  
-
-            <form enctype="multipart/form-data" action="?function=criarManifestacao" method="POST">     
-                <p>Descreva abaixo o conteúdo de sua manifestação. Se você quiser, é possível inserir anexos para melhor fundamentar sua manifestação.</p>        
-                <label>Tipo de manifestacao:</label>
-                <?php
-                $tipoSelecionado = null;
-                echo "<select name = 'tipo'>";
-                $tamanho = count($listaTipos);
-                if(isset($listaTipos)){
-                    for($i = 0; $i < $tamanho; $i = $i + 2){
-                        echo "<option value = {$listaTipos[$i]}";
-                        if($tipoSelecionado == $listaTipos[$i])
-                            echo "selected = 'selected'";
-                        echo ">{$listaTipos[$i+1]}</option>";
-                    }
-                }
-                echo "</select>"
-                ?>
-                <br>
-                <strong>Sobre o que deseja se manifestar?</strong>
-                <br>   
-                       
-                <label>Assunto:</label>
-                <input name="assunto" type="text" class="form-control col-md-8" maxlength="100" required="requied" />             
-                <br>
-                <label>Incluir anexos: </label>
-                <br>
-                <input name="anexo" type="file"/>           
-                <br>
-                <br>
-                <label>Sua mensagem:</label>
-                <textarea name="mensagem" rows="6" class="form-control col-md-8" maxlength="1000" required></textarea>
-                <br>
-                Se deseja que sua manifestação seja sigilosa, marque a opção: <strong>"Manifestação sigilosa"</strong>.
-                <div id="texto-explicativo" style="font-size: 12px">
-                    (Optar pelo sigilo garante que seus dados serão acessados somente pela ouvidoria e orgãos responsáveis pela sua manifestação.)
-                </div>   
-                <label><strong>Manifestacão sigilosa: </strong></label>
-                <input type="checkbox" name="sigilo" value="true">Sim<br>
-                <br>
-                <input name="sent" type="submit" value="Enviar" class="float-right btn btn-outline-success btn-lg active"/>    
-            </form><!--FIM DO FORMULÁRIO -->    
-        </div>
-   </body>
+        <div class="msg" style="margin-top:50px;">Parabéns, sua manifestação foi enviada com <strong class="sucesso">sucesso!</strong></div>
+        <br>
+        <div class="msg" style="margin-top:200px;">Prezado(a) <strong><?php echo $nome_usuario; ?></strong>,
+		sua manifestação foi criada e será encaminhada para o órgão responsável que terá <strong>30 dias úteis</strong> para resposta.</div>
+		<br>
+		<div class="msg" style="margin-top:50px;"><strong>Protocolo de atendimento <?php echo $protocolo_manifestacao . "."; ?></strong></div>
+		<br>
+		<div class="msg" style="margin-top:50px;">Para acompanhar sua manifestação, <a href="?=function=abrirManifestacao&<?php echo $protocolo_manifestacao; ?>">clique aqui</a> ou através da opção acompanhe sua manifestação no menu acima buscando com o protocolo gerado.</div>
+</body>
 </html>

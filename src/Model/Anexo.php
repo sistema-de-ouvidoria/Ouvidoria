@@ -2,7 +2,6 @@
 
 class Anexo{
     protected $id_anexo;
-    protected $id_manifestacao;
     protected $caminho;
     protected $nome_anexo;
 
@@ -34,12 +33,6 @@ class Anexo{
 
     public function setCaminho($caminho){
         $this->caminho = $caminho;
-    }
-    public function getIdManifestacao(){
-        return $this->id_manifestacao;
-    }
-    public function setIdManifestacao(string $id_manifestacao){
-        $this->id_manifestacao = $id_manifestacao;
     }
 }
 ?>

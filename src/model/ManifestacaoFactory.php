@@ -35,7 +35,8 @@ class ManifestacaoFactory extends AbstractFactory {
                 . $manifestacao->getDataManifestacao()."')";
 
                 if (mysqli_query($connection,$query)) {
-                    $result = true;
+                    $idGerado = mysqli_insert_id($connection);
+                    //$result = true;
                 } else {
                     $result = false;
                 }
@@ -43,7 +44,7 @@ class ManifestacaoFactory extends AbstractFactory {
                 echo $exc->getMessage();
                 $result = false;
             }
-            return $result;
+            return $idGerado;
     }
 }
 ?>
