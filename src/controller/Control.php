@@ -1,6 +1,7 @@
 <?php
 include('model/ManifestacaoManager.php');
 include('model/AnexoManager.php');
+include('model/TipoManager.php');
  class Control {
 
     private $manager;
@@ -8,7 +9,8 @@ include('model/AnexoManager.php');
     public function __construct() {
 
         $this->manifestacaoManager = new ManifestacaoManager();
-        $this->anexoManager = new anexomanager();
+        $this->anexoManager = new Anexomanager();
+        $this->tipoManager = new TipoManager();
     }
 
     public function init() {
@@ -30,6 +32,7 @@ include('model/AnexoManager.php');
     }
 
     public function home() {
+        $listaTipos = $this->tipoManager->listaTipos();
         require('view/criarManifestacao.php');
     }
 
@@ -46,25 +49,28 @@ include('model/AnexoManager.php');
             $situacao = 1;
             $idAnexo = "";
 
-            if ($_FILES['anexo']['error'][0] != UPLOAD_ERR_NO_FILE) {
-                $nome_anexo = $_FILES['anexo']['name'][0];
+            if ($_FILES['anexo']['error'] != UPLOAD_ERR_NO_FILE) {
+                $nome_anexo = $_FILES['anexo']['name'];
                 $extensao = explode('.', $nome_anexo);
                 $extensao = strtolower(end($extensao));
                 $idAnexo = "anexo-" . date('d-m-Y_h_i_s');
-                $caminho = "C:/wamp64/www/OuvidoriaSprint/Ouvidoria/src/arquivos/";
+                $caminho = "C:/wamp64/www/Ouvidoria/src/arquivos/";
 
-                if(move_uploaded_file($_FILES['anexo']['tmp_name'][0], $caminho . $idAnexo . "." . $extensao)) {
+                if(move_uploaded_file($_FILES['anexo']['tmp_name'], $caminho . $idAnexo . "." . $extensao)) {
                     $this->anexoManager->salvaAnexo($idAnexo, $caminho, $nome_anexo);
                 }
             }
 
             try {
-                $this->manifestacaoManager->salvaManifestacao($tipo, $assunto, $mensagem, $sigilo, $dataManifestacao, $cidadao, $situacao, $idAnexo);
+                if($this->manifestacaoManager->salvaManifestacao($tipo, $assunto, $mensagem, $sigilo, $dataManifestacao, $cidadao, $situacao, $idAnexo)){
+                    echo "<script type=\"text/javascript\">alert(\"Sua manifestação foi criada com sucesso!\");window.location.href=\"index.php\";</script>"; 
+                }
+                
             } catch (Exception $e) {
                 $sucess = false;
                 $msg = $e->getMessage();
             }
-            header("location: index.php");
+            //header("location: index.php");
         }
         else {
             echo "<script type=\"text/javascript\">alert(\"O arquivo excede o tamanho máximo de upload do site!\");window.location.href=\"index.php\";</script>";

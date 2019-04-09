@@ -1,11 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 4.8.4
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1:3306
--- Generation Time: 05-Abr-2019 às 00:53
--- Versão do servidor: 5.7.24
--- versão do PHP: 7.2.14
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -13,35 +6,15 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `ouvidoria`
---
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `anexo`
---
-
+  use ouvidoria;
 DROP TABLE IF EXISTS `anexo`;
 CREATE TABLE IF NOT EXISTS `anexo` (
   `id_anexo` varchar(255) NOT NULL,
   `caminho` varchar(255) DEFAULT NULL,
   `nome_anexo` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id_anexo`),
-  KEY `fk_manifestacao` (`id_manifestacao`)
+  PRIMARY KEY (`id_anexo`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `manifestacao`
---
 
 DROP TABLE IF EXISTS `manifestacao`;
 CREATE TABLE IF NOT EXISTS `manifestacao` (
@@ -61,11 +34,6 @@ CREATE TABLE IF NOT EXISTS `manifestacao` (
   CONSTRAINT FK_manif_tipomanif FOREIGN KEY (`id_tipo_manifestacao`) REFERENCES tipomanifestacao(`id_tipo_manifestacao`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `situacao`
---
 
 DROP TABLE IF EXISTS `situacao`;
 CREATE TABLE IF NOT EXISTS `situacao` (
@@ -74,11 +42,7 @@ CREATE TABLE IF NOT EXISTS `situacao` (
   PRIMARY KEY (`id_situacao`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
 
---
--- Estrutura da tabela `tipomanifestacao`
---
 
 DROP TABLE IF EXISTS `tipomanifestacao`;
 CREATE TABLE IF NOT EXISTS `tipomanifestacao` (
@@ -87,12 +51,6 @@ CREATE TABLE IF NOT EXISTS `tipomanifestacao` (
   PRIMARY KEY (`id_tipo_manifestacao`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `tipousuario`
---
-
 DROP TABLE IF EXISTS `tipousuario`;
 CREATE TABLE IF NOT EXISTS `tipousuario` (
   `id_tipo_usuario` int(11) NOT NULL AUTO_INCREMENT,
@@ -100,11 +58,6 @@ CREATE TABLE IF NOT EXISTS `tipousuario` (
   PRIMARY KEY (`id_tipo_usuario`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `usuario`
---
 
 DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE IF NOT EXISTS `usuario` (
@@ -121,23 +74,13 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 COMMIT;
 
---
--- Extraindo dados da tabela `tipomanifestacao`
---
 
 INSERT INTO `tipomanifestacao` (`nome_tipo_manifestacao`) VALUES
 ('Elogio'),
 ('Denuncia');
 
---
--- Extraindo dados da tabela `situacao`
---
 
 INSERT INTO `situacao` (`nome_situacao`) VALUES
 ('Aberta'),
 ('Encaminhada'),
 ('Fechada');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

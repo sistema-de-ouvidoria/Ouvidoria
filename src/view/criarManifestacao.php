@@ -1,8 +1,3 @@
-<?php
-require ('model/Connection.php');
-$query = "SELECT * from tipomanifestacao";
-$tipos = mysqli_query($connection,$query);
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -65,31 +60,33 @@ $tipos = mysqli_query($connection,$query);
                 <p>Descreva abaixo o conteúdo de sua manifestação. Se você quiser, é possível inserir anexos para melhor fundamentar sua manifestação.</p>        
                 <label>Tipo de manifestacao:</label>
                 <?php
-                    $tipoSelecionado = null;
-                    echo "<select name = 'tipo'>";
-                    while (($row = mysqli_fetch_assoc($tipos)) != null)
-                    {
-                        echo "<option value = '{$row['id_tipo_manifestacao']}'";
-                        if ($tipoSelecionado == $row['id_tipo_manifestacao'])
+                $tipoSelecionado = null;
+                echo "<select name = 'tipo'>";
+                $tamanho = count($listaTipos);
+                if(isset($listaTipos)){
+                    for($i = 0; $i < $tamanho; $i = $i + 2){
+                        echo "<option value = {$listaTipos[$i]}";
+                        if($tipoSelecionado == $listaTipos[$i])
                             echo "selected = 'selected'";
-                        echo ">{$row['nome_tipo_manifestacao']}</option>";
+                        echo ">{$listaTipos[$i+1]}</option>";
                     }
-                    echo "</select>";
+                }
+                echo "</select>"
                 ?>
-                <br>          
+                <br>
                 <strong>Sobre o que deseja se manifestar?</strong>
                 <br>   
                        
                 <label>Assunto:</label>
-                <input name="assunto" type="text" class="form-control col-md-8"/>             
+                <input name="assunto" type="text" class="form-control col-md-8" maxlength="100" required="requied" />             
                 <br>
                 <label>Incluir anexos: </label>
                 <br>
-                <input name="anexo[]" type="file" multiple="multiple" />           
+                <input name="anexo" type="file"/>           
                 <br>
                 <br>
                 <label>Sua mensagem:</label>
-                <textarea name="mensagem" rows="6" class="form-control col-md-12"> </textarea>
+                <textarea name="mensagem" rows="6" class="form-control col-md-8" maxlength="1000" required></textarea>
                 <br>
                 Se deseja que sua manifestação seja sigilosa, marque a opção: <strong>"Manifestação sigilosa"</strong>.
                 <div id="texto-explicativo" style="font-size: 12px">
