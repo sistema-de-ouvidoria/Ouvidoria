@@ -1,5 +1,5 @@
 <?php
-require('Connection.php');
+require('Conexao.php');
 require_once("model/Manifestacao.php");
 require_once("model/ManifestacaoFactory.php");
 

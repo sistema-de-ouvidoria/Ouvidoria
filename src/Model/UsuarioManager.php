@@ -11,7 +11,7 @@ class Usuariomanager
 
     public function buscaUsuario(string $cpf){
 
-        return $this->factory->selectUsuario($cpf);
+        return $this->factory->selecionarUsuario($cpf);
 
 
     }

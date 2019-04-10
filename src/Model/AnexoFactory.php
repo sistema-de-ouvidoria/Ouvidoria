@@ -1,6 +1,6 @@
 <?php
 
-include("model/Connection.php");
+include("model/Conexao.php");
 require_once("Anexo.php");
 require_once("AbstractFactory.php");
 class AnexoFactory extends AbstractFactory
@@ -11,7 +11,7 @@ class AnexoFactory extends AbstractFactory
     }
 
     public function salvar($obj) {
-        global $connection;
+        global $conexao;
         $anexo = $obj;
 
         try {
@@ -20,7 +20,7 @@ class AnexoFactory extends AbstractFactory
                 . $anexo->getCaminho()."','"
                 . $anexo->getNomeAnexo()."')";
 
-            if (mysqli_query($connection,$query)) {
+            if (mysqli_query($conexao,$query)) {
                 $result = true;
             } else {
                 $result = false;

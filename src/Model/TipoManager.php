@@ -12,7 +12,7 @@ class TipoManager
 
     public function listaTipos(){
 
-        return $this->factory->selectAllTipos();
+        return $this->factory->selecionarTodosOsTipos();
 
     }
 }

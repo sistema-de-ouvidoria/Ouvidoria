@@ -1,6 +1,6 @@
 <?php
 
-include("model/Connection.php");
+include("model/Conexao.php");
 require_once("Manifestacao.php");
 require_once("AbstractFactory.php");
 
@@ -20,7 +20,7 @@ class ManifestacaoFactory extends AbstractFactory {
     */
 
     public function salvar($obj) {
-    global $connection;
+    global $conexao;
     $manifestacao = $obj;
 
         try {
@@ -34,15 +34,15 @@ class ManifestacaoFactory extends AbstractFactory {
                 . $manifestacao->getIdAnexo()."','"
                 . $manifestacao->getDataManifestacao()."')";
 
-                if (mysqli_query($connection,$query)) {
-                    $idGerado = mysqli_insert_id($connection);
-                    //$result = true;
+                if (mysqli_query($conexao,$query)) {
+                    $idGerado = mysqli_insert_id($conexao);
+                    //$resultado = true;
                 } else {
-                    $result = false;
+                    $resultado = false;
                 }
             } catch (PDOException $exc) {
                 echo $exc->getMessage();
-                $result = false;
+                $resultado = false;
             }
             return $idGerado;
     }

@@ -1,6 +1,6 @@
 <?php
 
-include("model/Connection.php");
+include("model/Conexao.php");
 require_once("TipoManifestacao.php");
 require_once("AbstractFactory.php");
 
@@ -21,12 +21,12 @@ class TipoFactory extends AbstractFactory {
 
     public function salvar($obj) {
     }
-    public function selectAllTipos(){
-        global $connection;
+    public function selecionarTodosOsTipos(){
+        global $conexao;
         $tipos = array();
         $query = "SELECT id_tipo_manifestacao,nome_tipo_manifestacao from tipomanifestacao";
         try{
-            $resultado = mysqli_query($connection,$query);
+            $resultado = mysqli_query($conexao,$query);
             if(mysqli_num_rows($resultado) > 0){
                 $i = 0;
                 while($row = mysqli_fetch_array($resultado)){

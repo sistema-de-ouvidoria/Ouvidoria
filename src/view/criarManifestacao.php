@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -19,6 +18,8 @@
         <!-- ESTILOS PARA ESTA PÁGINA -->
         <!-- Nesse caso, este estilo é apenas para inserir imagens -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+        <link href="css/estilo.css" rel="stylesheet" type="text/css">
         
         <!-- JAVASCRIPT E JQUERY -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -79,7 +80,8 @@
                 <br>   
                        
                 <label>Assunto:</label>
-                <input name="assunto" type="text" class="form-control col-md-8" maxlength="100" required="requied" />             
+                <input name="assunto" type="text" class="form-control col-md-8" maxlength="100" required oninvalid="setCustomValidity('O campo assunto não pode estar vazio')" onchange="try{setCustomValidity('')}catch(e){}"/>
+
                 <br>
                 <label>Incluir anexos: </label>
                 <br>
@@ -87,7 +89,7 @@
                 <br>
                 <br>
                 <label>Sua mensagem:</label>
-                <textarea name="mensagem" rows="6" class="form-control col-md-8" maxlength="1000" required></textarea>
+                <textarea name="mensagem" rows="6" class="form-control col-md-8" maxlength="1000" required oninvalid="setCustomValidity('O campo sua mensagem não pode estar vazio')" onchange="try{setCustomValidity('')}catch(e){}"></textarea>
                 <br>
                 Se deseja que sua manifestação seja sigilosa, marque a opção: <strong>"Manifestação sigilosa"</strong>.
                 <div id="texto-explicativo" style="font-size: 12px">
@@ -96,7 +98,7 @@
                 <label><strong>Manifestacão sigilosa: </strong></label>
                 <input type="checkbox" name="sigilo" value="true">Sim<br>
                 <br>
-                <input name="sent" type="submit" value="Enviar" class="float-right btn btn-outline-success btn-lg active"/>    
+                <input id="teste" name="sent" type="submit" value="Enviar" class="btn btn-outline-success btn-lg active"/>
             </form><!--FIM DO FORMULÁRIO -->    
         </div>
    </body>

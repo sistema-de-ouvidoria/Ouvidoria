@@ -22,18 +22,6 @@ class Manifestacao{
         $this->id_anexo = $id_anexo;
     }
 
-    public function setDiretorioArquivo(array $diretorioArquivo){
-        $this->diretorioArquivo = $diretorioArquivo;
-    }
-    public function getDiretorioArquivo($indice)
-    {
-        if(array_key_exists($indice,$this->diretorioArquivo)):
-            return $this->diretorioArquivo[$indice];
-        else:
-            exit(0);
-        endif;
-    }
-
     //Setters e Getters da classe Manifestacao
     public function getId_manifestacao(){
         return $this->id_manifestacao;
