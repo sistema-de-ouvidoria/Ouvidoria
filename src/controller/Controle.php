@@ -56,7 +56,7 @@ include ('model/UsuarioManager.php');
                 $extensao = explode('.', $nome_anexo);
                 $extensao = strtolower(end($extensao));
                 $idAnexo = "anexo-" . date('d-m-Y_h_i_s');
-                $caminho = "C:/wamp64/www/Ouvidoria/Ouvidoria/src/arquivos/";
+                $caminho = "C:/wamp64/www/Ouvidoria/src/arquivos/";
 
                 if(move_uploaded_file($_FILES['anexo']['tmp_name'], $caminho . $idAnexo . "." . $extensao)) {
                     $this->anexoManager->salvaAnexo($idAnexo, $caminho, $nome_anexo);
