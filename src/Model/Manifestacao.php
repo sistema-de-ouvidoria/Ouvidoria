@@ -7,7 +7,7 @@ class Manifestacao{
     protected $assunto;
     protected $mensagem;
     protected $sigilo;
-    protected $dataManifestacao;
+    protected $data_manifestacao;
     protected $data_resposta;
     protected $id_anexo;
 
@@ -16,7 +16,7 @@ class Manifestacao{
         $this->assunto = $assunto;
         $this->mensagem = $mensagem;
         $this->sigilo = $sigilo;
-        $this->dataManifestacao = $dataManifestacao;
+        $this->data_manifestacao = $dataManifestacao;
         $this->cidadao_cpf = $cidadao_cpf;
         $this->id_situacao = $id_situacao;
         $this->id_anexo = $id_anexo;
@@ -80,11 +80,11 @@ class Manifestacao{
     }
 
     public function getDataManifestacao(){
-        return $this->dataManifestacao;
+        return $this->data_manifestacao;
     }
 
-    public function setDataManifestacao($dataManifestacao){
-        $this->dataManifestacao = $dataManifestacao;
+    public function setDataManifestacao($data_manifestacao){
+        $this->data_manifestacao = $data_manifestacao;
     }
 
     public function getData_resposta(){

@@ -2,14 +2,12 @@
 
 include("model/Conexao.php");
 require_once("TipoManifestacao.php");
-require_once("AbstractFactory.php");
 
-class TipoFactory extends AbstractFactory {
+class TipoFactory {
 
 
     public function __construct() {
 
-        parent::__construct();
     }
 
 
@@ -21,7 +19,7 @@ class TipoFactory extends AbstractFactory {
 
     public function salvar($obj) {
     }
-    public function selecionarTodosOsTipos(){
+    public function listarTipoManifestacao(){
         global $conexao;
         $tipos = array();
         $query = "SELECT id_tipo_manifestacao,nome_tipo_manifestacao from tipomanifestacao";

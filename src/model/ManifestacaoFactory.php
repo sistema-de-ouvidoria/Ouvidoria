@@ -2,14 +2,12 @@
 
 include("model/Conexao.php");
 require_once("Manifestacao.php");
-require_once("AbstractFactory.php");
 
-class ManifestacaoFactory extends AbstractFactory {
+class ManifestacaoFactory  {
 
 
     public function __construct() {
 
-        parent::__construct();
     }
 
 
@@ -19,7 +17,7 @@ class ManifestacaoFactory extends AbstractFactory {
     * @return boolean - se conseguiu salvar ou não.
     */
 
-    public function salvar($obj) {
+    public function salvarManifestacao($obj) {
     global $conexao;
     $manifestacao = $obj;
 

@@ -25,7 +25,7 @@ class ManifestacaoManager {
 		$manifestacao = new Manifestacao($tipo, $assunto, $mensagem, $sigilo,$dataManifestacao,
 			$cidadao_cpf, $situacao,$id_anexo);
 
-		return $this->factory->salvar($manifestacao);
+		return $this->factory->salvarManifestacao($manifestacao);
 
     }
 

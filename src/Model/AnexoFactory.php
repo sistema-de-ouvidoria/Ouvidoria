@@ -2,12 +2,10 @@
 
 include("model/Conexao.php");
 require_once("Anexo.php");
-require_once("AbstractFactory.php");
-class AnexoFactory extends AbstractFactory
+class AnexoFactory
 {
     public function __construct() {
 
-        parent::__construct();
     }
 
     public function salvar($obj) {

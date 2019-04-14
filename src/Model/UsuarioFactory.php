@@ -2,14 +2,12 @@
 
 include("model/Conexao.php");
 require_once("Manifestacao.php");
-require_once("AbstractFactory.php");
 
-class UsuarioFactory extends AbstractFactory {
+class UsuarioFactory {
 
 
     public function __construct() {
 
-        parent::__construct();
     }
 
 

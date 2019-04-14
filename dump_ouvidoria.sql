@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `cpf` varchar(11),
   `id_tipo_usuario` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL,
-  `endereco` varchar(255) DEFAULT NULL,
+  `endereco` varchar(255) NOT NULL,
   `telefone` varchar(11) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `senha` varchar(32) NOT NULL,

@@ -69,7 +69,7 @@ include ('model/UsuarioManager.php');
                     //echo "<script type=\"text/javascript\">alert(\"Sua manifestação foi criada com sucesso!\");window.location.href=\"index.php\";</script>";
                     $nome_usuario = $this->usuarioManager->buscaUsuario($cpf_usuario);
                     $protocolo_manifestacao = $idGerado; 
-                    require('view/sucesso.php');
+                    require('view/manifestacaoCriada.php');
                 }
                 
             } catch (Exception $e) {
