@@ -1,0 +1,1 @@
+Diretorio com todos os arquivos e imagens do sistema.
