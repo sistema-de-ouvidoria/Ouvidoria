@@ -65,10 +65,10 @@ include ('model/UsuarioManager.php');
                 }
             }
             else{
-                $msg = true;
+                $msgErrosenhaIgual = false;
             }
 
-            //require('view/cadastrarUsuario.php');
+            require('view/cadastrarUsuario.php');
         }
     }
 

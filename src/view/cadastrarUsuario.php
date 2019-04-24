@@ -1,7 +1,6 @@
 <?php
 session_start();
 require ('model/Conexao.php');
-$msg = false;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -94,7 +93,7 @@ if(!isset($_SESSION['CPF'])){
         <div class="form-group col-md-4">
             <label>Senha:</label><input type="text" name="senhaCadastro" class="form-control" />
             <label>Confirme a senha:</label><input name="senhaConfirmacaoCadastro" type="text" class="form-control" />
-            <?php if($msg) echo "As senhas devem ser iguais";?>
+            <?php if(isset($msgErrosenhaIgual) && !$msgErrosenhaIgual) echo "As senhas devem ser iguais";?>
 
         </div>
         <div class="form-group  col-md-8">
