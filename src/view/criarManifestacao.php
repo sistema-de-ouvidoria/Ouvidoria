@@ -26,34 +26,13 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     </head>
+
     <body>
 
-        <!--MENU SUPERIOR -->
-      
-            <nav class="navbar navbar-dark navbar-expand-lg bg-dark" > 
-                <!--BOTÃO SANDUICHE-->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"   aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button><!--FIM BOTÃO SANDUICHE -->
+    <?php include('menu.php'); ?>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent"  >
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link" href="index.php">Página Inicial</a></li>
-                        <li class="nav-item"><a class="nav-link" href="minha-pg.html">Minha Página</a></li>
-                        <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
-                    </ul>
-                </div>
+    <!--INICIO DO FORMULÁRIO -->
 
-                <div id="botao-login">
-                    <a href="login.html" class="btn btn-outline-success btn-lg active" role="button" aria-pressed="true">Login</a>
-                </div>
-            </nav>
-
-        <!--FIM MENU SUPERIOR --> 
-
-        <!--INICIO DO FORMULÁRIO -->
-
-      
         <br>
         <div id="manifestacao" style="margin-left: 1cm">
             <h3>Manifestação</h3>  

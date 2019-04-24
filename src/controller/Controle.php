@@ -24,8 +24,14 @@ include ('model/UsuarioManager.php');
         }
 
         switch ($f) {
+            case 'fazerLogin':
+                $this->fazerLogin();
+                break;
             case 'criarManifestacao':
                 $this->criarManifestacao();
+                break;
+            case 'cadastrarUsuario':
+                $this->cadastrarUsuario();
                 break;
             default:
                 $this->inicio();
@@ -34,8 +40,55 @@ include ('model/UsuarioManager.php');
     }
 
     public function inicio() {
-        $listaTipos = $this->tipoManager->listaTipos();
-        require('view/criarManifestacao.php');
+        //$listaTipos = $this->tipoManager->listaTipos();
+        require('view/cadastrarUsuario.php');
+    }
+
+    public function cadastrarUsuario() {
+        if (isset($_POST['enviado'])){
+            $nomeCadastro = $_POST['nomeCadastro'];
+            $cpfCadastro = $_POST['cpfCadastro'];
+            $enderecoCadastro = $_POST['enderecoCadastro'];
+            $telefoneCadastro = $_POST['telefoneCadastro'];
+            $emailCadastro = $_POST['emailCadastro'];
+            $senha1 = $_POST['senhaCadastro'];
+            $senha2 = $_POST['senhaConfirmacaoCadastro'];
+            $senhaValidada = $this->comparaSenhas($senha1,$senha2);
+            $tipo_usuario = 1;
+
+            if($senhaValidada){
+                try{
+                    $this->usuarioManager->registrarUsuario($cpfCadastro,$nomeCadastro,$enderecoCadastro,$telefoneCadastro,$emailCadastro,$senha1,$tipo_usuario);
+                    include 'view/cadastrarUsuario.php';
+                }catch(Exception $e){
+                    $msg = $e->getMessage();
+                }
+            }
+            else{
+                $msg = true;
+            }
+
+            //require('view/cadastrarUsuario.php');
+        }
+    }
+
+     public function comparaSenhas($senha1,$senha2){
+         if($senha1 == $senha2)
+             return true;
+         else
+             return false;
+     }
+
+    public function fazerLogin() {
+        $_SESSION = $_POST;
+
+        $login = isset($_POST["login"]) ? addslashes(trim($_POST["login"])) : FALSE;
+        $senha = isset($_POST["senha"]) ? md5(trim($_POST["senha"])) : FALSE;
+
+
+        if(!$login || !$senha){
+           echo 'teste';
+        }
     }
 
     public function criarManifestacao()

@@ -1,7 +1,7 @@
 <?php
 require_once("model/Usuario.php");
 require_once("model/UsuarioFactory.php");
-class Usuariomanager
+class UsuarioManager
 {
 
     public function __construct() {
@@ -14,5 +14,9 @@ class Usuariomanager
         return $this->factory->selecionarUsuario($cpf);
 
 
+    }
+    public function registrarUsuario($cpfCadastro,$nomeCadastro,$enderecoCadastro,$telefoneCadastro,$emailCadastro,$senha1,$id_tipo_user){
+        $usuario = new Usuario($cpfCadastro,$nomeCadastro,$enderecoCadastro,$telefoneCadastro,$emailCadastro,$senha1, $id_tipo_user);
+        return $this->factory->cadastrarUsuario($usuario);
     }
 }

@@ -9,14 +9,14 @@ class Usuario{
     protected $email;
     protected $senha;
 
-    function __construct($cpf,$id_tipo_usuario,$nome,$endereco,$telefone,$email,$senha) {
+    function __construct($cpf,$nome,$endereco,$telefone,$email,$senha, $id_tipo_usuario) {
         $this->cpf = $cpf;
-        $this->id_tipo_usuario = $id_tipo_usuario;
         $this->nome = $nome;
         $this->endereco = $endereco;
         $this->telefone = $telefone;
         $this->email = $email;
         $this->senha = $senha;
+        $this->id_tipo_usuario = $id_tipo_usuario;
     }
 
     //Setters e Getters da classe Manifestacao
@@ -27,15 +27,6 @@ class Usuario{
     public function setCpf($cpf){
         $this->cpf = $cpf;
     }
-
-    public function getId_tipo_usuario(){
-        return $this->id_tipo_usuario;
-    }
-
-    public function setId_tipo_usuario(Tipousuario $tipoUsuario){
-        $this->id_tipo_usuario = $tipoUsuario->getId_tipo_usuario();
-    }
-
     public function getNome(){
         return $this->nome;
     }
@@ -74,6 +65,14 @@ class Usuario{
 
     public function setSenha($senha){
         $this->senha = $senha;
+    }
+
+    public function getIdTipoUsuario(){
+        return $this->id_tipo_usuario;
+    }
+
+    public function setIdTipoUsuario($id_tipo_usuario){
+        $this->id_tipo_usuario = $id_tipo_usuario;
     }
 }
 ?>
