@@ -17,23 +17,41 @@ class UsuarioFactory {
      * @return boolean - se conseguiu salvar ou não.
      */
 
-    public function selecionarUsuario($cpf) {
+    public function validarUsuario($cpf, $senha) {
         global $conexao;
-        $nome_usuario = null;
 
         try {
-            $query = "SELECT nome from usuario where cpf = '$cpf'";
-            $result =mysqli_query($conexao,$query);
+            $query = "SELECT cpf, id_tipo_usuario from usuario where cpf = '$cpf' AND senha = '$senha'";
+            $resultado =mysqli_query($conexao,$query);
 
-            if ($result) {
-                $row = mysqli_fetch_array($result);
-                $nome_usuario = $row[0];
+            if ($resultado) {
+                $usuario = mysqli_fetch_assoc($resultado);
             } else {
-                $result = false;
+                $resultado = false;
             }
         } catch (PDOException $exc) {
             echo $exc->getMessage();
-            $result = false;
+            $resultado = false;
+        }
+        return $usuario;
+    }
+
+    public function selecionarUsuario($cpf) {
+        global $conexao;
+        $nome_usuario = "";
+        try {
+            $query = "SELECT nome from usuario where cpf = '$cpf'";
+            $resultado =mysqli_query($conexao,$query);
+
+            if ($resultado) {
+                $usuario = mysqli_fetch_array($resultado);
+                $nome_usuario = $usuario[0];
+            } else {
+                $resultado = false;
+            }
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
+            $resultado = false;
         }
         return $nome_usuario;
     }

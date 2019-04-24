@@ -2,10 +2,8 @@
 include('model/ManifestacaoManager.php');
 include('model/AnexoManager.php');
 include('model/TipoManager.php');
-include ('model/UsuarioManager.php');
+include('model/UsuarioManager.php');
  class Controle {
-
-    private $manager;
 
     public function __construct() {
 
@@ -40,8 +38,7 @@ include ('model/UsuarioManager.php');
     }
 
     public function inicio() {
-        //$listaTipos = $this->tipoManager->listaTipos();
-        require('view/cadastrarUsuario.php');
+        require('view/fazerLogin.php');
     }
 
     public function cadastrarUsuario() {
@@ -80,14 +77,31 @@ include ('model/UsuarioManager.php');
      }
 
     public function fazerLogin() {
-        $_SESSION = $_POST;
 
-        $login = isset($_POST["login"]) ? addslashes(trim($_POST["login"])) : FALSE;
+        $cpf = isset($_POST["cpf"]) ? addslashes(trim($_POST["cpf"])) : FALSE;
         $senha = isset($_POST["senha"]) ? md5(trim($_POST["senha"])) : FALSE;
 
-
-        if(!$login || !$senha){
+        if(!$cpf || !$senha){
            echo 'teste';
+        } else {
+            $usuario = $this->usuarioManager->validaUsuario($cpf, $senha);
+
+            $_SESSION['usuario'] = $usuario;
+
+            if($_SESSION['usuario']['id_tipo_usuario'] == 1){
+                //header('Location: view/homeCidadao.php');
+                $listaTipos = $this->tipoManager->listaTipos();
+                require('view/criarManifestacao.php');
+            }
+            else if($_SESSION['usuario']['id_tipo_usuario'] == 2){
+                header('Location: view/homeOuvidor.php');
+            }
+            else if($_SESSION['usuario']['id_tipo_usuario'] = 3)
+                header('Location: view/homeAdminSist.php');
+            else if($_SESSION['usuario']['id_tipo_usuario'] == 4)
+                header('Location: view/homeOrgao.php');
+            else
+                exit();
         }
     }
 
