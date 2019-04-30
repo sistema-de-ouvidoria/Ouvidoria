@@ -6,11 +6,12 @@ include('model/UsuarioManager.php');
  class Controle {
 
     public function __construct() {
-
         $this->manifestacaoManager = new ManifestacaoManager();
         $this->anexoManager = new Anexomanager();
         $this->tipoManager = new TipoManager();
         $this->usuarioManager = new UsuarioManager();
+        $this->inicializador();
+
     }
 
     public function inicializador() {
@@ -31,6 +32,12 @@ include('model/UsuarioManager.php');
             case 'cadastrarUsuario':
                 $this->cadastrarUsuario();
                 break;
+            case 'cadastrarUsuarioAction':
+                $this->cadastrarUsuarioAction();
+                break;
+            case 'loginAction':
+                $this->loginAction();
+                break;
             default:
                 $this->inicio();
                 break;
@@ -38,8 +45,17 @@ include('model/UsuarioManager.php');
     }
 
     public function inicio() {
-        require('view/fazerLogin.php');
+        require('view/telaInicial.php');
+        //header('Location: view/telaInicial.php');
     }
+
+     public function cadastrarUsuarioAction() {
+         require('view/cadastrarUsuario.php');
+     }
+
+     public function loginAction() {
+        require('view/fazerLogin.php');
+     }
 
     public function cadastrarUsuario() {
         if (isset($_POST['enviado'])){
@@ -65,7 +81,7 @@ include('model/UsuarioManager.php');
                 $msgErrosenhaIgual = false;
             }
 
-            require('view/cadastrarUsuario.php');
+            header('Location: view/cadastrarUsuario.php');
         }
     }
 
@@ -88,20 +104,28 @@ include('model/UsuarioManager.php');
 
             $_SESSION['usuario'] = $usuario;
 
-            if($_SESSION['usuario']['id_tipo_usuario'] == 1){
+            // Usuario Cidadao
+            if ($_SESSION['usuario']['id_tipo_usuario'] == 1) {
                 //header('Location: view/homeCidadao.php');
                 $listaTipos = $this->tipoManager->listaTipos();
                 require('view/criarManifestacao.php');
             }
-            else if($_SESSION['usuario']['id_tipo_usuario'] == 2){
-                header('Location: view/homeOuvidor.php');
+            // Usuario Ouvidor
+            else if ($_SESSION['usuario']['id_tipo_usuario'] == 2) {
+                header('Location: view/listarManifestacao.php');
             }
-            else if($_SESSION['usuario']['id_tipo_usuario'] = 3)
+            // Usuario Administrador Sistema
+            else if ($_SESSION['usuario']['id_tipo_usuario'] == 3)
                 header('Location: view/homeAdminSist.php');
-            else if($_SESSION['usuario']['id_tipo_usuario'] == 4)
+
+            //Usuario Administrador Publico
+            else if ($_SESSION['usuario']['id_tipo_usuario'] == 4)
                 header('Location: view/homeOrgao.php');
-            else
-                exit();
+            else {
+                $msgLogin = false;
+                require('view/fazerLogin.php');
+                //header('Location: view/fazerLogin.php');
+            }
         }
     }
 

@@ -77,7 +77,7 @@
                 <label><strong>Manifestacão sigilosa: </strong></label>
                 <input type="checkbox" name="sigilo" value="true">Sim<br>
                 <br>
-                <input id="teste" name="sent" type="submit" value="Enviar" class="btn btn-outline-success btn-lg active"/>
+                <input id="botao" name="sent" type="submit" value="Enviar" class="btn btn-outline-success btn-lg active"/>
             </form><!--FIM DO FORMULÁRIO -->    
         </div>
    </body>

@@ -8,14 +8,15 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent"  >
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="index.php">Página Inicial</a></li>
+            <li class="nav-item"><a class="nav-link" href="?function=inicio">Página Inicial</a></li>
             <li class="nav-item"><a class="nav-link" href="minha-pg.html">Minha Página</a></li>
+            <li class="nav-item"><a class="nav-link" href="?function=cadastrarUsuarioAction">Cadastrar</a></li>
             <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
         </ul>
     </div>
 
     <div id="botao-login">
-        <a href="login.html" class="btn btn-outline-success btn-lg active" role="button" aria-pressed="true">Login</a>
+        <a href="?function=loginAction" class="btn btn-outline-success btn-lg active" role="button" aria-pressed="true">Login</a>
     </div>
 </nav>
 

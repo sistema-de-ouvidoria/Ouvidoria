@@ -42,29 +42,7 @@ if(!isset($_SESSION['CPF'])){
 
 <!--MENU SUPERIOR -->
 
-
-
-<nav class="navbar navbar-dark navbar-expand-lg bg-dark fixed-top" >
-    <!--BOTÃO SANDUICHE-->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"   aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button><!--FIM BOTÃO SANDUICHE -->
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="home.php">Página Inicial</a></li>
-            <li class="nav-item"><a class="nav-link" href="minha-pg.html">Minha Página</a></li>
-            <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
-        </ul>
-    </div>
-    <div id="botoes"
-    <form id="botoes">
-        <input type="submit" class="btn btn-outline-success" value="  Login  " /></li>
-        <a href="cadastrarUsuario.php" class="btn btn-outline-info active"  aria-pressed="true" >Cadastre-se</a><
-    </form>
-    </div>
-
-</nav>
+<?php include('menu.php'); ?>
 
 <!--FIM MENU SUPERIOR -->
 

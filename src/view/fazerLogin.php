@@ -43,6 +43,7 @@
                 <br>
                 <label>Senha:</label>
                 <input name="senha" type="password" class="form-control col-md-8" maxlength="100" required oninvalid="setCustomValidity('O campo senha não pode estar vazio')" onchange="try{setCustomValidity('')}catch(e){}"/>
+                <?php if(isset($msgLogin) && !$msgLogin): ?> <div class="alerta error" role="alert">Senha ou Login inválidos!</div> <br> <?php endif; ?>
                 <br>
                 <input type="submit" value="Entrar" class="btn btn-outline-success btn-lg active"/>
             </form><!--FIM DO FORMULÁRIO -->
