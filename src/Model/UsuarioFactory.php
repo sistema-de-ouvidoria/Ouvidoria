@@ -66,7 +66,7 @@ class UsuarioFactory {
                 . $usuario->getEndereco() ."','"
                 . $usuario->getTelefone() ."','"
                 . $usuario->getEmail() ."','"
-                . $usuario->getSenha() ."','"
+                . md5($usuario->getSenha()) ."','"
                 . $usuario->getIdTipoUsuario() ."')";
             if(mysqli_query($conexao,$query)){
                 return true;

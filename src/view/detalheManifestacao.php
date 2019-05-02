@@ -5,7 +5,7 @@ require ('model/Conexao.php');
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title>Cadastro de Usuário</title>
+    <title></title>
     <meta charset="utf-8">
     <meta http-equiv=”content-type” content="text/html;" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -54,31 +54,20 @@ if(!isset($_SESSION['CPF'])){
 <br>
 <br>
 <div style="margin-left: 1cm">
-    <h1> Cadastre-se </h1>
-    <br>
     <form action="?function=cadastrarUsuario" method="POST">
-        <div class="form-group col-md-4">
-            <label>Nome:</label><input type="text" name="nomeCadastro" class="form-control" />
+        <div class="row form-group col-md-4">
+            <label>Protocolo:</label><input type="text" name="nomeCadastro" class="form-control" />
+            <label>Data de Criação:</label><input type="text" name="cpfCadastro" class="form-control" />
         </div>
         <div class="form-group  col-md-4">
-            <label>CPF:</label><input type="text" name="cpfCadastro" class="form-control" />
-        </div>
-        <div class="form-group  col-md-4">
-            <label>Endereço:</label><input type="text" name="enderecoCadastro" class="form-control" />
-            <label>Telefone:</label><input type="text" name="telefoneCadastro" class="form-control" />
-            <label>E-mail:</label><input type="email" name="emailCadastro" class="form-control" />
+            <label>Assunto:</label><input type="text" name="enderecoCadastro" class="form-control" />
+            <label>Proprietário:</label><input type="text" name="telefoneCadastro" class="form-control" />
+            <label>Situação:</label><input type="email" name="emailCadastro" class="form-control" />
+            <label>Descrição:</label><input type="text" name="senhaCadastro" class="form-control" />
         </div>
         <div class="form-group col-md-4">
-            <label>Senha:</label><input type="text" name="senhaCadastro" class="form-control" />
-            <label>Confirme a senha:</label><input name="senhaConfirmacaoCadastro" type="text" class="form-control" />
-            <?php if(isset($msgErrosenhaIgual) && !$msgErrosenhaIgual) echo "As senhas devem ser iguais";?>
-
-        </div>
-        <div class="form-group  col-md-8">
-
-
-            <input  type="submit" value="Enviar" name="enviado" class="float-right btn btn-outline-primary active"/>
-
+            <input type="text" name="orgaos" class="form-control" />
+            <input  type="submit" value="Encaminhar" name="enviado" class="float-right btn btn-outline-primary active"/>
         </div>
     </form>
 </div>

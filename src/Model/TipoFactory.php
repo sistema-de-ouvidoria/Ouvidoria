@@ -27,9 +27,9 @@ class TipoFactory {
             $resultado = mysqli_query($conexao,$query);
             if(mysqli_num_rows($resultado) > 0){
                 $i = 0;
-                while($row = mysqli_fetch_array($resultado)){
-                    $tipos[$i] = $row['id_tipo_manifestacao'];
-                    $tipos[$i+1] = $row['nome_tipo_manifestacao'];
+                while($linha = mysqli_fetch_array($resultado)){
+                    $tipos[$i] = $linha['id_tipo_manifestacao'];
+                    $tipos[$i+1] = $linha['nome_tipo_manifestacao'];
                     $i = $i + 2;
 
                 }

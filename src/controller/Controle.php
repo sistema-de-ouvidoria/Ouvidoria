@@ -38,6 +38,9 @@ include('model/UsuarioManager.php');
             case 'loginAction':
                 $this->loginAction();
                 break;
+            case 'detalharManifestacao':
+                $this->detalharManifestacao();
+                break;
             default:
                 $this->inicio();
                 break;
@@ -46,7 +49,6 @@ include('model/UsuarioManager.php');
 
     public function inicio() {
         require('view/telaInicial.php');
-        //header('Location: view/telaInicial.php');
     }
 
      public function cadastrarUsuarioAction() {
@@ -93,12 +95,12 @@ include('model/UsuarioManager.php');
      }
 
     public function fazerLogin() {
-
         $cpf = isset($_POST["cpf"]) ? addslashes(trim($_POST["cpf"])) : FALSE;
         $senha = isset($_POST["senha"]) ? md5(trim($_POST["senha"])) : FALSE;
 
         if(!$cpf || !$senha){
-           echo 'teste';
+            //tratar erros
+           echo 'Você não tem permissão para acessar essa página.';
         } else {
             $usuario = $this->usuarioManager->validaUsuario($cpf, $senha);
 
@@ -106,29 +108,32 @@ include('model/UsuarioManager.php');
 
             // Usuario Cidadao
             if ($_SESSION['usuario']['id_tipo_usuario'] == 1) {
-                //header('Location: view/homeCidadao.php');
                 $listaTipos = $this->tipoManager->listaTipos();
                 require('view/criarManifestacao.php');
             }
             // Usuario Ouvidor
             else if ($_SESSION['usuario']['id_tipo_usuario'] == 2) {
-                header('Location: view/listarManifestacao.php');
+                $dados = $this->manifestacaoManager->listaManifestacoes();
+                require('view/listarManifestacao.php');
             }
-            // Usuario Administrador Sistema
+            // Usuario Administrador Publico
             else if ($_SESSION['usuario']['id_tipo_usuario'] == 3)
+                header('Location: view/homeOrgao.php');
+
+            //Usuario Administrador Sistema
+            else if ($_SESSION['usuario']['id_tipo_usuario'] == 4)
                 header('Location: view/homeAdminSist.php');
 
-            //Usuario Administrador Publico
-            else if ($_SESSION['usuario']['id_tipo_usuario'] == 4)
-                header('Location: view/homeOrgao.php');
             else {
                 $msgLogin = false;
                 require('view/fazerLogin.php');
-                //header('Location: view/fazerLogin.php');
             }
         }
     }
 
+    public function detalharManifestacao() {
+        require ('view/detalheManifestacao.php');
+    }
     public function criarManifestacao()
     {
         if (isset($_POST['sent'])) {
@@ -157,7 +162,6 @@ include('model/UsuarioManager.php');
             try {
                 $idGerado = $this->manifestacaoManager->salvaManifestacao($tipo, $assunto, $mensagem, $sigilo, $dataManifestacao, $cpf_usuario, $situacao, $idAnexo);
                 if($idGerado != null){
-                    //echo "<script type=\"text/javascript\">alert(\"Sua manifestação foi criada com sucesso!\");window.location.href=\"index.php\";</script>";
                     $nome_usuario = $this->usuarioManager->buscaUsuario($cpf_usuario);
                     $protocolo_manifestacao = $idGerado; 
                     require('view/manifestacaoCriada.php');

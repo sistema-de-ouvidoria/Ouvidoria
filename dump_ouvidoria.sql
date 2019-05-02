@@ -24,10 +24,7 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
---
 -- Estrutura da tabela `anexo`
---
-
 DROP TABLE IF EXISTS `anexo`;
 CREATE TABLE IF NOT EXISTS `anexo` (
   `id_anexo` varchar(255) NOT NULL,
@@ -38,10 +35,7 @@ CREATE TABLE IF NOT EXISTS `anexo` (
 
 -- --------------------------------------------------------
 
---
 -- Estrutura da tabela `manifestacao`
---
-
 DROP TABLE IF EXISTS `manifestacao`;
 CREATE TABLE IF NOT EXISTS `manifestacao` (
   `id_manifestacao` int(11) NOT NULL AUTO_INCREMENT,
@@ -62,10 +56,7 @@ CREATE TABLE IF NOT EXISTS `manifestacao` (
 
 -- --------------------------------------------------------
 
---
 -- Estrutura da tabela `situacao`
---
-
 DROP TABLE IF EXISTS `situacao`;
 CREATE TABLE IF NOT EXISTS `situacao` (
   `id_situacao` int(11) NOT NULL AUTO_INCREMENT,
@@ -75,10 +66,7 @@ CREATE TABLE IF NOT EXISTS `situacao` (
 
 -- --------------------------------------------------------
 
---
 -- Estrutura da tabela `tipomanifestacao`
---
-
 DROP TABLE IF EXISTS `tipomanifestacao`;
 CREATE TABLE IF NOT EXISTS `tipomanifestacao` (
   `id_tipo_manifestacao` int(11) NOT NULL AUTO_INCREMENT,
@@ -88,10 +76,7 @@ CREATE TABLE IF NOT EXISTS `tipomanifestacao` (
 
 -- --------------------------------------------------------
 
---
 -- Estrutura da tabela `tipousuario`
---
-
 DROP TABLE IF EXISTS `tipousuario`;
 CREATE TABLE IF NOT EXISTS `tipousuario` (
   `id_tipo_usuario` int(11) AUTO_INCREMENT,
@@ -100,15 +85,8 @@ CREATE TABLE IF NOT EXISTS `tipousuario` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
-INSERT INTO `tipousuario` (`nome_tipo_usuario`) VALUES
-('Cidadao'),
-('Ouvidor'),
-('Administrador Publico'),
-('Administrador Sistema');
---
--- Estrutura da tabela `usuario`
---
 
+-- Estrutura da tabela `usuario`
 DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE IF NOT EXISTS `usuario` (
   `cpf` varchar(11),
@@ -124,27 +102,32 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 COMMIT;
 
+-- Extraindo dados da tabela `usuario`
 INSERT INTO `usuario` (`cpf`, `id_tipo_usuario`, `nome`, `endereco`, `telefone`, `email`, `senha`) VALUES
-('12345678910', 1, 'Fernando da Silva', 'Rua Lima Souza, 234', '999999999','fernando@gmail.com', md5('1234'));
+('12345678910', 1, 'Joao da Silva', 'Rua Lima Souza, 234', '999999999','fernando@gmail.com', md5('1234')),
+('12345678911', 2, 'Paulo da Silva', 'Rua Lima Souza, 235', '999999999','paulo@gmail.com', md5('1234')),
+('12345678912', 3, 'Maria da Silva', 'Rua Lima Souza, 236', '999999999','maria@gmail.com', md5('1234')),
+('12345678913', 4, 'Joana da Silva', 'Rua Lima Souza, 237', '999999999','joana@gmail.com', md5('1234'));
 
---
 -- Extraindo dados da tabela `tipomanifestacao`
---
-
 INSERT INTO `tipomanifestacao` (`nome_tipo_manifestacao`) VALUES
 ('Elogio'),
 ('Reclamacao'),
 ('Sugestao'),
 ('Denuncia');
 
---
 -- Extraindo dados da tabela `situacao`
---
-
 INSERT INTO `situacao` (`nome_situacao`) VALUES
 ('Aberta'),
 ('Encaminhada'),
 ('Fechada');
+
+-- Extraindo dados da tabela `tipousuario`
+INSERT INTO `tipousuario` (`nome_tipo_usuario`) VALUES
+('Cidadao'),
+('Ouvidor'),
+('Administrador Publico'),
+('Administrador Sistema');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

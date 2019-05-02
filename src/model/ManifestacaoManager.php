@@ -29,7 +29,9 @@ class ManifestacaoManager {
 
     }
 
+	public function listaManifestacoes(){
+		return $this->factory->listarManifestacoes();
+	}
 
 }
-
 ?>

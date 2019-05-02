@@ -6,7 +6,7 @@
         <meta http-equiv=”content-type” content="text/html;" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="keywords" content="tags, que, eu, quiser, usar, para, os, robos, do, google" />
-        <title>Fala aÍ</title>
+        <title>Fazer Login</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
