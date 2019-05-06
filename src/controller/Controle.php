@@ -52,7 +52,6 @@ include('model/HistoricoManager.php');
             case 'encaminhar':
                 $this->encaminhar();
                 break;
-
             case 'responder':
                 $this->responderManifestacao();
                 break;
@@ -64,7 +63,16 @@ include('model/HistoricoManager.php');
             case 'deslogar':
                 session_start();
                 session_destroy();
+                $_SESSION['usuario'] = null;
                 $this->inicio();
+                break;
+            case 'recusarManifestacao':
+                session_start();
+                $this->recusarManifestacao();
+                break;
+            case 'alterarDados':
+                session_start();
+                $this->alterarDados();
                 break;
             default:
                 $this->inicio();
@@ -85,6 +93,34 @@ include('model/HistoricoManager.php');
      }
 
     public function cadastrarUsuario() {
+        if (isset($_POST['enviado'])){
+            $nomeCadastro = $_POST['nomeCadastro'];
+            $cpfCadastro = $_POST['cpfCadastro'];
+            $enderecoCadastro = $_POST['enderecoCadastro'];
+            $telefoneCadastro = $_POST['telefoneCadastro'];
+            $emailCadastro = $_POST['emailCadastro'];
+            $senha1 = $_POST['senhaCadastro'];
+            $senha2 = $_POST['senhaConfirmacaoCadastro'];
+            $senhaValidada = $this->comparaSenhas($senha1,$senha2);
+            $tipo_usuario = 1;
+
+            if($senhaValidada){
+                try{
+                    $this->usuarioManager->registrarUsuario($cpfCadastro,$nomeCadastro,$enderecoCadastro,$telefoneCadastro,$emailCadastro,$senha1,$tipo_usuario);
+                    include 'view/cadastrarUsuario.php';
+                }catch(Exception $e){
+                    $msg = $e->getMessage();
+                }
+            }
+            else{
+                $msgErrosenhaIgual = false;
+            }
+
+            header('Location: view/cadastrarUsuario.php');
+        }
+    }
+
+    public function alterarDados(){
         if (isset($_POST['enviado'])){
             $nomeCadastro = $_POST['nomeCadastro'];
             $cpfCadastro = $_POST['cpfCadastro'];
@@ -247,5 +283,11 @@ include('model/HistoricoManager.php');
         }
 
          $this->listar($_SESSION['usuario']['id_tipo_usuario']);
+    }
+
+    public function recusarManifestacao(){
+        $id = $_GET['id'];
+        $this->manifestacaoManager->recusaManifestacao($id);
+        $this->listar($_SESSION['usuario']['id_tipo_usuario']);
     }
 }
