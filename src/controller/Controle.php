@@ -3,6 +3,9 @@ include('model/ManifestacaoManager.php');
 include('model/AnexoManager.php');
 include('model/TipoManager.php');
 include('model/UsuarioManager.php');
+include('model/OrgaoPublicoManager.php');
+include('model/HistoricoManager.php');
+
  class Controle {
 
     public function __construct() {
@@ -10,6 +13,8 @@ include('model/UsuarioManager.php');
         $this->anexoManager = new Anexomanager();
         $this->tipoManager = new TipoManager();
         $this->usuarioManager = new UsuarioManager();
+        $this->orgaoManager = new OrgaoPublicoManager();
+        $this->historicoManager = new HistoricoManager();
         $this->inicializador();
 
     }
@@ -32,14 +37,34 @@ include('model/UsuarioManager.php');
             case 'cadastrarUsuario':
                 $this->cadastrarUsuario();
                 break;
-            case 'cadastrarUsuarioAction':
-                $this->cadastrarUsuarioAction();
+            case 'cadastrarUsuarioAcao':
+                $this->cadastrarUsuarioAcao();
                 break;
-            case 'loginAction':
-                $this->loginAction();
+            case 'loginAcao':
+                $this->loginAcao();
                 break;
-            case 'detalharManifestacao':
-                $this->detalharManifestacao();
+            case 'detalharManifestacaoOuvidor':
+                $this->detalharManifestacaoOuvidor();
+                break;
+            case 'detalharManifestacaoAdmPublico':
+                $this->detalharManifestacaoAdmPublico();
+                break;
+            case 'encaminhar':
+                $this->encaminhar();
+                break;
+
+            case 'responder':
+                $this->responderManifestacao();
+                break;
+            case 'listar':
+                session_start();
+                $this->listar($_SESSION['usuario']['id_tipo_usuario']);
+                session_write_close();
+                break;
+            case 'deslogar':
+                session_start();
+                session_destroy();
+                $this->inicio();
                 break;
             default:
                 $this->inicio();
@@ -48,14 +73,14 @@ include('model/UsuarioManager.php');
     }
 
     public function inicio() {
-        require('view/telaInicial.php');
+        require('view/fazerLogin.php');
     }
 
-     public function cadastrarUsuarioAction() {
+     public function cadastrarUsuarioAcao() {
          require('view/cadastrarUsuario.php');
      }
 
-     public function loginAction() {
+     public function loginAcao() {
         require('view/fazerLogin.php');
      }
 
@@ -104,21 +129,22 @@ include('model/UsuarioManager.php');
         } else {
             $usuario = $this->usuarioManager->validaUsuario($cpf, $senha);
 
+            session_start();
             $_SESSION['usuario'] = $usuario;
 
             // Usuario Cidadao
             if ($_SESSION['usuario']['id_tipo_usuario'] == 1) {
                 $listaTipos = $this->tipoManager->listaTipos();
                 require('view/criarManifestacao.php');
+
             }
             // Usuario Ouvidor
             else if ($_SESSION['usuario']['id_tipo_usuario'] == 2) {
-                $dados = $this->manifestacaoManager->listaManifestacoes();
-                require('view/listarManifestacao.php');
+                $this->listar($_SESSION['usuario']['id_tipo_usuario']);
             }
             // Usuario Administrador Publico
             else if ($_SESSION['usuario']['id_tipo_usuario'] == 3)
-                header('Location: view/homeOrgao.php');
+                $this->listar($_SESSION['usuario']['id_tipo_usuario']);
 
             //Usuario Administrador Sistema
             else if ($_SESSION['usuario']['id_tipo_usuario'] == 4)
@@ -128,22 +154,54 @@ include('model/UsuarioManager.php');
                 $msgLogin = false;
                 require('view/fazerLogin.php');
             }
+            session_write_close();
         }
     }
 
-    public function detalharManifestacao() {
-        require ('view/detalheManifestacao.php');
+    public function listar($acesso){
+        $nvlAcesso = $acesso;
+        $dados = $this->manifestacaoManager->listaManifestacoes($acesso);
+
+        if($nvlAcesso == 2)
+            require('view/listarManifestacaoOuvidor.php');
+        elseif ($nvlAcesso == 3)
+            require('view/listarManifestacaoAdmPublico.php');
+
     }
+
+    public function encaminhar() {
+        session_start();
+        $id = $_GET['id'];
+        $id_orgao_publico = $_GET['org'];
+        $ouvidor = $_SESSION['usuario']['cpf'];
+
+        if($this->manifestacaoManager->alteraManifestacaoOuvidor($id)) {
+            $this->historicoManager->salvaHistoricoManifestacao($id_orgao_publico, $ouvidor, $id);
+        }
+        $this->listar($_SESSION['usuario']['id_tipo_usuario']);
+     }
+
+    public function detalharManifestacaoOuvidor() {
+        $manifestacao = $this->manifestacaoManager->selecionaManifestacao($_GET['id']);
+        $orgaos = $this->orgaoManager->listaOrgaosPublico();
+        require ('view/detalheManifestacaoOuvidor.php');
+    }
+
+    public function detalharManifestacaoAdmPublico() {
+         $manifestacao = $this->manifestacaoManager->selecionaManifestacao($_GET['id']);
+         require ('view/detalheManifestacaoAdmPublico.php');
+     }
+
     public function criarManifestacao()
     {
+        session_start();
         if (isset($_POST['sent'])) {
-
             $tipo = $_POST['tipo'];
             $sigilo = isset($_POST['sigilo']) ? true : false;
             $assunto = $_POST['assunto'];
             $mensagem = $_POST['mensagem'];
             $dataManifestacao = date('Y/m/d');
-            $cpf_usuario = '12345678910';
+            $cpf_usuario = $_SESSION['usuario']['cpf'];
             $situacao = 1;
             $idAnexo = "";
 
@@ -171,10 +229,23 @@ include('model/UsuarioManager.php');
                 $sucess = false;
                 $msg = $e->getMessage();
             }
-            //header("location: index.php");
         }
         else {
             echo "<script type=\"text/javascript\">alert(\"O arquivo excede o tamanho máximo de upload do site!\");window.location.href=\"index.php\";</script>";
         }
+    }
+
+    public function responderManifestacao() {
+         session_start();
+         $id = $_POST['protocolo'];
+         $adm_publico = $_SESSION['usuario']['cpf'];
+         $resposta = $_POST['resposta'];
+
+
+        if($this->manifestacaoManager->alteraManifestacaoAdmPublico($id, $resposta)) {
+            $this->historicoManager->atualizaHistorico($adm_publico,$id);
+        }
+
+         $this->listar($_SESSION['usuario']['id_tipo_usuario']);
     }
 }

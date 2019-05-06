@@ -9,8 +9,6 @@ class ManifestacaoFactory  {
     public function __construct() {
 
     }
-
-
     /**
     * Persiste objetos Contato no banco de dados.
     * @param Contato $obj - Objeto Contato a ser persistido.
@@ -45,13 +43,23 @@ class ManifestacaoFactory  {
             return $idGerado;
     }
 
-    public function listarManifestacoes(){
+    public function listarManifestacoes(string $acesso){
         global $conexao;
         $manifestacoes = array();
 
-        $query = "SELECT id_manifestacao, assunto, data_manifestacao, nome_tipo_manifestacao, nome_situacao, mensagem 
-        from manifestacao m INNER JOIN tipomanifestacao t ON m.id_tipo_manifestacao = t.id_tipo_manifestacao
-        INNER JOIN situacao s ON s.id_situacao = m.id_situacao;";
+        if($acesso == 2) {
+            $query = "SELECT id_manifestacao, assunto, data_manifestacao, nome_tipo_manifestacao, nome_situacao, mensagem 
+            from manifestacao m INNER JOIN tipomanifestacao t ON m.id_tipo_manifestacao = t.id_tipo_manifestacao
+            INNER JOIN situacao s ON s.id_situacao = m.id_situacao 
+            WHERE s.id_situacao = 1;";
+        }
+        elseif ($acesso == 3) {
+            $query = "SELECT id_manifestacao, assunto, data_manifestacao, nome_tipo_manifestacao, nome_situacao, mensagem 
+            from manifestacao m INNER JOIN tipomanifestacao t ON m.id_tipo_manifestacao = t.id_tipo_manifestacao
+            INNER JOIN situacao s ON s.id_situacao = m.id_situacao 
+            WHERE s.id_situacao != 1;";
+        }
+
         try {
             $resultado = mysqli_query($conexao, $query);
 
@@ -61,11 +69,55 @@ class ManifestacaoFactory  {
                 return $manifestacoes;
             }
             else
-                return "Nenhum tipo encontrado";
+                return NULL;
 
         } catch (PDOException $exc) {
             echo $exc->getMessage();
             $result = false;
         }
+    }
+
+    public function selecionarManifestacao(string $id){
+        global $conexao;
+
+        $manifestacao = array();
+
+        $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem 
+        from manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
+        INNER JOIN situacao s ON s.id_situacao = m.id_situacao
+        WHERE id_manifestacao = " . $id . ";";
+
+        $resultado = mysqli_query($conexao, $query);
+
+        if($resultado){
+            $manifestacao = mysqli_fetch_object($resultado);
+
+            return $manifestacao;
+        }
+        else {
+            return "Nenhum tipo encontrado";
+        }
+    }
+
+    public function alterarManifestacaoOuvidor($id) {
+        global $conexao;
+
+        $query = "UPDATE manifestacao m SET id_situacao = 2 WHERE id_manifestacao = " . $id . ";";
+
+        if(mysqli_query($conexao, $query))
+            return true;
+        else
+            return false;
+    }
+
+    public function alterarManifestacaoAdmPublico($id, $resposta) {
+        global $conexao;
+
+        $query = "UPDATE manifestacao m SET resposta = '". $resposta ."', id_situacao= 3 WHERE id_manifestacao = " . $id . ";";
+
+        if(mysqli_query($conexao, $query))
+            return true;
+        else
+            return false;
     }
 }

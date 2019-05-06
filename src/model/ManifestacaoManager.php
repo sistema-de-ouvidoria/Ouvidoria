@@ -29,9 +29,22 @@ class ManifestacaoManager {
 
     }
 
-	public function listaManifestacoes(){
-		return $this->factory->listarManifestacoes();
+	public function listaManifestacoes($nvlAcesso){
+		return $this->factory->listarManifestacoes($nvlAcesso);
 	}
 
+	public function alteraManifestacaoOuvidor($id){
+		return $this->factory->alterarManifestacaoOuvidor($id);
+	}
+
+	public function alteraManifestacaoAdmPublico($id, $resposta){
+		return $this->factory->alterarManifestacaoAdmPublico($id, $resposta);
+	}
+
+	public function selecionaManifestacao(string $id){
+		$resultado = $this->factory->selecionarManifestacao($id);
+
+		return $resultado;
+	}
 }
 ?>
