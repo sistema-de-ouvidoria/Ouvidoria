@@ -23,8 +23,9 @@ class UsuarioManager
 
     }
 
-    public function alteraUsuario(string $cpfAlterado,string $nomeAlterado,string $enderecoAlterado, string $telefoneAlterado,$emailAlterado,$senha1){
-        $usuario = new Usuario();
+    public function alteraUsuario(string $cpfAlterado,string $nomeAlterado,string $enderecoAlterado, string $telefoneAlterado,$emailAlterado,$senha1, $id){
+        $usuario = new Usuario($cpfAlterado, $nomeAlterado, $enderecoAlterado, $telefoneAlterado,
+            $emailAlterado, $senha1, $id);
         $usuario->setCpf($cpfAlterado);
         $usuario->setNome($nomeAlterado);
         $usuario->setEndereco($enderecoAlterado);
@@ -45,5 +46,5 @@ class UsuarioManager
     public function verificaSenhaAntiga(string $senha,string $cpf){
         return $this->factory->verificaSenha($senha,$cpf);
     }
+
 }
-//update usuario set email='maria@gmail.com', telefone = '999999999', senha = md5(1234) where cpf = '12345678912'

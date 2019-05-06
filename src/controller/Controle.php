@@ -130,40 +130,41 @@ include('model/HistoricoManager.php');
         }
     }
 
-    public function alterarDados(){
-        if (isset($_POST['enviado'])){
-            $senhaAntigaConfirmacao =md5($_POST['senhaAntigaAlteraDados']);
-            $cpfAlterado = $_POST['cpfAlteraDados'];
-            if($this->usuarioManager->verificaSenhaAntiga($senhaAntigaConfirmacao,$cpfAlterado)){
-                $nomeAlterado = $_POST['nomeAlteraDados'];
-                $enderecoAlterado = $_POST['enderecoAlteraDados'];
-                $telefoneAlterado = $_POST['telefoneAlteraDados'];
-                $emailAlterado = $_POST['emailAlteraDados'];
-                $senha1 = $_POST['senhaNovaAlteraDados'];
-                $senha2 = $_POST['senhaNovaConfirmacaoAlteraDados'];
+     public function alterarDados(){
+         if (isset($_POST['enviado'])){
+             $senhaAntigaConfirmacao =md5($_POST['senhaAntigaAlteraDados']);
+             $cpfAlterado = $_POST['cpfAlteraDados'];
+             if($this->usuarioManager->verificaSenhaAntiga($senhaAntigaConfirmacao,$cpfAlterado)){
+                 $nomeAlterado = $_POST['nomeAlteraDados'];
+                 $enderecoAlterado = $_POST['enderecoAlteraDados'];
+                 $telefoneAlterado = $_POST['telefoneAlteraDados'];
+                 $emailAlterado = $_POST['emailAlteraDados'];
+                 $senha1 = $_POST['senhaNovaAlteraDados'];
+                 $senha2 = $_POST['senhaNovaConfirmacaoAlteraDados'];
+                 $id = $_SESSION['usuario']['id_tipo_usuario'];
 
-                if(isset($senha1) && isset($senha2) && $this->comparaSenhas($senha1,$senha2)){
-                    try{
-                        if($senha1 == "")
-                            $senha1 = $senhaAntigaConfirmacao;
-                        else
-                            $senha1 = md5($senha1);
-                        $sucesso = $this->usuarioManager->alteraUsuario($cpfAlterado,$nomeAlterado,$enderecoAlterado,$telefoneAlterado,$emailAlterado,$senha1);
-                        echo "sucesso";
-                        $this->alteraDadosAcao(); 
-                    }catch(Exception $e){
-                        $msg = $e->getMessage();
-                    }
-                }
-            }
-                else{
-                    echo "senha errada";
-                    $this->alteraDadosAcao();
-                }
+                 if(isset($senha1) && isset($senha2) && $this->comparaSenhas($senha1,$senha2)){
+                     try{
+                         if($senha1 == "")
+                             $senha1 = $senhaAntigaConfirmacao;
+                         else
+                             $senha1 = md5($senha1);
+                            $sucesso = $this->usuarioManager->alteraUsuario($cpfAlterado,$nomeAlterado,$enderecoAlterado,$telefoneAlterado,$emailAlterado,$senha1, $id);
+                         //echo "sucesso";
+                         $this->alteraDadosAcao();
+                     }catch(Exception $e){
+                         $msg = $e->getMessage();
+                     }
+                 }
+             }
+             else{
+                 //echo "senha errada";
+                 $this->alteraDadosAcao();
+             }
 
-            header('Location: view/alterarDados.php');
-            }   
-        }
+             header('Location: view/alterarDados.php');
+         }
+     }
 
      public function comparaSenhas($senha1,$senha2){
          if($senha1 == $senha2)

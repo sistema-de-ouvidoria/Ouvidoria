@@ -9,7 +9,14 @@ class Usuario{
     protected $email;
     protected $senha;
 
-    function __construct() {
+    function __construct($cpf,$nome, $endereco, $telefone, $email, $senha, $id_tipo_usuario) {
+        $this->cpf = $cpf;
+        $this->id_tipo_usuario = $id_tipo_usuario;
+        $this->nome = $nome;
+        $this->endereco = $endereco;
+        $this->telefone = $telefone;
+        $this->email = $email;
+        $this->senha = $senha;
     }
  
 

@@ -69,8 +69,8 @@ if(!isset($_SESSION['CPF'])){
             <label>E-mail:</label><input type="email" name="emailCadastro" class="form-control" />
         </div>
         <div class="form-group col-md-4">
-            <label>Senha:</label><input type="text" name="senhaCadastro" class="form-control" />
-            <label>Confirme a senha:</label><input name="senhaConfirmacaoCadastro" type="text" class="form-control" />
+            <label>Senha:</label><input type="password" name="senhaCadastro" class="form-control" />
+            <label>Confirme a senha:</label><input name="senhaConfirmacaoCadastro" type="password" class="form-control" />
             <?php if(isset($msgErrosenhaIgual) && !$msgErrosenhaIgual) echo "As senhas devem ser iguais";?>
 
         </div>

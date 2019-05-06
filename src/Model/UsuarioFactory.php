@@ -114,15 +114,15 @@ class UsuarioFactory {
             $resultado = false;
         }
     }
-    //$query = "UPDATE manifestacao SET id_situacao = 2 WHERE id_manifestacao = " . $id . ";";
+
     public function alterarUsuario($obj){
         global $conexao;
         $usuario = $obj;
-        
+
         try{
             $query = "UPDATE usuario SET cpf = '".$usuario->getCpf()."',nome = '".$usuario->getNome()."',endereco = '".$usuario->getEndereco()."',telefone = '".$usuario->getTelefone()."',email = '".$usuario->getEmail()."',senha = '".$usuario->getSenha()."' where cpf = '".$usuario->getCpf()."'";
             if(mysqli_query($conexao,$query)){
-                return true; 
+                return true;
             }
             else
                 return false;

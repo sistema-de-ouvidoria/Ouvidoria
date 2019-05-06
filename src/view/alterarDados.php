@@ -5,7 +5,7 @@ require ('model/Conexao.php');
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title>Cadastro de Usuário</title>
+    <title>Alterar Dados</title>
     <meta charset="utf-8">
     <meta http-equiv=”content-type” content="text/html;" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -58,20 +58,20 @@ if(!isset($_SESSION['CPF'])){
     <br>
     <form action="?function=alterarDados" method="POST">
         <div class="form-group col-md-4">
-            <label>Nome:</label><input type="text" name="nomeAlteraDados" value="<?php echo $usuario->nome;?>"  class="form-control"/>
+            <label>Nome:</label><input type="text" name="nomeAlteraDados" value="<?=$usuario->nome?>"  class="form-control"/>
         </div>
         <div class="form-group  col-md-4">
-            <label>CPF:</label><input type="text" name="cpfAlteraDados" value="<?php echo $usuario->cpf;?>" class="form-control" readonly />
+            <label>CPF:</label><input type="text" name="cpfAlteraDados" value="<?=$usuario->cpf?>" class="form-control" readonly />
         </div>
         <div class="form-group  col-md-4">
-            <label>Endereço:</label><input type="text" name="enderecoAlteraDados" value="<?php echo $usuario->endereco; ?>" class="form-control" />
-            <label>Telefone:</label><input type="text" name="telefoneAlteraDados" value="<?php echo $usuario->telefone; ?>" class="form-control" />
-            <label>E-mail:</label><input type="email" name="emailAlteraDados" value="<?php echo $usuario->email; ?>" class="form-control" />
+            <label>Endereço:</label><input type="text" name="enderecoAlteraDados" value="<?=$usuario->endereco?>" class="form-control" />
+            <label>Telefone:</label><input type="text" name="telefoneAlteraDados" value="<?=$usuario->telefone?>" class="form-control" />
+            <label>E-mail:</label><input type="email" name="emailAlteraDados" value="<?=$usuario->email?>" class="form-control" />
         </div>
         <div class="form-group col-md-4">
-            <label>Confirme a senha antiga:</label><input type="text" name="senhaAntigaAlteraDados" required="required" class="form-control" />
-            <label>Nova senha:</label><input type="text" name="senhaNovaAlteraDados" class="form-control" />
-            <label>Confirme a nova senha:</label><input name="senhaNovaConfirmacaoAlteraDados" type="text" class="form-control" />
+            <label>Confirme a senha antiga:</label><input type="password"" name="senhaAntigaAlteraDados" required="required" class="form-control" />
+            <label>Nova senha:</label><input type="password" name="senhaNovaAlteraDados" class="form-control" />
+            <label>Confirme a nova senha:</label><input name="senhaNovaConfirmacaoAlteraDados" type="password" class="form-control" />
             <?php if(isset($msgErrosenhaIgual) && !$msgErrosenhaIgual) echo "As senhas devem ser iguais";?>
 
 
