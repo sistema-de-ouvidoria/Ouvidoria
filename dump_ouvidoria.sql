@@ -1,30 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 4.8.4
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1:3306
--- Generation Time: 05-Abr-2019 às 00:53
--- Versão do servidor: 5.7.24
--- versão do PHP: 7.2.14
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `ouvidoria`
---
-
--- --------------------------------------------------------
-
--- Estrutura da tabela `anexo`
+use ouvidoria;
 DROP TABLE IF EXISTS `anexo`;
 CREATE TABLE IF NOT EXISTS `anexo` (
   `id_anexo` varchar(255) NOT NULL,
@@ -33,9 +7,6 @@ CREATE TABLE IF NOT EXISTS `anexo` (
   PRIMARY KEY (`id_anexo`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
--- Estrutura da tabela `manifestacao`
 DROP TABLE IF EXISTS `manifestacao`;
 CREATE TABLE IF NOT EXISTS `manifestacao` (
   `id_manifestacao` int(11) NOT NULL AUTO_INCREMENT,
@@ -53,40 +24,24 @@ CREATE TABLE IF NOT EXISTS `manifestacao` (
   CONSTRAINT FK_manif_anexo FOREIGN KEY (`id_anexo`) REFERENCES situacao(`id_anexo`),
   CONSTRAINT FK_manif_tipomanif FOREIGN KEY (`id_tipo_manifestacao`) REFERENCES tipomanifestacao(`id_tipo_manifestacao`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
--- Estrutura da tabela `situacao`
 DROP TABLE IF EXISTS `situacao`;
 CREATE TABLE IF NOT EXISTS `situacao` (
   `id_situacao` int NOT NULL AUTO_INCREMENT,
   `nome_situacao` varchar(255) NOT NULL,
   PRIMARY KEY (`id_situacao`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
--- Estrutura da tabela `tipomanifestacao`
 DROP TABLE IF EXISTS `tipomanifestacao`;
 CREATE TABLE IF NOT EXISTS `tipomanifestacao` (
   `id_tipo_manifestacao` int(11) NOT NULL AUTO_INCREMENT,
   `nome_tipo_manifestacao` varchar(100) NOT NULL,
   PRIMARY KEY (`id_tipo_manifestacao`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
--- Estrutura da tabela `tipousuario`
 DROP TABLE IF EXISTS `tipousuario`;
 CREATE TABLE IF NOT EXISTS `tipousuario` (
   `id_tipo_usuario` int(11) AUTO_INCREMENT,
   `nome_tipo_usuario` varchar(255) NOT NULL,
   PRIMARY KEY (`id_tipo_usuario`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
--- Estrutura da tabela `usuario`
 DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE IF NOT EXISTS `usuario` (
   `cpf` varchar(11),
@@ -100,10 +55,6 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   UNIQUE KEY `email` (`email`),
   KEY `fk_tipo_usuario` (`id_tipo_usuario`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
--- Estrutura da tabela `orgaopublico`
 DROP TABLE IF EXISTS `orgaopublico`;
 CREATE TABLE IF NOT EXISTS `orgaopublico` (
     `id_orgao_publico` int NOT NULL AUTO_INCREMENT,
@@ -111,10 +62,6 @@ CREATE TABLE IF NOT EXISTS `orgaopublico` (
     `nome_orgao_publico` varchar(100),
     PRIMARY KEY (`id_orgao_publico`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
--- Estrutura da tabela `orgaopublico`
 DROP TABLE IF EXISTS `historico`;
 CREATE TABLE IF NOT EXISTS `historico` (
     `id_historico` int NOT NULL AUTO_INCREMENT,
@@ -129,35 +76,25 @@ CREATE TABLE IF NOT EXISTS `historico` (
     CONSTRAINT FK_hist_admpublico FOREIGN KEY (`adm_publico`) REFERENCES usuario(`cpf`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 COMMIT;
-
--- Extraindo dados da tabela `usuario`
 INSERT INTO `usuario` (`cpf`, `id_tipo_usuario`, `nome`, `endereco`, `telefone`, `email`, `senha`) VALUES
 ('12345678910', 1, 'Joao da Silva', 'Rua Lima Souza, 234', '999999999','fernando@gmail.com', md5('1234')),
 ('12345678911', 2, 'Paulo da Silva', 'Rua Lima Souza, 235', '999999999','paulo@gmail.com', md5('1234')),
 ('12345678912', 3, 'Maria da Silva', 'Rua Lima Souza, 236', '999999999','maria@gmail.com', md5('1234')),
 ('12345678913', 4, 'Joana da Silva', 'Rua Lima Souza, 237', '999999999','joana@gmail.com', md5('1234'));
-
--- Extraindo dados da tabela `tipomanifestacao`
 INSERT INTO `tipomanifestacao` (`nome_tipo_manifestacao`) VALUES
 ('Elogio'),
 ('Reclamacao'),
 ('Sugestao'),
 ('Denuncia');
-
--- Extraindo dados da tabela `situacao`
 INSERT INTO `situacao` (`nome_situacao`) VALUES
 ('Aberta'),
 ('Encaminhada'),
 ('Fechada');
-
--- Extraindo dados da tabela `tipousuario`
 INSERT INTO `tipousuario` (`nome_tipo_usuario`) VALUES
 ('Cidadao'),
 ('Ouvidor'),
 ('Administrador Publico'),
 ('Administrador Sistema');
-
--- Extraindo dados da tabela `orgaopublico`
 INSERT INTO `orgaopublico` (`sigla_orgao_publico`, `nome_orgao_publico`) VALUES
 ('Agehab', 'Agencia de Habitacao de Mato Grosso do Sul'),
 ('Agepan', 'Agencia Estadual de Regulacao de Servicos Publicos'),
@@ -181,9 +118,3 @@ INSERT INTO `orgaopublico` (`sigla_orgao_publico`, `nome_orgao_publico`) VALUES
 ('Seprotur', 'Secretaria de Estado de Desenvolvimento Agrario, da Producao, da Industria, do Comercio e do Turismo'),
 ('SES', 'Secretaria de Estado de Saude de Mato Grosso do Sul'),
 ('Setass', 'Secretaria de Estado de Trabalho, Assistencia Social e Economia Solidaria' );
-
-
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -62,7 +62,9 @@ if(!isset($_SESSION['CPF'])){
             </div>
             <div class="row col-md-10 container clearfix">
                 <a class="btn btn-success" href="#" onClick="document.getElementById('form').submit();"><i class="fa fa-check"></i> Responder</a>
-                <a class="btn btn-danger" href="?function=listar"><i class="fa fa-times"></i> Cancelar</a>
+                <a class="btn btn-danger" href="?function=recusarManifestacao&id=<?php echo $manifestacao->id_manifestacao; ?>"><i class="fa fa-times"></i>Recusar</a>
+                <a class="btn btn-primary" href="?function=listar"><i class="fa fa-times"></i> Voltar</a>
+
             </div>
         </form>
 
