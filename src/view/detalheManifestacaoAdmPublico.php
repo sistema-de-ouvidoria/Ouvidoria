@@ -15,7 +15,7 @@ require ('model/Conexao.php');
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="../css/estilo.css">
-
+    <link rel="shortcut icon" href="logo.jpg"/>
 
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -56,7 +56,7 @@ if(!isset($_SESSION['CPF'])){
                 <label>Assunto:</label><input value="<?=$manifestacao->assunto?>" readonly class="form-control" />
                 <label>Proprietário:</label><input value="<?=$manifestacao->nome?>" readonly class="form-control" />
                 <label>Situação:</label><input value="<?=$manifestacao->nome_situacao?>" readonly class="form-control" />
-                <label>Orgão Responsavel:</label><input value="<?=""?>" readonly class="form-control" />
+                <label>Orgão Responsavel:</label><input value="<?=$manifestacao->nome_orgao_publico?>" readonly class="form-control" />
                 <label>Descrição:</label><textarea rows="6" class="form-control col-md-12" maxlength="1000" readonly><?=$manifestacao->mensagem?></textarea>
                 <label>Resposta:</label><textarea onchange="seleciona_resposta(this)" required name="resposta" rows="6" class="form-control col-md-12" maxlength="1000"></textarea>
             </div>

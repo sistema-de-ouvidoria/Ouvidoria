@@ -54,7 +54,7 @@ class ManifestacaoFactory  {
             WHERE s.id_situacao = 1;";
         }
         elseif ($acesso == 3) {
-            $query = "SELECT id_manifestacao, assunto, data_manifestacao, nome_tipo_manifestacao, nome_situacao, mensagem 
+            $query = "SELECT id_manifestacao, assunto, data_manifestacao, nome_tipo_manifestacao, nome_situacao, mensagem
             from manifestacao m INNER JOIN tipomanifestacao t ON m.id_tipo_manifestacao = t.id_tipo_manifestacao
             INNER JOIN situacao s ON s.id_situacao = m.id_situacao 
             WHERE s.id_situacao = 2;";
@@ -82,8 +82,10 @@ class ManifestacaoFactory  {
 
         $manifestacao = array();
 
-        $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem 
+        $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem, nome_orgao_publico 
         from manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
+        INNER JOIN historico h ON h.manifestacao = m.id_tipo_manifestacao
+        INNER JOIN orgaopublico o ON h.orgao_publico = o.id_orgao_publico
         INNER JOIN situacao s ON s.id_situacao = m.id_situacao
         WHERE id_manifestacao = " . $id . ";";
 

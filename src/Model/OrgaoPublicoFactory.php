@@ -6,7 +6,7 @@ class OrgaoPublicoFactory
     public function listarOrgaosPublico(){
         global $conexao;
         $orgaos = array();
-        $query = "SELECT id_orgao_publico, nome_orgao_publico from orgaopublico";
+        $query = "SELECT id_orgao_publico, nome_orgao_publico, sigla_orgao_publico from orgaopublico";
         try{
             $resultado = mysqli_query($conexao,$query);
 

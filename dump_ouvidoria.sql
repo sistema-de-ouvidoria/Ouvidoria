@@ -106,7 +106,7 @@ INSERT INTO `orgaopublico` (`sigla_orgao_publico`, `nome_orgao_publico`) VALUES
 ('Iagro', 'Agencia Estadual de Defesa Sanitaria Animal e Vegetal'),
 ('Imprensa', 'Diario Oficial do Estado de Mato Grosso do Sul'),
 ('Jucems', 'Junta Comercial do Estado de Mato Grosso do Sul'),
-('MSGÁS', 'Companhia de Gas do Estado de Mato Grosso do Sul'),
+('MSGAS', 'Companhia de Gas do Estado de Mato Grosso do Sul'),
 ('PM/MS', 'Policia Militar de Mato Grosso do Sul'),
 ('Portal MS', 'Governo do Estado de Mato Grosso do Sul'),
 ('SAD', 'Secretaria de Estado de Administracao do MS'),

@@ -18,7 +18,7 @@
         <!-- ESTILOS PARA ESTA PÁGINA -->
         <!-- Nesse caso, este estilo é apenas para inserir imagens -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-
+        <link rel="shortcut icon" href="logo.jpg"/>
         <link href="css/estilo.css" rel="stylesheet" type="text/css">
         
         <!-- JAVASCRIPT E JQUERY -->

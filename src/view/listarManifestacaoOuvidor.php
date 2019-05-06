@@ -20,6 +20,7 @@
     <!-- Nesse caso, este estilo é apenas para inserir imagens -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link href="css/estilo.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="logo.jpg"/>
 
     <!-- JAVASCRIPT E JQUERY -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

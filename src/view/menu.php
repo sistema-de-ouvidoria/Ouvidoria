@@ -20,7 +20,7 @@ else
             <?php if($nivelAcesso > 0){?><li class="nav-item"><a class="nav-link" href="?function=minhaPaginaAcao">Minha Página</a></li> <?php } ?>
             <?php if($nivelAcesso == 0){?><li class="nav-item"><a class="nav-link" href="?function=cadastrarUsuarioAcao">Cadastrar</a></li> <?php }?>
             <?php if($nivelAcesso > 1){?><li class="nav-item"><a class="nav-link" href="?function=listar">Listar manifestações</a></li> <?php }?>
-            <?php if($nivelAcesso > 1){?><li class="nav-item"><a class="nav-link" href="?function=alteraDadosAcao">Alterar dados</a></li> <?php }?>
+            <?php if($nivelAcesso > 0){?><li class="nav-item"><a class="nav-link" href="?function=alterarDados">Alterar dados</a></li> <?php }?>
             <li class="nav-item"><a class="nav-link" href="?function=sobreAcao">Sobre</a></li>
         </ul>
     </div>

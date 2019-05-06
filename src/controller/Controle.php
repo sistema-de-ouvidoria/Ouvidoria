@@ -52,6 +52,7 @@ include('model/HistoricoManager.php');
             case 'encaminhar':
                 $this->encaminhar();
                 break;
+
             case 'responder':
                 $this->responderManifestacao();
                 break;
@@ -210,15 +211,21 @@ include('model/HistoricoManager.php');
         }
     }
 
-    public function listar($acesso){
-        $nvlAcesso = $acesso;
-        $dados = $this->manifestacaoManager->listaManifestacoes($acesso);
+    public function listar(){
+        $nvlAcesso = isset($_SESSION['usuario']['id_tipo_usuario']) ? $_SESSION['usuario']['id_tipo_usuario'] : null;
 
-        if($nvlAcesso == 2)
-            require('view/listarManifestacaoOuvidor.php');
-        elseif ($nvlAcesso == 3)
-            require('view/listarManifestacaoAdmPublico.php');
+        if(!is_null($nvlAcesso)) {
+            $dados = $this->manifestacaoManager->listaManifestacoes($nvlAcesso);
 
+            if ($nvlAcesso == 2)
+                require('view/listarManifestacaoOuvidor.php');
+            elseif ($nvlAcesso == 3)
+                require('view/listarManifestacaoAdmPublico.php');
+        }
+        else {
+            echo 'Você não tem permissão para acessar essa página.';
+            exit();
+        }
     }
 
     public function encaminhar() {
