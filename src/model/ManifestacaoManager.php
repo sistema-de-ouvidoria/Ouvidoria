@@ -46,5 +46,9 @@ class ManifestacaoManager {
 
 		return $resultado;
 	}
+
+	public function recusaManifestacao(string $id){
+		$resultado = $this->factory->recusaManifestacao($id);
+	}
 }
 ?>

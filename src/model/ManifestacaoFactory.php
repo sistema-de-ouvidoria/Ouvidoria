@@ -57,7 +57,7 @@ class ManifestacaoFactory  {
             $query = "SELECT id_manifestacao, assunto, data_manifestacao, nome_tipo_manifestacao, nome_situacao, mensagem 
             from manifestacao m INNER JOIN tipomanifestacao t ON m.id_tipo_manifestacao = t.id_tipo_manifestacao
             INNER JOIN situacao s ON s.id_situacao = m.id_situacao 
-            WHERE s.id_situacao != 1;";
+            WHERE s.id_situacao = 2;";
         }
 
         try {
@@ -102,7 +102,7 @@ class ManifestacaoFactory  {
     public function alterarManifestacaoOuvidor($id) {
         global $conexao;
 
-        $query = "UPDATE manifestacao m SET id_situacao = 2 WHERE id_manifestacao = " . $id . ";";
+        $query = "UPDATE manifestacao SET id_situacao = 2 WHERE id_manifestacao = " . $id . ";";
 
         if(mysqli_query($conexao, $query))
             return true;
@@ -113,9 +113,19 @@ class ManifestacaoFactory  {
     public function alterarManifestacaoAdmPublico($id, $resposta) {
         global $conexao;
 
-        $query = "UPDATE manifestacao m SET resposta = '". $resposta ."', id_situacao= 3 WHERE id_manifestacao = " . $id . ";";
+        $query = "UPDATE manifestacao SET resposta = '". $resposta ."', id_situacao= 3 WHERE id_manifestacao = " . $id . ";";
 
         if(mysqli_query($conexao, $query))
+            return true;
+        else
+            return false;
+    }
+
+    public function recusaManifestacao($id){
+        global $conexao;
+        $query = "UPDATE manifestacao SET id_situacao = '1' where id_manifestacao = ".$id.";";
+
+        if(mysqli_query($conexao,$query))
             return true;
         else
             return false;

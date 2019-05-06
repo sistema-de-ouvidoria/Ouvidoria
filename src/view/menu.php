@@ -20,12 +20,16 @@ else
             <?php if($nivelAcesso > 0){?><li class="nav-item"><a class="nav-link" href="?function=minhaPaginaAcao">Minha Página</a></li> <?php } ?>
             <?php if($nivelAcesso == 0){?><li class="nav-item"><a class="nav-link" href="?function=cadastrarUsuarioAcao">Cadastrar</a></li> <?php }?>
             <?php if($nivelAcesso > 1){?><li class="nav-item"><a class="nav-link" href="?function=listar">Listar manifestações</a></li> <?php }?>
+            <?php if($nivelAcesso > 1){?><li class="nav-item"><a class="nav-link" href="?function=alteraDadosAcao">Alterar dados</a></li> <?php }?>
             <li class="nav-item"><a class="nav-link" href="?function=sobreAcao">Sobre</a></li>
         </ul>
     </div>
 
     <div id="botao-login">
-<!--        --><?php //if($nivelAcesso > 1){?><!--<a href="?function=loginAcao" class="btn btn-outline-success btn-lg active" role="button" aria-pressed="true">Login</a> --><?php //}?>
+        <?php if($nivelAcesso == 0 && !isset($verificacao)){?><a href="?function=loginAcao" class="btn btn-outline-success btn-lg active" role="button" aria-pressed="true">Login</a> <?php }?>
+        
+    </div>
+    <div id="botao-deslogar">    
         <?php if($nivelAcesso > 0){?> <a class="btn btn-outline-danger" href="?function=deslogar"><i class="fa fa-sign-out" aria-hidden="true"></i></a> <?php }?>
     </div>
 </nav>

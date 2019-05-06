@@ -29,7 +29,7 @@
 
     <body>
 
-        <?php include('menu.php'); ?>
+        <?php $verificacao = 1; include('menu.php'); ?>
 
         <!--INICIO DO FORMULÁRIO -->
 

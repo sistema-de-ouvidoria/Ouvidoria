@@ -52,7 +52,6 @@ include('model/HistoricoManager.php');
             case 'encaminhar':
                 $this->encaminhar();
                 break;
-
             case 'responder':
                 $this->responderManifestacao();
                 break;
@@ -64,12 +63,30 @@ include('model/HistoricoManager.php');
             case 'deslogar':
                 session_start();
                 session_destroy();
+                $_SESSION['usuario'] = null;
                 $this->inicio();
+                break;
+            case 'recusarManifestacao':
+                session_start();
+                $this->recusarManifestacao();
+                break;
+            case 'alteraDadosAcao':
+                session_start();
+                $this->alteraDadosAcao();
+                break;
+            case 'alterarDados':
+                session_start();
+                $this->alterarDados();
                 break;
             default:
                 $this->inicio();
                 break;
         }
+    }
+
+    public function alteraDadosAcao(){  
+        $usuario = $this->usuarioManager->buscaInfoUsuario($_SESSION['usuario']['cpf']);
+        require('view/alterarDados.php');
     }
 
     public function inicio() {
@@ -111,6 +128,41 @@ include('model/HistoricoManager.php');
             header('Location: view/cadastrarUsuario.php');
         }
     }
+
+    public function alterarDados(){
+        if (isset($_POST['enviado'])){
+            $senhaAntigaConfirmacao =md5($_POST['senhaAntigaAlteraDados']);
+            $cpfAlterado = $_POST['cpfAlteraDados'];
+            if($this->usuarioManager->verificaSenhaAntiga($senhaAntigaConfirmacao,$cpfAlterado)){
+                $nomeAlterado = $_POST['nomeAlteraDados'];
+                $enderecoAlterado = $_POST['enderecoAlteraDados'];
+                $telefoneAlterado = $_POST['telefoneAlteraDados'];
+                $emailAlterado = $_POST['emailAlteraDados'];
+                $senha1 = $_POST['senhaNovaAlteraDados'];
+                $senha2 = $_POST['senhaNovaConfirmacaoAlteraDados'];
+
+                if(isset($senha1) && isset($senha2) && $this->comparaSenhas($senha1,$senha2)){
+                    try{
+                        if($senha1 == "")
+                            $senha1 = $senhaAntigaConfirmacao;
+                        else
+                            $senha1 = md5($senha1);
+                        $sucesso = $this->usuarioManager->alteraUsuario($cpfAlterado,$nomeAlterado,$enderecoAlterado,$telefoneAlterado,$emailAlterado,$senha1);
+                        echo "sucesso";
+                        $this->alteraDadosAcao(); 
+                    }catch(Exception $e){
+                        $msg = $e->getMessage();
+                    }
+                }
+            }
+                else{
+                    echo "senha errada";
+                    $this->alteraDadosAcao();
+                }
+
+            header('Location: view/alterarDados.php');
+            }   
+        }
 
      public function comparaSenhas($senha1,$senha2){
          if($senha1 == $senha2)
@@ -247,5 +299,11 @@ include('model/HistoricoManager.php');
         }
 
          $this->listar($_SESSION['usuario']['id_tipo_usuario']);
+    }
+
+    public function recusarManifestacao(){
+        $id = $_GET['id'];
+        $this->manifestacaoManager->recusaManifestacao($id);
+        $this->listar($_SESSION['usuario']['id_tipo_usuario']);
     }
 }
