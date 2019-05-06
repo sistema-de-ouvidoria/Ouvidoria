@@ -9,15 +9,9 @@ class Usuario{
     protected $email;
     protected $senha;
 
-    function __construct($cpf,$nome,$endereco,$telefone,$email,$senha, $id_tipo_usuario) {
-        $this->cpf = $cpf;
-        $this->nome = $nome;
-        $this->endereco = $endereco;
-        $this->telefone = $telefone;
-        $this->email = $email;
-        $this->senha = $senha;
-        $this->id_tipo_usuario = $id_tipo_usuario;
+    function __construct() {
     }
+ 
 
     //Setters e Getters da classe Manifestacao
     public function getCpf(){
