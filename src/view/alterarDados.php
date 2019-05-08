@@ -14,7 +14,7 @@ require ('model/Conexao.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="../css/estilo.css">
+    <link rel="stylesheet" type="text/css" href="../estilo.css">
     <link rel="shortcut icon" href="logo.jpg"/>
 
     <!-- BOOTSTRAP -->
@@ -56,7 +56,7 @@ if(!isset($_SESSION['CPF'])){
 <div style="margin-left: 1cm">
     <h1> Alterar dados </h1>
     <br>
-    <form action="?function=alterarDados" method="POST">
+    <form action="?function=alterarDados" method="POST" name="formulario">
         <div class="form-group col-md-4">
             <label>Nome:</label><input type="text" name="nomeAlteraDados" value="<?=$usuario->nome?>"  class="form-control"/>
         </div>
@@ -67,22 +67,23 @@ if(!isset($_SESSION['CPF'])){
             <label>Endereço:</label><input type="text" name="enderecoAlteraDados" value="<?=$usuario->endereco?>" class="form-control" />
             <label>Telefone:</label><input type="text" name="telefoneAlteraDados" value="<?=$usuario->telefone?>" class="form-control" />
             <label>E-mail:</label><input type="email" name="emailAlteraDados" value="<?=$usuario->email?>" class="form-control" />
+            <?php if(isset($emailUnico) && !$emailUnico){ echo "<span style='color:red;'>E-mail inserido já cadastrado</span>"; echo "<br>";}?>
         </div>
         <div class="form-group col-md-4">
-            <label>Confirme a senha antiga:</label><input type="password"" name="senhaAntigaAlteraDados" required="required" class="form-control" />
-            <label>Nova senha:</label><input type="password" name="senhaNovaAlteraDados" class="form-control" />
-            <label>Confirme a nova senha:</label><input name="senhaNovaConfirmacaoAlteraDados" type="password" class="form-control" />
-            <?php if(isset($msgErrosenhaIgual) && !$msgErrosenhaIgual) echo "As senhas devem ser iguais";?>
-
-
+            <input type="hidden" value="<?=$usuario->senha?>">
+            <label>Senha atual:</label><input type="password" id="senhaAntigaAlteraDados" name="senhaAntigaAlteraDados" required="required" class="form-control" />
+            <?php if(isset($senhaDiferenteBanco) && !$senhaDiferenteBanco){ echo "<span style='color:red;'>Senha diferente da cadastrada</span>";echo "<br>";} ?>
+            <label>Nova senha:</label><input type="password" id="senhaNovaAlteraDados" name="senhaNovaAlteraDados" class="form-control" />
+            <?php if(isset($senhaMenor) && !$senhaMenor){ echo "<span style='color:red;'>O campo senha não pode conter menos de 5 caracteres</span>";echo "<br>";} ?>
+            <label>Confirme a nova senha:</label><input id="senhaNovaConfirmacaoAlteraDados" name="senhaNovaConfirmacaoAlteraDados" type="password" class="form-control" />
+            <?php if(isset($senhaIgual) && !$senhaIgual)echo "<span style='color:red;'>A confirmação de senha não confere</span>";?>
         </div>
-        <div class="form-group  col-md-8">
-
-
-            <input  type="submit" value="Enviar" name="enviado" class="float-right btn btn-outline-primary active"/>
+        <div class="form-group  col-md-4">
+            <input  type="submit" value="Enviar" name="enviado"class="float-right btn btn-outline-success active"/>
 
         </div>
     </form>
+    <br><br>
 </div>
 <!-- FIM DA TELA DE CADASTRO -->
 

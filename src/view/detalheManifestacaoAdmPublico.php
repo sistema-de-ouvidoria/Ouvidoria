@@ -14,7 +14,7 @@ require ('model/Conexao.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="../css/estilo.css">
+    <link rel="stylesheet" type="text/css" href="../estilo.css">
     <link rel="shortcut icon" href="logo.jpg"/>
 
     <!-- BOOTSTRAP -->
@@ -47,30 +47,49 @@ if(!isset($_SESSION['CPF'])){
 <!--FIM MENU SUPERIOR -->
 
 <!-- TELA DE CADASTRO -->
-<br>
-    <div style="margin-left: 1cm">
-        <form id="form" method="post" action="?function=responder">
-            <div class="row form-group col-md-4">
-                <label for="protocolo">Protocolo:</label><input name="protocolo" value="<?=$manifestacao->id_manifestacao?>" readonly class="form-control" />
-                <label>Data de Criação:</label><input value="<?=date('d-m-Y', strtotime($manifestacao->data_manifestacao))?>" readonly class="form-control" />
-                <label>Assunto:</label><input value="<?=$manifestacao->assunto?>" readonly class="form-control" />
-                <label>Proprietário:</label><input value="<?=$manifestacao->nome?>" readonly class="form-control" />
-                <label>Situação:</label><input value="<?=$manifestacao->nome_situacao?>" readonly class="form-control" />
-                <label>Orgão Responsavel:</label><input value="<?=$manifestacao->nome_orgao_publico?>" readonly class="form-control" />
-                <label>Descrição:</label><textarea rows="6" class="form-control col-md-12" maxlength="1000" readonly><?=$manifestacao->mensagem?></textarea>
-                <label>Resposta:</label><textarea onchange="seleciona_resposta(this)" required name="resposta" rows="6" class="form-control col-md-12" maxlength="1000"></textarea>
-            </div>
-            <div class="row col-md-10 container clearfix">
-                <a class="btn btn-success" href="#" onClick="document.getElementById('form').submit();"><i class="fa fa-check"></i> Responder</a>
-                <a class="btn btn-danger" href="?function=recusarManifestacao&id=<?php echo $manifestacao->id_manifestacao; ?>"><i class="fa fa-times"></i>Recusar</a>
-                <a class="btn btn-primary" href="?function=listar"><i class="fa fa-times"></i> Voltar</a>
-
-            </div>
-        </form>
-
+<div class="container mt-3">
+    <form id="form" class="row" action="?function=responder" method="post">
+        <div class="form-group col-6">
+            <label for="protocolo">Protocolo:</label>
+            <input value="<?=$manifestacao->id_manifestacao?>" name="protocolo" id="protocolo" readonly class="form-control">
         </div>
+        <div class="form-group col-6">
+            <label for="data">Data de Criação:</label>
+            <input id="data" class="form-control" value="<?=date('d-m-Y', strtotime($manifestacao->data_manifestacao))?>" readonly>
+        </div>
+        <div class="form-group col-12">
+            <label for="assunto">Assunto:</label>
+            <input id="assunto" class="form-control" value="<?=$manifestacao->assunto?>" readonly>
+        </div>
+        <div class="form-group col-12">
+            <label for="prop">Proprietário:</label>
+            <input id="prop" class="form-control" value="<?=$manifestacao->nome?>" readonly>
+        </div>
+        <div class="form-group col-6">
+            <label for="situacao">Situação:</label>
+            <input id="situacao" class="form-control" value="<?=$manifestacao->nome_situacao?>" readonly>
+        </div>
+        <div class="form-group col-6">
+            <label for="setor">Setor Responsável:</label>
+            <input id="setor" value="<?=$manifestacao->nome_orgao_publico?>" readonly class="form-control"/>
+        </div>
+        <div class="form-group col-12">
+            <label for="descricao">Descrição:</label>
+            <textarea name="mensagem" rows="6" class="form-control" maxlength="1000" readonly><?=$manifestacao->mensagem?></textarea>
+        </div>
+        <div class="form-group col-12">
+            <label for="resposta">Resposta:</label>
+            <textarea id="resposta" onchange="seleciona_resposta(this)" name="resposta" required rows="6" class="form-control" maxlength="1000" placeholder="Digite aqui sua resposta..."></textarea>
+        </div>
+        <div class="form-group col-12">
+            <a class="btn btn-success float-right" href="#" onClick="document.getElementById('form').submit();"><i class="fa fa-check"></i> Responder</a>
+            <a class="btn btn-danger float-left" href="?function=recusarManifestacao&id=<?php echo $manifestacao->id_manifestacao; ?>"><i class="fa fa-times"></i> Rejeitar</a>
+        </div>
+        <!--                <div class="form-group col-12">-->
+        <!--                    <a class="btn btn-primary" href="?function=listar"><i class="fa fa-times"></i> Voltar</a>-->
+        <!--                </div>-->
+    </form>
 </div>
-
 <script>
     function seleciona_resposta(el) {
         var $lnk = document.getElementById("resposta_adm");

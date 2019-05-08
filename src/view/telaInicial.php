@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title>Fazer Login</title>
+    <title>PAGINA INICIAL</title>
     <meta charset="utf-8">
     <meta http-equiv=”content-type” content="text/html;" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="keywords" content="tags, que, eu, quiser, usar, para, os, robos, do, google" />
-    <title>Fala aÍ</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -36,7 +35,7 @@
 
 <br>
 <div id="manifestacao" style="margin-left: 1cm">
-    <h3>Fazer Login</h3>
+    <h3>Página inicial</h3>
 
 </div>
 </body>

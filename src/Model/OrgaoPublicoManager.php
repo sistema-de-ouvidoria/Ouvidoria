@@ -9,12 +9,14 @@ class OrgaoPublicoManager
 
     private $factory;
 
-    public function __construct() {
+    public function __construct()
+    {
 
         $this->factory = new OrgaoPublicoFactory();
     }
 
-    public function listaOrgaosPublico(){
+    public function listaOrgaosPublico()
+    {
         return $this->factory->listarOrgaosPublico();
     }
 

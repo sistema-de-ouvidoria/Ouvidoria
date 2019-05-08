@@ -34,19 +34,22 @@
         <!--INICIO DO FORMULÁRIO -->
 
         <br>
-        <div id="manifestacao" style="margin-left: 1cm">
+        <div class="row mt-5">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
             <h3>Fazer Login</h3>
 
             <form action="?function=fazerLogin" method="POST">
                 <label>CPF:</label>
-                <input name="cpf" type="text" class="form-control col-md-8" maxlength="100" required oninvalid="setCustomValidity('O campo CPF não pode estar vazio')" onchange="try{setCustomValidity('')}catch(e){}"/>
+                <input name="cpf" type="number" onKeyDown="if(this.value.length==11) return false;" class="form-control" maxlength="11" required oninvalid="setCustomValidity('O campo CPF não pode estar vazio')" onchange="try{setCustomValidity('')}catch(e){}"/>
                 <br>
                 <label>Senha:</label>
-                <input name="senha" type="password" class="form-control col-md-8" maxlength="100" required oninvalid="setCustomValidity('O campo senha não pode estar vazio')" onchange="try{setCustomValidity('')}catch(e){}"/>
+                <input name="senha" type="password" class="form-control" maxlength="100" required oninvalid="setCustomValidity('O campo senha não pode estar vazio')" onchange="try{setCustomValidity('')}catch(e){}"/>
                 <?php if(isset($msgLogin) && !$msgLogin): ?> <div class="alerta error" role="alert">Senha ou Login inválidos!</div> <br> <?php endif; ?>
                 <br>
-                <input type="submit" value="Entrar" class="btn btn-outline-success btn-lg active"/>
+                <input type="submit" value="Entrar" class="btn btn-outline-success btn-lg active float-right"/>
             </form><!--FIM DO FORMULÁRIO -->
+            </div>
         </div>
     </body>
 </html>

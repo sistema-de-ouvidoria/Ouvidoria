@@ -1,35 +1,59 @@
 <?php
-if(isset($_SESSION['usuario']['id_tipo_usuario'])){
+if (isset($_SESSION['usuario']['id_tipo_usuario'])) {
     $nivelAcesso = $_SESSION['usuario']['id_tipo_usuario'];
-}
-else
+} else
     $nivelAcesso = 0;
 ?>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<nav class="navbar navbar-dark navbar-expand-lg bg-dark" >
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"   aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent"  >
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="?function=">Página Inicial</a></li>
-            <?php if($nivelAcesso > 0){?><li class="nav-item"><a class="nav-link" href="?function=minhaPaginaAcao">Minha Página</a></li> <?php } ?>
-            <?php if($nivelAcesso == 0){?><li class="nav-item"><a class="nav-link" href="?function=cadastrarUsuarioAcao">Cadastrar</a></li> <?php }?>
-            <?php if($nivelAcesso > 1){?><li class="nav-item"><a class="nav-link" href="?function=listar">Listar manifestações</a></li> <?php }?>
-            <?php if($nivelAcesso > 0){?><li class="nav-item"><a class="nav-link" href="?function=alteraDadosAcao">Alterar dados</a></li> <?php }?>
-            <li class="nav-item"><a class="nav-link" href="?function=sobreAcao">Sobre</a></li>
+
+            <?php if ($nivelAcesso > 0) { ?>
+                <li class="nav-item"><a class="nav-link" href="?function=inicial">Página Inicial</a>
+                </li> <?php } else { ?>
+                <li class="nav-item"><a class="nav-link" href="?function=">Página Inicial</a></li>
+            <?php } ?>
+            <?php if ($nivelAcesso > 0) { ?>
+                <li class="nav-item"><a class="nav-link" href="?function=criarManifestacaoAcao">Criar Manifestação</a>
+                </li> <?php } ?>
+            <!--<?php if ($nivelAcesso > 0) { ?><li class="nav-item"><a class="nav-link" href="?function=minhaPaginaAcao">Minha Página</a></li> <?php } ?> -->
+            <?php if ($nivelAcesso == 0) { ?>
+                <li class="nav-item"><a class="nav-link" href="?function=cadastrarUsuarioAcao">Cadastrar</a>
+                </li> <?php } ?>
+            <?php if ($nivelAcesso > 1) { ?>
+                <li class="nav-item"><a class="nav-link" href="?function=listar">Listar manifestações</a>
+                </li> <?php } ?>
+
+            <!-- <li class="nav-item"><a class="nav-link" href="?function=sobreAcao">Sobre</a></li> " -->
         </ul>
     </div>
 
     <div id="botao-login">
-        <?php if($nivelAcesso == 0 && !isset($verificacao)){?><a href="?function=loginAcao" class="btn btn-outline-success btn-lg active" role="button" aria-pressed="true">Login</a> <?php }?>
-        
+        <?php if ($nivelAcesso == 0 && !isset($verificacao)) { ?><a href="?function=loginAcao"
+                                                                    class="btn btn-outline-success btn-lg active"
+                                                                    role="button"
+                                                                    aria-pressed="true">Login</a> <?php } ?>
+
     </div>
-    <div id="botao-deslogar">    
-        <?php if($nivelAcesso > 0){?> <a class="btn btn-outline-danger" href="?function=deslogar"><i class="fa fa-sign-out" aria-hidden="true"></i></a> <?php }?>
+    <div class="btn-group">
+        <?php if ($nivelAcesso > 0) { ?>
+            <button id="usuario" type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['usuario']['nome']; ?></button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="?function=alteraDadosAcao">Perfil</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="?function=deslogar">Sair</a>
+            </div>
+        <?php } ?>
     </div>
+
 </nav>

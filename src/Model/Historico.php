@@ -10,11 +10,13 @@ class Historico
     protected $cpf_ouvidor;
     protected $cpf_adm_publico;
 
-    function __construct(string $orgao_publico,string $ouvidor,string $manifestacao) {
+    function __construct(string $orgao_publico, string $ouvidor, string $manifestacao)
+    {
         $this->id_orgao_publico = $orgao_publico;
         $this->id_manifestacao = $manifestacao;
         $this->cpf_ouvidor = $ouvidor;
     }
+
     /**
      * @return mixed
      */
@@ -63,17 +65,23 @@ class Historico
         $this->cpf_adm_publico = $cpf_adm_publico;
     }
 
-    public function getIdHistorico(){
+    public function getIdHistorico()
+    {
         return $this->id_historico;
     }
-    public function setIdHituacao($id_historico){
+
+    public function setIdHituacao($id_historico)
+    {
         $this->$id_historico = $id_historico;
     }
 
-    public function getIdManifestacao(){
+    public function getIdManifestacao()
+    {
         return $this->id_manifestacao;
     }
-    public function setIdManifestacao($id_manifestacao){
+
+    public function setIdManifestacao($id_manifestacao)
+    {
         $this->id_manifestacao = $id_manifestacao;
     }
 }

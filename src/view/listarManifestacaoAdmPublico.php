@@ -14,30 +14,21 @@
 
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
+        <link href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
 
-    <!-- ESTILOS PARA ESTA PÁGINA -->
-    <!-- Nesse caso, este estilo é apenas para inserir imagens -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link href="css/estilo.css" rel="stylesheet" type="text/css">
-    <link rel="shortcut icon" href="logo.jpg"/>
-    <!-- JAVASCRIPT E JQUERY -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <!-- ESTILOS PARA ESTA PÁGINA -->
+        <!-- Nesse caso, este estilo é apenas para inserir imagens -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+        <link href="css/estilo.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="logo.jpg"/>
+        <!-- JAVASCRIPT E JQUERY -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 </head>
 <body>
-    <?php include('menu.php');?>
+<?php include('menu.php');?>
 
-    <div class="row col-md-10 container clearfix">
-        <div class="form-group col-md-4">
-            <label>Buscar por assunto ou descrição:</label><input type="text" name="consulta" id="input" onkeyup="funcaoDeBusca()" class="form-control" />
-        </div>
-        <div class="form-group col-md-4">
-            <label>Buscar pelo número de protocolo:</label><input type="text" name="consulta_protocolo" id="inputProtocolo" onkeyup="funcaoDeBuscaProtocolo()" class="form-control" />
-        </div>
-    </div>
-
-    <?php include('tabelaManifestacoes.php');?>
+<?php include('tabelaManifestacoes.php');?>
 </body>
 </html>

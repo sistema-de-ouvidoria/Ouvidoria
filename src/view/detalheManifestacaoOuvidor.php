@@ -14,7 +14,7 @@ require ('model/Conexao.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="../css/estilo.css">
+    <link rel="stylesheet" type="text/css" href="../estilo.css">
     <link rel="shortcut icon" href="logo.jpg"/>
 
     <!-- BOOTSTRAP -->
@@ -47,21 +47,38 @@ if(!isset($_SESSION['CPF'])){
 <!--FIM MENU SUPERIOR -->
 
 <!-- TELA DE CADASTRO -->
-<br>
-<div style="margin-left: 1cm">
-    <form action="?function=encaminhar&id=<?=$manifestacao->id_manifestacao?>" method="GET">
-        <div class="row form-group col-md-4">
-            <label for="protocolo">Protocolo:</label><input id="protocolo" type="text" name="nomeCadastro" value="<?=$manifestacao->id_manifestacao?>" readonly class="form-control" />
-            <label>Data de Criação:</label><input type="text" name="cpfCadastro" value="<?=date('d-m-Y', strtotime($manifestacao->data_manifestacao))?>" readonly class="form-control" />
-            <label>Assunto:</label><input type="text" value="<?=$manifestacao->assunto?>" name="enderecoCadastro" readonly class="form-control" />
-            <label>Proprietário:</label><input type="text" value="<?=$manifestacao->nome?>" name="telefoneCadastro" readonly class="form-control" />
-            <label>Situação:</label><input type="email" name="emailCadastro" value="<?=$manifestacao->nome_situacao?>" readonly class="form-control" />
-            <label>Descrição:</label><textarea name="mensagem" rows="6" class="form-control col-md-12" maxlength="1000" readonly><?=$manifestacao->mensagem?></textarea>
+
+<div class="container mt-3">
+    <form class="row" action="?function=encaminhar&id=<?=$manifestacao->id_manifestacao?>" method="GET">
+        <div class="form-group col-6">
+            <label for="protocolo">Protocolo:</label>
+            <input value="<?=$manifestacao->id_manifestacao?>" id="protocolo" readonly class="form-control">
         </div>
-        <div class="row">
+        <div class="form-group col-6">
+            <label for="data">Data de Criação:</label>
+            <input id="data" class="form-control" value="<?=date('d-m-Y', strtotime($manifestacao->data_manifestacao))?>" readonly>
+        </div>
+        <div class="form-group col-12">
+            <label for="assunto">Assunto:</label>
+            <input id="assunto" class="form-control" value="<?=$manifestacao->assunto?>" readonly>
+        </div>
+        <div class="form-group col-12">
+            <label for="prop">Proprietário:</label>
+            <input id="prop" class="form-control" value="<?=$manifestacao->nome?>" readonly>
+        </div>
+        <div class="form-group col-6">
+            <label for="situacao">Situação:</label>
+            <input id="situacao" class="form-control" value="<?=$manifestacao->nome_situacao?>" readonly>
+        </div>
+        <div class="form-group col-12">
+            <label for="descricao">Descrição:</label>
+            <textarea name="mensagem" rows="6" class="form-control" maxlength="1000" readonly><?=$manifestacao->mensagem?></textarea>
+        </div>
+        <div class="form-group col-12">
+            <label for="setor">Setor Responsável:</label>
             <?php
             $tipoSelecionado = null;
-            echo "<select onchange='seleciona_orgao(this)' name = 'orgao' id='orgao'>";
+            echo "<select class='container mr-12' onchange='seleciona_orgao(this)' name = 'orgao' id='orgao'>";
             $tamanho = count($orgaos);
             if(isset($orgaos)){
                 echo "<option value = ''>Selecione um Orgão Publico</option>";
@@ -76,8 +93,7 @@ if(!isset($_SESSION['CPF'])){
             }
             echo "</select>"
             ?>
-        </div>
-            <a class="btn btn-warning" href="?function=encaminhar&id=<?=$manifestacao->id_manifestacao?>&org="id="orgao_publico"><i class="fa fa-wrench"></i> Encaminhar</a>
+            <a class="btn btn-warning float-right mt-3" href="?function=encaminhar&id=<?=$manifestacao->id_manifestacao?>&org="id="orgao_publico"><i class="fa fa-wrench"></i> Encaminhar</a>
         </div>
     </form>
 </div>

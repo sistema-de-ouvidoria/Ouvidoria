@@ -1,6 +1,7 @@
 <?php
 
-class Usuario{
+class Usuario
+{
     protected $cpf;
     protected $id_tipo_usuario;
     protected $nome;
@@ -9,7 +10,8 @@ class Usuario{
     protected $email;
     protected $senha;
 
-    function __construct($cpf,$nome, $endereco, $telefone, $email, $senha, $id_tipo_usuario) {
+    function __construct($cpf, $nome, $endereco, $telefone, $email, $senha, $id_tipo_usuario)
+    {
         $this->cpf = $cpf;
         $this->id_tipo_usuario = $id_tipo_usuario;
         $this->nome = $nome;
@@ -18,62 +20,78 @@ class Usuario{
         $this->email = $email;
         $this->senha = $senha;
     }
- 
+
 
     //Setters e Getters da classe Manifestacao
-    public function getCpf(){
+    public function getCpf()
+    {
         return $this->cpf;
     }
 
-    public function setCpf($cpf){
+    public function setCpf($cpf)
+    {
         $this->cpf = $cpf;
     }
-    public function getNome(){
+
+    public function getNome()
+    {
         return $this->nome;
     }
 
-    public function setNome($nome){
+    public function setNome($nome)
+    {
         $this->nome = $nome;
     }
 
-    public function getEndereco(){
+    public function getEndereco()
+    {
         return $this->endereco;
     }
 
-    public function setEndereco($endereco){
+    public function setEndereco($endereco)
+    {
         $this->endereco = $endereco;
     }
 
-    public function getTelefone(){
+    public function getTelefone()
+    {
         return $this->telefone;
     }
 
-    public function setTelefone($telefone){
+    public function setTelefone($telefone)
+    {
         $this->telefone = $telefone;
     }
 
-    public function getEmail(){
+    public function getEmail()
+    {
         return $this->email;
     }
 
-    public function setEmail($email){
+    public function setEmail($email)
+    {
         $this->email = $email;
     }
 
-    public function getSenha(){
+    public function getSenha()
+    {
         return $this->senha;
     }
 
-    public function setSenha($senha){
+    public function setSenha($senha)
+    {
         $this->senha = $senha;
     }
 
-    public function getIdTipoUsuario(){
+    public function getIdTipoUsuario()
+    {
         return $this->id_tipo_usuario;
     }
 
-    public function setIdTipoUsuario($id_tipo_usuario){
+    public function setIdTipoUsuario($id_tipo_usuario)
+    {
         $this->id_tipo_usuario = $id_tipo_usuario;
     }
 }
+
 ?>
