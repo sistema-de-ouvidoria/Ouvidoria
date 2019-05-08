@@ -14,8 +14,10 @@ require ('model/Conexao.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="../estilo.css">
     <link rel="shortcut icon" href="logo.jpg"/>
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="script.js" /></script>
 
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -62,12 +64,12 @@ if(!isset($_SESSION['CPF'])){
                 <label>Nome:</label><input type="text" name="nomeCadastro" class="form-control" required oninvalid="setCustomValidity('O campo nome deve ser informado')" onchange="try{setCustomValidity('')}catch(e){}"/>
             </div>
             <div class="form-group  col-md-4">
-                <label>CPF:</label><input type="number" placeholder="Insira apenas números" name="cpfCadastro" maxlength="11"   name="cpfCadastro" class="form-control" onKeyDown="if(this.value.length==11) return false;" required oninvalid="setCustomValidity('O campo CPF deve ser informado')" onchange="try{setCustomValidity('')}catch(e){}"/>
+                <label>CPF:</label><input type="number" id="cpf" placeholder="Insira apenas números" name="cpfCadastro" maxlength="11" name="cpfCadastro" class="form-control" onkeypress="return somenteNumerosCPF(event)" required oninvalid="setCustomValidity('O campo CPF deve ser informado')" onchange="try{setCustomValidity('')}catch(e){}"/>
                 <?php if(isset($cpfExiste) && !$cpfExiste) echo "<span style='color:red;'>CPF já cadastrado</span>";?>
             </div>
             <div class="form-group  col-md-4">
                 <label>Endereço:</label><input type="text" name="enderecoCadastro" class="form-control" />
-                <label>Telefone:</label><input type="text" name="telefoneCadastro" class="form-control" />
+                <label>Telefone:</label><input type="number" id="telefone" maxlength="11" name="telefoneCadastro" onkeypress="return somenteNumerosTel(event)" required class="form-control"/>
                 <label>E-mail:</label><input type="email" name="emailCadastro" class="form-control" required oninvalid="setCustomValidity('E-mail inválido')" onchange="try{setCustomValidity('')}catch(e){}"/>
                  <?php if(isset($emailUnico) && !$emailUnico){ echo "<span style='color:red;'>E-mail inserido já cadastrado</span>"; echo "<br>";}?>
             </div>
@@ -85,7 +87,9 @@ if(!isset($_SESSION['CPF'])){
     </div>
 <!-- FIM DA TELA DE CADASTRO -->
 
+    <script>
 
+    </script>
 </body>
 
 <!--<button class="btn btn-outline-success btn-lg active float-right" role="button" aria-pressed="true"">Enviar</button>

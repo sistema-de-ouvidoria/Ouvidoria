@@ -14,8 +14,10 @@ require ('model/Conexao.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="../estilo.css">
     <link rel="shortcut icon" href="logo.jpg"/>
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="script.js" /></script>
 
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -46,8 +48,6 @@ if(!isset($_SESSION['CPF'])){
 
 <!--FIM MENU SUPERIOR -->
 
-
-
 <!-- TELA DE CADASTRO -->
 <br>
 <br>
@@ -65,7 +65,7 @@ if(!isset($_SESSION['CPF'])){
         </div>
         <div class="form-group  col-md-4">
             <label>Endereço:</label><input type="text" name="enderecoAlteraDados" value="<?=$usuario->endereco?>" class="form-control" />
-            <label>Telefone:</label><input type="text" name="telefoneAlteraDados" value="<?=$usuario->telefone?>" class="form-control" />
+            <label>Telefone:</label><input type="number" id="telefone" maxlength="11" onkeypress="return somenteNumerosTel(event)" name="telefoneAlteraDados" value="<?=$usuario->telefone?>" class="form-control" />
             <label>E-mail:</label><input type="email" name="emailAlteraDados" value="<?=$usuario->email?>" class="form-control" />
             <?php if(isset($emailUnico) && !$emailUnico){ echo "<span style='color:red;'>E-mail inserido já cadastrado</span>"; echo "<br>";}?>
         </div>

@@ -130,7 +130,7 @@ class Controle
 
     public function inicio()
     {
-        require('view/criarNoticia.php');
+        require('view/telaInicial.php');
     }
 
     public function cadastrarUsuarioAcao()
@@ -270,7 +270,6 @@ class Controle
         }
     }
 
-
     public function comparaSenhas($senha1, $senha2)
     {
         if ($senha1 == $senha2)
@@ -323,11 +322,7 @@ class Controle
 
         if (!is_null($nvlAcesso)) {
             $dados = $this->manifestacaoManager->listaManifestacoes($nvlAcesso);
-
-            if ($nvlAcesso == 2)
-                require('view/listarManifestacaoOuvidor.php');
-            elseif ($nvlAcesso == 3)
-                require('view/listarManifestacaoAdmPublico.php');
+            require ('view/listarManifestacoes.php');
         } else {
             echo 'Você não tem permissão para acessar essa página.';
             exit();

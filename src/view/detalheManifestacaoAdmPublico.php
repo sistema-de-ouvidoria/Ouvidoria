@@ -5,7 +5,7 @@ require ('model/Conexao.php');
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title></title>
+    <title>Detalhe Manifestação</title>
     <meta charset="utf-8">
     <meta http-equiv=”content-type” content="text/html;" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -14,7 +14,6 @@ require ('model/Conexao.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="../estilo.css">
     <link rel="shortcut icon" href="logo.jpg"/>
 
     <!-- BOOTSTRAP -->

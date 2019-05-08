@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title>PAGINA INICIAL</title>
+    <title>Ouvidoria</title>
     <meta charset="utf-8">
     <meta http-equiv=”content-type” content="text/html;" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -17,8 +17,6 @@
     <!-- ESTILOS PARA ESTA PÁGINA -->
     <!-- Nesse caso, este estilo é apenas para inserir imagens -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-
-    <link href="css/estilo.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="logo.jpg"/>
 
     <!-- JAVASCRIPT E JQUERY -->

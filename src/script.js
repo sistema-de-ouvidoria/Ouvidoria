@@ -41,3 +41,37 @@ function funcaoDeBuscaProtocolo() {
         }
     }
 }
+
+function somenteNumerosTel(e) {
+    var charCode = e.charCode ? e.charCode : e.keyCode;
+    // charCode 8 = backspace
+    // charCode 9 = tab
+    if (charCode != 8 && charCode != 9) {
+        // charCode 48 equivale a 0
+        // charCode 57 equivale a 9
+        var max = 11;
+        var num = document.getElementById('telefone');
+
+        if ((charCode < 48 || charCode > 57)||(telefone.value.length >= max)) {
+            return false;
+        }
+
+    }
+}
+
+function somenteNumerosCPF(e) {
+    var charCode = e.charCode ? e.charCode : e.keyCode;
+    // charCode 8 = backspace
+    // charCode 9 = tab
+    if (charCode != 8 && charCode != 9) {
+        // charCode 48 equivale a 0
+        // charCode 57 equivale a 9
+        var max = 11;
+        var num = document.getElementById('cpf');
+
+        if ((charCode < 48 || charCode > 57)||(cpf.value.length >= max)) {
+            return false;
+        }
+
+    }
+}
