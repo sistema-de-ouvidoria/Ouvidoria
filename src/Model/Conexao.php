@@ -10,7 +10,7 @@ if (!defined("PASSWORD")) {
     define('PASSWORD', '');
 }
 if (!defined("DB")) {
-    define('DB', 'ouvidoria_teste');
+    define('DB', 'ouvidoria');
 }
 
 
