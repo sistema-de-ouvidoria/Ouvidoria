@@ -80,7 +80,7 @@ class ManifestacaoFactory
         }
     }
 
-    public function selecionarManifestacao(string $id)
+    public function selecionarManifestacaoAdmPublico(string $id)
     {
         global $conexao;
 
@@ -103,6 +103,29 @@ class ManifestacaoFactory
             return "Nenhum tipo encontrado";
         }
     }
+
+    public function selecionarManifestacaoOuvidor(string $id)
+    {
+        global $conexao;
+
+        $manifestacao = array();
+
+        $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem 
+        from manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
+        INNER JOIN situacao s ON s.id_situacao = m.id_situacao
+        WHERE id_manifestacao = " . $id . ";";
+
+        $resultado = mysqli_query($conexao, $query);
+
+        if ($resultado) {
+            $manifestacao = mysqli_fetch_object($resultado);
+
+            return $manifestacao;
+        } else {
+            return "Nenhum tipo encontrado";
+        }
+    }
+
 
     public function alterarManifestacaoOuvidor($id)
     {

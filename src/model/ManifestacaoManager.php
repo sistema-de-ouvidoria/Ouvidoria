@@ -47,9 +47,16 @@ class ManifestacaoManager
         return $this->factory->alterarManifestacaoAdmPublico($id, $resposta);
     }
 
-    public function selecionaManifestacao(string $id)
+    public function selecionaManifestacaoAdmPublico(string $id)
     {
-        $resultado = $this->factory->selecionarManifestacao($id);
+        $resultado = $this->factory->selecionarManifestacaoAdmPublico($id);
+
+        return $resultado;
+    }
+
+    public function selecionaManifestacaoOuvidor(string $id)
+    {
+        $resultado = $this->factory->selecionarManifestacaoOuvidor($id);
 
         return $resultado;
     }

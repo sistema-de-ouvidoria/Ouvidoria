@@ -62,9 +62,6 @@ CREATE TABLE IF NOT EXISTS `historico`
 -- Extraindo dados da tabela `historico`
 --
 
-INSERT INTO `historico` (`id_historico`, `orgao_publico`, `ouvidor`, `adm_publico`, `manifestacao`)
-VALUES
-
 -- --------------------------------------------------------
 
 --
@@ -93,11 +90,6 @@ CREATE TABLE IF NOT EXISTS `manifestacao`
 --
 -- Extraindo dados da tabela `manifestacao`
 --
-
-INSERT INTO `manifestacao` (`id_manifestacao`, `cidadao_cpf`, `id_tipo_manifestacao`, `id_situacao`, `assunto`,
-                            `mensagem`, `sigilo`, `id_anexo`, `data_manifestacao`, `resposta`)
-VALUES
-
 
 -- --------------------------------------------------------
 

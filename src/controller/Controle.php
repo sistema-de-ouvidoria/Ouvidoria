@@ -348,14 +348,14 @@ class Controle
 
     public function detalharManifestacaoOuvidor()
     {
-        $manifestacao = $this->manifestacaoManager->selecionaManifestacao($_GET['id']);
+        $manifestacao = $this->manifestacaoManager->selecionaManifestacaoOuvidor($_GET['id']);
         $orgaos = $this->orgaoManager->listaOrgaosPublico();
         require('view/detalheManifestacaoOuvidor.php');
     }
 
     public function detalharManifestacaoAdmPublico()
     {
-        $manifestacao = $this->manifestacaoManager->selecionaManifestacao($_GET['id']);
+        $manifestacao = $this->manifestacaoManager->selecionaManifestacaoAdmPublico($_GET['id']);
         require('view/detalheManifestacaoAdmPublico.php');
     }
 
