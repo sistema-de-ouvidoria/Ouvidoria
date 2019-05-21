@@ -8,7 +8,6 @@ include('model/HistoricoManager.php');
 
 class Controle
 {
-
     public function __construct()
     {
         $this->manifestacaoManager = new ManifestacaoManager();
