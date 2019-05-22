@@ -1,5 +1,5 @@
 <?php
-
+namespace Ouvidoria\model\factory;
 
 class OrgaoPublicoFactory
 {

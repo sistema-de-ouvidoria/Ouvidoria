@@ -59,7 +59,7 @@ if(!isset($_SESSION['CPF'])){
     <h1> Cadastre-se </h1>
     <br>
     <div>
-        <form action="?function=cadastrarUsuario" method="POST">
+        <form action="?section=UsuarioControle&function=cadastrarUsuario" method="POST">
             <div class="form-group col-md-4">
                 <label>Nome:</label><input type="text" name="nomeCadastro" class="form-control" required oninvalid="setCustomValidity('O campo nome deve ser informado')" onchange="try{setCustomValidity('')}catch(e){}"/>
             </div>

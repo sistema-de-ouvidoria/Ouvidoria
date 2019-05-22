@@ -92,7 +92,7 @@ if(!isset($_SESSION['CPF'])){
             }
             echo "</select>"
             ?>
-            <a class="btn btn-warning float-right mt-3" href="?function=encaminhar&id=<?=$manifestacao->id_manifestacao?>&org="id="orgao_publico"><i class="fa fa-wrench"></i> Encaminhar</a>
+            <a class="btn btn-warning float-right mt-3" href="?section=ManifestacaoControle&function=encaminhar&id=<?=$manifestacao->id_manifestacao?>&org="id="orgao_publico"><i class="fa fa-wrench"></i> Encaminhar</a>
         </div>
     </form>
 </div>

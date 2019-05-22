@@ -1,5 +1,5 @@
 <?php
-
+namespace Ouvidoria\model;
 class Manifestacao
 {
     protected $id_manifestacao;

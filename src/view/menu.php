@@ -18,19 +18,19 @@ if (isset($_SESSION['usuario']['id_tipo_usuario'])) {
         <ul class="navbar-nav mr-auto">
 
             <?php if ($nivelAcesso > 0) { ?>
-                <li class="nav-item"><a class="nav-link" href="?function=inicial">Página Inicial</a>
+                <li class="nav-item"><a class="nav-link" href="?section=UsuarioControle&function=inicial">Página Inicial</a>
                 </li> <?php } else { ?>
-                <li class="nav-item"><a class="nav-link" href="?function=">Página Inicial</a></li>
+                <li class="nav-item"><a class="nav-link" href="?section=UsuarioControle&function=">Página Inicial</a></li>
             <?php } ?>
             <?php if ($nivelAcesso > 0) { ?>
-                <li class="nav-item"><a class="nav-link" href="?function=criarManifestacaoAcao">Criar Manifestação</a>
+                <li class="nav-item"><a class="nav-link" href="?section=ManifestacaoControle&function=criarManifestacaoAcao">Criar Manifestação</a>
                 </li> <?php } ?>
             <!--<?php if ($nivelAcesso > 0) { ?><li class="nav-item"><a class="nav-link" href="?function=minhaPaginaAcao">Minha Página</a></li> <?php } ?> -->
             <?php if ($nivelAcesso == 0) { ?>
-                <li class="nav-item"><a class="nav-link" href="?function=cadastrarUsuarioAcao">Cadastrar</a>
+                <li class="nav-item"><a class="nav-link" href="?section=UsuarioControle&function=cadastrarUsuarioAcao">Cadastrar</a>
                 </li> <?php } ?>
             <?php if ($nivelAcesso > 1) { ?>
-                <li class="nav-item"><a class="nav-link" href="?function=listar">Listar manifestações</a>
+                <li class="nav-item"><a class="nav-link" href="?section=ManifestacaoControle&function=listar">Listar manifestações</a>
                 </li> <?php } ?>
 
             <!-- <li class="nav-item"><a class="nav-link" href="?function=sobreAcao">Sobre</a></li> " -->
@@ -38,7 +38,7 @@ if (isset($_SESSION['usuario']['id_tipo_usuario'])) {
     </div>
 
     <div id="botao-login">
-        <?php if ($nivelAcesso == 0 && !isset($verificacao)) { ?><a href="?function=loginAcao"
+        <?php if ($nivelAcesso == 0 && !isset($verificacao)) { ?><a href="index.php?section=UsuarioControle&function=loginAcao"
                                                                     class="btn btn-outline-success btn-lg active"
                                                                     role="button"
                                                                     aria-pressed="true">Login</a> <?php } ?>
@@ -49,9 +49,9 @@ if (isset($_SESSION['usuario']['id_tipo_usuario'])) {
             <button id="usuario" type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['usuario']['nome']; ?></button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="?function=alteraDadosAcao">Perfil</a>
+                <a class="dropdown-item" href="index.php?section=UsuarioControle&function=alteraDadosAcao">Perfil</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="?function=deslogar">Sair</a>
+                <a class="dropdown-item" href="index.php?section=UsuarioControle&function=deslogar">Sair</a>
             </div>
         <?php } ?>
     </div>

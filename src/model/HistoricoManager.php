@@ -1,8 +1,9 @@
 <?php
-require('Conexao.php');
-require_once("model/Historico.php");
+namespace Ouvidoria\model\manager;
 require_once("model/HistoricoFactory.php");
 
+use Ouvidoria\model\Historico;
+use Ouvidoria\model\factory\HistoricoFactory;
 class HistoricoManager
 {
     private $factory;
@@ -26,4 +27,8 @@ class HistoricoManager
         return $this->factory->atualizarHistorico($adm_publico, $id);
     }
 
+    public function atualizaHistoricoRecusa(string $adm_publico, string $id, string $data, string $motivo)
+    {
+        return $this->factory->atualizarHistoricoRecusa($adm_publico, $id, $data, $motivo);
+    }
 }

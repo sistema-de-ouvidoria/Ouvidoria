@@ -47,7 +47,7 @@ if(!isset($_SESSION['CPF'])){
 
 <!-- TELA DE CADASTRO -->
 <div class="container mt-3">
-    <form id="form" class="row" action="?function=responder" method="post">
+    <form id="form" class="row" action="?section=ManifestacaoControle&function=responder" method="post">
         <div class="form-group col-6">
             <label for="protocolo">Protocolo:</label>
             <input value="<?=$manifestacao->id_manifestacao?>" name="protocolo" id="protocolo" readonly class="form-control">
@@ -82,11 +82,8 @@ if(!isset($_SESSION['CPF'])){
         </div>
         <div class="form-group col-12">
             <a class="btn btn-success float-right" href="#" onClick="document.getElementById('form').submit();"><i class="fa fa-check"></i> Responder</a>
-            <a class="btn btn-danger float-left" href="?function=recusarManifestacao&id=<?php echo $manifestacao->id_manifestacao; ?>"><i class="fa fa-times"></i> Rejeitar</a>
+            <a class="btn btn-danger float-left" href="?section=ManifestacaoControle&function=recusarManifestacao&id=<?php echo $manifestacao->id_manifestacao; ?>"><i class="fa fa-times"></i> Rejeitar</a>
         </div>
-        <!--                <div class="form-group col-12">-->
-        <!--                    <a class="btn btn-primary" href="?function=listar"><i class="fa fa-times"></i> Voltar</a>-->
-        <!--                </div>-->
     </form>
 </div>
 <script>

@@ -1,6 +1,9 @@
 <?php
+namespace Ouvidoria\model\manager;
 require_once("model/Usuario.php");
 require_once("model/UsuarioFactory.php");
+use Ouvidoria\model\factory\UsuarioFactory;
+use Ouvidoria\model\Usuario;
 
 class UsuarioManager
 {

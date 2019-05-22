@@ -1,7 +1,8 @@
 <?php
-
+namespace Ouvidoria\model\manager;
 require_once("model/Anexo.php");
 require_once("model/AnexoFactory.php");
+use Ouvidoria\model\factory\AnexoFactory;
 
 class AnexoManager
 {

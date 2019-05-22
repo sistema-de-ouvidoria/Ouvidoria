@@ -1,8 +1,8 @@
 <?php
-require('Conexao.php');
-require_once("model/OrgaoPublico.php");
+namespace Ouvidoria\model\manager;
 require_once("model/OrgaoPublicoFactory.php");
 
+use Ouvidoria\model\factory\OrgaoPublicoFactory;
 
 class OrgaoPublicoManager
 {

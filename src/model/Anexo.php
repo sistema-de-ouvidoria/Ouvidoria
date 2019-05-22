@@ -1,4 +1,5 @@
 <?php
+namespace Ouvidoria\model;
 
 class Anexo
 {

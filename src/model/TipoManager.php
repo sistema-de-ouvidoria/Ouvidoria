@@ -1,7 +1,7 @@
 <?php
-
-require_once("model/TipoManifestacao.php");
+namespace Ouvidoria\model\manager;
 require_once("model/TipoFactory.php");
+use Ouvidoria\model\factory\TipoFactory;
 
 class TipoManager
 {

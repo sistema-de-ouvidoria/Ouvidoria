@@ -67,10 +67,10 @@
                     <td style="display:none;"><?= $dados[$i][5] ?></td>
                     <?php if ($nvlAcesso == 2): ?>
                         <td><a class="btn btn-warning"
-                               href="?function=detalharManifestacaoOuvidor&id=<?= $dados[$i][0] ?>">Detalhar</a></td>
+                               href="?section=ManifestacaoControle&function=detalharManifestacaoOuvidor&id=<?= $dados[$i][0] ?>">Detalhar</a></td>
                     <?php elseif ($nvlAcesso == 3): ?>
                         <td><a class="btn btn-warning"
-                               href="?function=detalharManifestacaoAdmPublico&id=<?= $dados[$i][0] ?>">Detalhar</a></td>
+                               href="?section=ManifestacaoControle&function=detalharManifestacaoAdmPublico&id=<?= $dados[$i][0] ?>">Detalhar</a></td>
                     <?php endif; ?>
                 </tr>
             <?php endfor;

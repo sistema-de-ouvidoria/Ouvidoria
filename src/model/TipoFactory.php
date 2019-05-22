@@ -1,4 +1,5 @@
 <?php
+namespace Ouvidoria\model\factory;
 
 include("model/Conexao.php");
 require_once("TipoManifestacao.php");

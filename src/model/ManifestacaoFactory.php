@@ -1,6 +1,8 @@
 <?php
+namespace Ouvidoria\model\factory;
 
-include("model/Conexao.php");
+require("Conexao.php");
+
 require_once("Manifestacao.php");
 
 class ManifestacaoFactory
@@ -88,7 +90,7 @@ class ManifestacaoFactory
 
         $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem, nome_orgao_publico 
         from manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
-        INNER JOIN historico h ON h.manifestacao = m.id_tipo_manifestacao
+        INNER JOIN historico h ON h.manifestacao = m.id_manifestacao
         INNER JOIN orgaopublico o ON h.orgao_publico = o.id_orgao_publico
         INNER JOIN situacao s ON s.id_situacao = m.id_situacao
         WHERE id_manifestacao = " . $id . ";";

@@ -19,7 +19,6 @@
         <!-- Nesse caso, este estilo é apenas para inserir imagens -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <link rel="shortcut icon" href="logo.jpg"/>
-        <link href="css/estilo.css" rel="stylesheet" type="text/css">
         
         <!-- JAVASCRIPT E JQUERY -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -37,7 +36,7 @@
         <div id="manifestacao" style="margin-left: 1cm">
             <h3>Manifestação</h3>  
 
-            <form enctype="multipart/form-data" action="?function=criarManifestacao" method="POST">     
+            <form enctype="multipart/form-data" action="?section=ManifestacaoControle&function=criarManifestacao" method="POST">
                 <p>Descreva abaixo o conteúdo de sua manifestação. Se você quiser, é possível inserir anexos para melhor fundamentar sua manifestação.</p>        
                 <label>Tipo de manifestacao:</label>
                 <?php

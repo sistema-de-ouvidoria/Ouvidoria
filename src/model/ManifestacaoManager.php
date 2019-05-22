@@ -1,15 +1,15 @@
 <?php
-require('Conexao.php');
-require_once("model/Manifestacao.php");
-require_once("model/ManifestacaoFactory.php");
+namespace Ouvidoria\model\manager;
 
+require ('model/ManifestacaoFactory.php');
+use Ouvidoria\model\factory\ManifestacaoFactory;
+use Ouvidoria\model\Manifestacao;
 class ManifestacaoManager
 {
     private $factory;
 
     public function __construct()
     {
-
         $this->factory = new ManifestacaoFactory();
     }
 
