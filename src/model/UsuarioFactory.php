@@ -194,6 +194,29 @@ class UsuarioFactory
             return false;
         }
     }
-}
 
-?>
+    public function listarUsuarios()
+    {
+        global $conexao;
+        $usuarios = array();
+
+        $query = "SELECT cpf, nome, email, telefone, endereco
+            from usuario u;";
+
+        try {
+            $resultado = mysqli_query($conexao, $query);
+
+            if (mysqli_num_rows($resultado) > 0) {
+                $manifestacoes = mysqli_fetch_all($resultado);
+
+                return $manifestacoes;
+            } else
+                return NULL;
+
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
+            $result = false;
+        }
+    }
+
+}

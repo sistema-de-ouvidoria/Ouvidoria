@@ -1,6 +1,5 @@
 <?php
 namespace Ouvidoria\model\manager;
-
 require ('model/ManifestacaoFactory.php');
 use Ouvidoria\model\factory\ManifestacaoFactory;
 use Ouvidoria\model\Manifestacao;

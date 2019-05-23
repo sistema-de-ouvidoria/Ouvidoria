@@ -8,26 +8,18 @@ use Ouvidoria\model\Usuario;
 class UsuarioManager
 {
 
-    public function __construct()
-    {
-
+    public function __construct(){
         $this->factory = new UsuarioFactory();
     }
 
     public function validaUsuario(string $cpf, string $senha)
     {
-
         return $this->factory->validarUsuario($cpf, $senha);
-
-
     }
 
     public function buscaUsuario(string $cpf)
     {
-
         return $this->factory->selecionarUsuario($cpf);
-
-
     }
 
     public function alteraUsuario(string $cpfAlterado, string $nomeAlterado, string $enderecoAlterado, string $telefoneAlterado, $emailAlterado, $senha1, $id)
@@ -83,5 +75,10 @@ class UsuarioManager
     public function selecionarEmail(string $cpf)
     {
         return $this->factory->selecionarEmail($cpf);
+    }
+
+    public function listaUsuarios()
+    {
+        return $this->factory->listarUsuarios();
     }
 }

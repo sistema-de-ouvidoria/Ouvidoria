@@ -24,12 +24,7 @@ class UsuarioControle extends AbstractControle
 
     public function inicializador()
     {
-
-        if (isset($_GET['function'])) {
-            $f = $_GET['function'];
-        } else {
-            $f = "default";
-        }
+        $f = isset($_GET['function']) ? $_GET['function'] : "default";
 
         switch ($f) {
             case 'fazerLogin':
@@ -61,6 +56,9 @@ class UsuarioControle extends AbstractControle
             case 'inicial':
                 session_start();
                 $this->inicial();
+                break;
+            case 'listarUsuarios':
+                $this->listarUsuarios();
                 break;
             default:
                 $this->inicio();
@@ -276,7 +274,7 @@ class UsuarioControle extends AbstractControle
 
             //Usuario Administrador Sistema
             else if ($_SESSION['usuario']['id_tipo_usuario'] == 4)
-                header('Location: view/homeAdminSist.php');
+                $this->listarUsuarios();
 
             else {
                 $msgLogin = false;
@@ -293,6 +291,19 @@ class UsuarioControle extends AbstractControle
         if (!is_null($nvlAcesso)) {
             $dados = $this->manifestacaoManager->listaManifestacoes($nvlAcesso);
             require ('view/listarManifestacoes.php');
+        } else {
+            echo 'Você não tem permissão para acessar essa página.';
+            exit();
+        }
+    }
+
+    public function listarUsuarios()
+    {
+        $nvlAcesso = isset($_SESSION['usuario']['id_tipo_usuario']) ? $_SESSION['usuario']['id_tipo_usuario'] : null;
+
+        if (!is_null($nvlAcesso)) {
+            $dados = $this->usuarioManager->listaUsuarios();
+            require ('view/listarUsuarios.php');
         } else {
             echo 'Você não tem permissão para acessar essa página.';
             exit();

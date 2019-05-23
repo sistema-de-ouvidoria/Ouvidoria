@@ -1,9 +1,10 @@
 <?php
 namespace Ouvidoria\model\manager;
-require_once("model/HistoricoFactory.php");
-
+require("model/Historico.php");
+require("model/HistoricoFactory.php");
 use Ouvidoria\model\Historico;
 use Ouvidoria\model\factory\HistoricoFactory;
+
 class HistoricoManager
 {
     private $factory;

@@ -20,6 +20,28 @@ function funcaoDeBusca() {
     }
 }
 
+function buscaUsuario() {
+    var input, filter, table, tr, assunto, descricao, i, txtValue, txtValue2;
+    input = document.getElementById("input");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("minhaTabela");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        assunto = tr[i].getElementsByTagName("td")[0];
+        descricao = tr[i].getElementsByTagName("td")[1];
+        if (assunto || descricao) {
+            txtValue = cpf.textContent || cpf.innerText;
+            txtValue2 = nome.textContent || nome.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
 function funcaoDeBuscaProtocolo() {
     var input, filter, table, tr, protocolo, i, txtValue;
     input = document.getElementById("inputProtocolo");

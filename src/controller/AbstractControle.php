@@ -8,14 +8,10 @@ require('model/UsuarioManager.php');
 require('model/OrgaoPublicoManager.php');
 require('model/HistoricoManager.php');
 
-
-
 abstract class AbstractControle
 {
 
-    public function __construct()
-    {
-    }
+    public function __construct(){}
 
     abstract public function inicializador ();
 

@@ -23,11 +23,7 @@ class ManifestacaoControle extends AbstractControle
 
     public function inicializador()
     {
-        if (isset($_GET['function'])) {
-            $f = $_GET['function'];
-        } else {
-            $f = "default";
-        }
+        $f = isset($_GET['function']) ? $_GET['function'] : "default";
 
         switch ($f) {
             case 'criarManifestacao':
