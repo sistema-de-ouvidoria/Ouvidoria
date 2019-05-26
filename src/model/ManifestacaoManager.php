@@ -53,6 +53,13 @@ class ManifestacaoManager
         return $resultado;
     }
 
+	public function selecionaManifestacaoCidadao(string $id)
+    {
+        $resultado = $this->factory->selecionarManifestacaoCidadao($id);
+
+        return $resultado;
+    }
+
     public function selecionaManifestacaoOuvidor(string $id)
     {
         $resultado = $this->factory->selecionarManifestacaoOuvidor($id);

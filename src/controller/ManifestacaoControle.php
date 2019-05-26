@@ -35,6 +35,9 @@ class ManifestacaoControle extends AbstractControle
             case 'detalharManifestacaoAdmPublico':
                 $this->detalharManifestacaoAdmPublico();
                 break;
+				case 'detalharManifestacaoCidadao':
+                $this->detalharManifestacaoCidadao();
+                break;
             case 'encaminhar':
                 $this->encaminhar();
                 break;
@@ -54,17 +57,33 @@ class ManifestacaoControle extends AbstractControle
                 session_start();
                 $this->criarManifestacaoAcao();
                 break;
+			case 'acompanharManifestacaoAcao':
+				session_start();
+				$this->acompanharManifestacaoAcao();
+				break;
             default:
                 $this->inicio();
                 break;
         }
     }
 
+	public function acompanharManifestacaoAcao(){
 
+		$this->listarAcompanharManifestacao();
+	}
     public function criarManifestacaoAcao()
     {
         $listaTipos = $this->tipoManager->listaTipos();
         require('view/criarManifestacao.php');
+    }
+
+	public function listarAcompanharManifestacao()
+    {
+        $nvlAcesso = 1;
+        if (!is_null($nvlAcesso)) {
+            $dados = $this->manifestacaoManager->listaManifestacoes($nvlAcesso);
+            require ('view/acompanhaManifestacao.php');
+        }
     }
 
     public function listar()
@@ -108,6 +127,11 @@ class ManifestacaoControle extends AbstractControle
     {
         $manifestacao = $this->manifestacaoManager->selecionaManifestacaoAdmPublico($_GET['id']);
         require('view/detalheManifestacaoAdmPublico.php');
+    }
+	public function detalharManifestacaoCidadao()
+    {
+        $manifestacao = $this->manifestacaoManager->selecionaManifestacaoCidadao($_GET['id']);
+        require('view/acompanhaManifestacaoDetalhe.php');
     }
 
     public function criarManifestacao()
