@@ -26,14 +26,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 </head>
 <body>
-<?php
-/*
-
-if(!isset($_SESSION['CPF'])){
-    header('Location: ../index.php');
-}
-*/
-?>
 
 <!--MENU SUPERIOR -->
 
@@ -66,7 +58,8 @@ if(!isset($_SESSION['CPF'])){
         </div>
         <div class="form-group col-6">
             <label for="setor">Setor Responsável:</label>
-            <input id="setor" value="<?=$manifestacao->nome_orgao_publico?>" readonly class="form-control"/>
+            <input id="setor" value="<?php if(isset($manifestacao->nome_orgao_publico)) echo '$manifestacao->nome_orgao_publico'; else
+			echo 'Esta manifestação ainda não foi encaminhada'?>" readonly class="form-control"/>
         </div>
         <div class="form-group col-12">
             <label for="descricao">Descrição:</label>
@@ -74,19 +67,20 @@ if(!isset($_SESSION['CPF'])){
         </div>
         <div class="form-group col-12">
             <label for="resposta">Resposta:</label>
-            <textarea id="resposta" onchange="seleciona_resposta(this)" name="resposta" required rows="6" class="form-control" maxlength="1000" placeholder="Digite aqui sua resposta..."></textarea>
+            <textarea name="mensagem" rows="6" class="form-control" maxlength="1000" readonly><?php if (isset($manifestacao->resposta)) echo $manifestacao->resposta; else echo "";?></textarea>
         </div>
         <div class="form-group col-12">
-            <a class="btn btn-success float-right" href="#" onClick="document.getElementById('form').submit();"><span class="fa fa-check"></span> Responder</a>
-            <a class="btn btn-danger float-left" href="?section=ManifestacaoControle&function=recusarManifestacao&id=<?php echo $manifestacao->id_manifestacao; ?>"><span class="fa fa-times"></span> Rejeitar</a>
+
+			<?php if($checaInteresse == 1){?>
+                <a class="btn btn-danger float-middle" href="?section=ManifestacaoControle&function=removerInteresse&idManifestacao=<?=$manifestacao->id_manifestacao?>"><span class="fa fa-check"></span>Deixar de receber notificações</a>
+			<?php }
+			else {?>
+                <a class="btn btn-info float-left" href="?section=ManifestacaoControle&function=manifestarInteresse&idManifestacao=<?=$manifestacao->id_manifestacao?>"><span class="fa fa-check"></span>Receber notificações</a>
+			<?php } ?>
+
+            <a class="btn btn-success float-right" href="?section=ManifestacaoControle&function=acompanharManifestacaoAcao"><span class="fa fa-check"></span>Voltar</a>
         </div>
     </form>
 </div>
-<script>
-    function seleciona_resposta(el) {
-        var $lnk = document.getElementById("resposta_adm");
-        $lnk.href = $lnk.href.replace(/resposta=(.*)/, 'resposta=') + el.value;
-    }
-</script>
 
 </body>

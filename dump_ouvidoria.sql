@@ -23,6 +23,16 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
+--
+-- Estrutura da tabela `interesse`
+--
+DROP TABLE IF EXISTS `interesse`;
+CREATE TABLE IF NOT EXISTS `interesse`
+(
+    `idManifestacao`   varchar(12),
+    `idUsuario`    varchar(11),
+    PRIMARY KEY (`idManifestacao`,`idUsuario`)
+);
 
 --
 -- Estrutura da tabela `anexo`
@@ -207,7 +217,8 @@ INSERT INTO `tipousuario` (`id_tipo_usuario`, `nome_tipo_usuario`)
 VALUES (1, 'Cidadao'),
        (2, 'Ouvidor'),
        (3, 'Administrador Publico'),
-       (4, 'Administrador Sistema');
+       (4, 'Administrador Sistema'),
+       (5, 'Desativado');
 
 -- --------------------------------------------------------
 

@@ -5,7 +5,7 @@
     <meta http-equiv=”content-type” content="text/html;" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="keywords" content="tags, que, eu, quiser, usar, para, os, robos, do, google" />
-    <title>Listar Manifestações</title>
+    <title>Listar Usuários</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -32,7 +32,8 @@
     <h2>Lista de Usuários</h2>
     <div class="row">
         <div class="form-group col-md-6">
-            <label>Buscar por CPF ou Nome:</label><input type="text" name="consulta" id="input" onkeyup="buscaUsuario()" class="form-control"/>
+            <label for="inputUsuario">Buscar por CPF ou Nome:</label>
+            <input type="text" name="consulta" id="inputUsuario" onkeyup="funcaoDeBuscaUsuario()" class="form-control"/>
         </div>
     </div>
     <table id="minhaTabela" class="table-hover table-striped table-bordered" data-searching="false">
@@ -60,8 +61,7 @@
                     <td><?= $dados[$i][4] ?></td>
                     <td style="display:none;"><?= $dados[$i][5] ?></td>
                     <?php if ($nvlAcesso == 4): ?>
-                        <td><a class="btn btn-warning"
-                               href="?section=UsuarioControle&function=detalharUsuario&cpf=<?= $dados[$i][0] ?>">Detalhar</a></td>
+                        <td><a class="btn btn-warning" href="?section=UsuarioControle&function=detalharUsuario&cpf=<?= $dados[$i][0] ?>">Detalhar</a></td>
                     <?php endif; ?>
                 </tr>
             <?php endfor;

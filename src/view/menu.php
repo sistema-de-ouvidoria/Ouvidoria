@@ -17,35 +17,38 @@ if (isset($_SESSION['usuario']['id_tipo_usuario'])) {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
 
-            <?php if ($nivelAcesso > 0) { ?>
+            <?php if ($nivelAcesso > 0 && $nivelAcesso < 5) { ?>
                 <li class="nav-item"><a class="nav-link" href="?section=UsuarioControle&function=inicial">Página Inicial</a>
                 </li> <?php } else { ?>
                 <li class="nav-item"><a class="nav-link" href="?section=UsuarioControle&function=">Página Inicial</a></li>
             <?php } ?>
-            <?php if ($nivelAcesso > 0) { ?>
+            <?php if ($nivelAcesso > 0 && $nivelAcesso < 5) { ?>
                 <li class="nav-item"><a class="nav-link" href="?section=ManifestacaoControle&function=criarManifestacaoAcao">Criar Manifestação</a>
                 </li> <?php } ?>
-            <!--<?php if ($nivelAcesso > 0) { ?><li class="nav-item"><a class="nav-link" href="?function=minhaPaginaAcao">Minha Página</a></li> <?php } ?> -->
-            <?php if ($nivelAcesso == 0) { ?>
+            <?php if ($nivelAcesso > 0) { ?>
+                <li class="nav-item"><a class="nav-link" href="?section=ManifestacaoControle&function=acompanharManifestacaoAcao">Acompanhar manifestação</a>
+                </li> <?php } ?>
+            <?php if ($nivelAcesso == 0 || $nivelAcesso == 5) { ?>
                 <li class="nav-item"><a class="nav-link" href="?section=UsuarioControle&function=cadastrarUsuarioAcao">Cadastrar</a>
                 </li> <?php } ?>
-            <?php if ($nivelAcesso > 1) { ?>
+            <?php if ($nivelAcesso > 1 && $nivelAcesso < 5) { ?>
                 <li class="nav-item"><a class="nav-link" href="?section=ManifestacaoControle&function=listar">Listar manifestações</a>
                 </li> <?php } ?>
-
-            <!-- <li class="nav-item"><a class="nav-link" href="?function=sobreAcao">Sobre</a></li> " -->
+            <?php if ($nivelAcesso == 4) { ?>
+                <li class="nav-item"><a class="nav-link" href="?section=UsuarioControle&function=listarUsuarios">Listar Usuários</a>
+                </li> <?php } ?>
         </ul>
     </div>
 
     <div id="botao-login">
-        <?php if ($nivelAcesso == 0 && !isset($verificacao)) { ?><a href="index.php?section=UsuarioControle&function=loginAcao"
+        <?php if (($nivelAcesso == 0 || $nivelAcesso == 5) && !isset($verificacao)) { ?><a href="index.php?section=UsuarioControle&function=loginAcao"
                                                                     class="btn btn-outline-success btn-lg active"
                                                                     role="button"
                                                                     aria-pressed="true">Login</a> <?php } ?>
 
     </div>
     <div class="btn-group">
-        <?php if ($nivelAcesso > 0) { ?>
+        <?php if ($nivelAcesso > 0 && $nivelAcesso < 5) { ?>
             <button id="usuario" type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['usuario']['nome']; ?></button>
             <div class="dropdown-menu">

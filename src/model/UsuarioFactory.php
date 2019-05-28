@@ -142,6 +142,24 @@ class UsuarioFactory
         }
     }
 
+    public function alterarDados($obj)
+    {
+        global $conexao;
+        $usuario = $obj;
+
+        try {
+            $query = "UPDATE usuario SET nome = '" . $usuario->getNome() . "',endereco = '" . $usuario->getEndereco() . "',telefone = '" . $usuario->getTelefone() . "',email = '" . $usuario->getEmail() . "' where cpf = '" . $usuario->getCpf() . "'";
+
+            if (mysqli_query($conexao, $query)) {
+                return true;
+            } else
+                return false;
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
+            $resultado = false;
+        }
+    }
+
     public function selecionarEmail(string $cpf)
     {
         global $conexao;
@@ -201,7 +219,7 @@ class UsuarioFactory
         $usuarios = array();
 
         $query = "SELECT cpf, nome, email, telefone, endereco
-            from usuario u;";
+            from usuario u";
 
         try {
             $resultado = mysqli_query($conexao, $query);
@@ -216,6 +234,23 @@ class UsuarioFactory
         } catch (PDOException $exc) {
             echo $exc->getMessage();
             $result = false;
+        }
+    }
+
+    public function desativarUsuario($cpf)
+    {
+        global $conexao;
+
+        try {
+            $query = "UPDATE usuario SET  id_tipo_usuario = '" . 5 . "' where cpf = '" . $cpf . "'";
+
+            if (mysqli_query($conexao, $query)) {
+                return true;
+            } else
+                return false;
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
+            $resultado = false;
         }
     }
 

@@ -32,13 +32,12 @@
     <h2>Lista de Manifestações</h2>
     <div class="row">
         <div class="form-group col-md-6">
-            <label>Buscar por assunto ou descrição:</label><input type="text" name="consulta" id="input"
-                                                                  onkeyup="funcaoDeBusca()" class="form-control"/>
+            <label for="input">Buscar por assunto ou descrição:</label>
+            <input type="text" name="consulta" id="input" onkeyup="funcaoDeBusca()" class="form-control"/>
         </div>
         <div class="form-group col-md-6">
-            <label>Buscar pelo número de protocolo:</label><input type="text" name="consulta_protocolo"
-                                                                  id="inputProtocolo" onkeyup="funcaoDeBuscaProtocolo()"
-                                                                  class="form-control"/>
+            <label for="inputProtocolo">Buscar pelo número de protocolo:</label>
+            <input type="text" name="consulta_protocolo" id="inputProtocolo" onkeyup="funcaoDeBuscaProtocolo()" class="form-control"/>
         </div>
     </div>
     <table id="minhaTabela" class="table-hover table-striped table-bordered" data-searching="false">
@@ -65,7 +64,10 @@
                     <td><?= $dados[$i][3] ?></td>
                     <td><?= $dados[$i][4] ?></td>
                     <td style="display:none;"><?= $dados[$i][5] ?></td>
-                    <?php if ($nvlAcesso == 2): ?>
+                    <?php if($nvlAcesso == 1): ?>
+                    <td><a class="btn btn-warning"
+                           href="?section=ManifestacaoControle&function=detalharManifestacaoCidadao&id=<?= $dados[$i][0] ?>">Detalhar</a></td>
+                    <?php elseif ($nvlAcesso == 2): ?>
                         <td><a class="btn btn-warning"
                                href="?section=ManifestacaoControle&function=detalharManifestacaoOuvidor&id=<?= $dados[$i][0] ?>">Detalhar</a></td>
                     <?php elseif ($nvlAcesso == 3): ?>

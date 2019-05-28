@@ -1,15 +1,15 @@
 <?php
 namespace Ouvidoria\model\manager;
-require_once("model/TipoFactory.php");
-use Ouvidoria\model\factory\TipoFactory;
+require_once("model/TipoManifestacaoFactory.php");
+use Ouvidoria\model\factory\TipoManifestacaoFactory;
 
-class TipoManager
+class TipoManifestacaoManager
 {
 
     public function __construct()
     {
 
-        $this->factory = new TipoFactory();
+        $this->factory = new TipoManifestacaoFactory();
     }
 
     public function listaTipos()

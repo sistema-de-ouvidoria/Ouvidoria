@@ -64,6 +64,22 @@ class ManifestacaoManager
     {
         $resultado = $this->factory->recusaManifestacao($id);
     }
+
+    public function removerInteresse(string $idManifestacao, string $idUsuario){
+        return $this->factory->removerInteresse($idManifestacao,$idUsuario);
+    }
+
+    public function checaInteresse(string $idManifestacao,string $idUsuario){
+        return $this->factory->checaInteresse($idManifestacao,$idUsuario);
+    }
+    public function manifestarInteresse(string $idManifestacao,string $idUsuario){
+        return $this->factory->manifestarInteresse($idManifestacao,$idUsuario);
+    }
+    public function selecionaManifestacaoCidadao(string $id)
+    {
+        $resultado = $this->factory->selecionarManifestacaoCidadao($id);
+
+        return $resultado;
+    }
 }
 
-?>

@@ -1,7 +1,3 @@
-<?php
-session_start();
-require ('model/Conexao.php');
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -48,7 +44,7 @@ if(!isset($_SESSION['CPF'])){
 <!-- TELA DE CADASTRO -->
 
 <div class="container mt-3">
-    <form class="row" action="?function=encaminhar&id=<?=$manifestacao->id_manifestacao?>" method="GET">
+    <form class="row" action="?section=ManifestacaoControle&function=encaminhar&id=<?=$manifestacao->id_manifestacao?>" method="GET">
         <div class="form-group col-6">
             <label for="protocolo">Protocolo:</label>
             <input value="<?=$manifestacao->id_manifestacao?>" id="protocolo" readonly class="form-control">
@@ -92,7 +88,7 @@ if(!isset($_SESSION['CPF'])){
             }
             echo "</select>"
             ?>
-            <a class="btn btn-warning float-right mt-3" href="?section=ManifestacaoControle&function=encaminhar&id=<?=$manifestacao->id_manifestacao?>&org="id="orgao_publico"><i class="fa fa-wrench"></i> Encaminhar</a>
+            <a class="btn btn-warning float-right mt-3" href="?section=ManifestacaoControle&function=encaminhar&id=<?=$manifestacao->id_manifestacao?>&org="id="orgao_publico"><span class="fa fa-wrench"></span> Encaminhar</a>
         </div>
     </form>
 </div>

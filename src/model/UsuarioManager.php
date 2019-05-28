@@ -46,6 +46,12 @@ class UsuarioManager
         return $this->factory->alterarUsuario($usuario);
     }
 
+    public function alteraDados(string $cpfAlterado, string $nomeAlterado, string $enderecoAlterado, string $telefoneAlterado, $emailAlterado)
+    {
+        $usuario = new Usuario($cpfAlterado, $nomeAlterado, $enderecoAlterado, $telefoneAlterado, $emailAlterado, null, null);
+
+        return $this->factory->alterarDados($usuario);
+    }
     public function buscaInfoUsuario(string $cpf)
     {
         return $this->factory->buscaInfoUsuario($cpf);
@@ -80,5 +86,10 @@ class UsuarioManager
     public function listaUsuarios()
     {
         return $this->factory->listarUsuarios();
+    }
+
+    public function desativaUsuario(string $cpf)
+    {
+        return $this->factory->desativarUsuario($cpf);
     }
 }

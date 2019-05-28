@@ -54,16 +54,28 @@ class ManifestacaoFactory
         global $conexao;
         $manifestacoes = array();
 
-        if ($acesso == 2) {
+        if ($acesso == 1) {
+            $query = "SELECT id_manifestacao, assunto, data_manifestacao, nome_tipo_manifestacao, nome_situacao, mensagem 
+            from manifestacao m INNER JOIN tipomanifestacao t ON m.id_tipo_manifestacao = t.id_tipo_manifestacao
+            INNER JOIN situacao s ON s.id_situacao = m.id_situacao 
+            WHERE s.id_situacao = 1 and m.sigilo = 0;";
+        }
+        else if ($acesso == 2) {
             $query = "SELECT id_manifestacao, assunto, data_manifestacao, nome_tipo_manifestacao, nome_situacao, mensagem 
             from manifestacao m INNER JOIN tipomanifestacao t ON m.id_tipo_manifestacao = t.id_tipo_manifestacao
             INNER JOIN situacao s ON s.id_situacao = m.id_situacao 
             WHERE s.id_situacao = 1;";
-        } elseif ($acesso == 3) {
+        }
+        elseif ($acesso == 3) {
             $query = "SELECT id_manifestacao, assunto, data_manifestacao, nome_tipo_manifestacao, nome_situacao, mensagem
             from manifestacao m INNER JOIN tipomanifestacao t ON m.id_tipo_manifestacao = t.id_tipo_manifestacao
             INNER JOIN situacao s ON s.id_situacao = m.id_situacao 
             WHERE s.id_situacao = 2;";
+        }
+        elseif ($acesso == 4) {
+            $query = "SELECT id_manifestacao, assunto, data_manifestacao, nome_tipo_manifestacao, nome_situacao, mensagem
+            from manifestacao m INNER JOIN tipomanifestacao t ON m.id_tipo_manifestacao = t.id_tipo_manifestacao
+            INNER JOIN situacao s ON s.id_situacao = m.id_situacao;";
         }
 
         try {
@@ -79,6 +91,39 @@ class ManifestacaoFactory
         } catch (PDOException $exc) {
             echo $exc->getMessage();
             $result = false;
+        }
+    }
+
+    public function selecionarManifestacaoCidadao(string $id)
+    {
+        global $conexao;
+
+        $manifestacao = array();
+        $query = "SELECT orgao_publico from historico where manifestacao = ".$id.";";
+        $sql = mysqli_query($conexao,$query);
+        $checar = mysqli_fetch_assoc($sql);
+        if($checar){
+            $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem, nome_orgao_publico 
+			from manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
+			INNER JOIN historico h ON h.manifestacao = m.id_manifestacao
+			INNER JOIN orgaopublico o ON h.orgao_publico = o.id_orgao_publico
+			INNER JOIN situacao s ON s.id_situacao = m.id_situacao
+			WHERE id_manifestacao = " . $id . ";";
+        }else{
+            $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem 
+			from manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
+			INNER JOIN situacao s ON s.id_situacao = m.id_situacao
+			WHERE id_manifestacao = " . $id . ";";
+        }
+
+        $resultado = mysqli_query($conexao, $query);
+
+        if ($resultado) {
+            $manifestacao = mysqli_fetch_object($resultado);
+
+            return $manifestacao;
+        } else {
+            return "Nenhum tipo encontrado";
         }
     }
 
@@ -161,6 +206,40 @@ class ManifestacaoFactory
         if (mysqli_query($conexao, $query))
             return true;
         else
+            return false;
+    }
+
+    public function manifestarInteresse(string $idManifestacao,string $idUsuario){
+        global $conexao;
+        $query = "insert into interesse (idManifestacao,idUsuario) values ('"
+            .$idManifestacao."','".$idUsuario."')";
+
+        if(mysqli_query($conexao,$query))
+            return true;
+        else
+            return false;
+
+    }
+
+    public function checaInteresse(string $idManifestacao,string $idUsuario){
+        global $conexao;
+        $query = "select idUsuario from interesse where idManifestacao = " . $idManifestacao . " and idUsuario = " . $idUsuario . ";";
+        $sql = mysqli_query($conexao,$query);
+        $checar = mysqli_fetch_assoc($sql);
+        if($checar){
+            return 1;
+        }
+        else
+            return 0;
+
+    }
+
+    public function removerInteresse(string $idManifestacao,string $idUsuario){
+        global $conexao;
+        $query = "DELETE FROM interesse where idManifestacao = " . $idManifestacao . " and idusuario = " . $idUsuario . ";";
+        if(mysqli_query($conexao,$query)){
+            return true;
+        }else
             return false;
     }
 }

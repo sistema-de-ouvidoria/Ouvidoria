@@ -4,25 +4,8 @@ namespace Ouvidoria\model\factory;
 include("model/Conexao.php");
 require_once("TipoManifestacao.php");
 
-class TipoFactory
+class TipoManifestacaoFactory
 {
-
-
-    public function __construct()
-    {
-
-    }
-
-
-    /**
-     * Persiste objetos Contato no banco de dados.
-     * @param Contato $obj - Objeto Contato a ser persistido.
-     * @return boolean - se conseguiu salvar ou não.
-     */
-
-    public function salvar($obj)
-    {
-    }
 
     public function listarTipoManifestacao()
     {

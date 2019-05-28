@@ -20,17 +20,17 @@ function funcaoDeBusca() {
     }
 }
 
-function buscaUsuario() {
-    var input, filter, table, tr, assunto, descricao, i, txtValue, txtValue2;
-    input = document.getElementById("input");
-    filter = input.value.toUpperCase();
+function funcaoDeBuscaUsuario() {
+    var inputUsuario, filter, table, tr, cpf, nome, i, txtValue, txtValue2;
+    inputUsuario = document.getElementById("inputUsuario");
+    filter = inputUsuario.value.toUpperCase();
     table = document.getElementById("minhaTabela");
     tr = table.getElementsByTagName("tr");
 
     for (i = 0; i < tr.length; i++) {
-        assunto = tr[i].getElementsByTagName("td")[0];
-        descricao = tr[i].getElementsByTagName("td")[1];
-        if (assunto || descricao) {
+        cpf = tr[i].getElementsByTagName("td")[0];
+        nome = tr[i].getElementsByTagName("td")[1];
+        if (cpf || nome) {
             txtValue = cpf.textContent || cpf.innerText;
             txtValue2 = nome.textContent || nome.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {

@@ -5,8 +5,10 @@ use Ouvidoria\model\manager\AnexoManager;
 use Ouvidoria\model\manager\HistoricoManager;
 use Ouvidoria\model\manager\ManifestacaoManager;
 use Ouvidoria\model\manager\OrgaoPublicoManager;
-use Ouvidoria\model\manager\TipoManager;
+use Ouvidoria\model\manager\TipoManifestacaoManager;
+use Ouvidoria\model\manager\TipoUsuarioManager;
 use Ouvidoria\model\manager\UsuarioManager;
+
 
 class UsuarioControle extends AbstractControle
 {
@@ -14,7 +16,8 @@ class UsuarioControle extends AbstractControle
     {
         $this->manifestacaoManager = new ManifestacaoManager();
         $this->anexoManager = new Anexomanager();
-        $this->tipoManager = new TipoManager();
+        $this->tipoManager = new TipoManifestacaoManager();
+        $this->tipoUserManager = new TipoUsuarioManager();
         $this->usuarioManager = new UsuarioManager();
         $this->orgaoManager = new OrgaoPublicoManager();
         $this->historicoManager = new HistoricoManager();
@@ -26,6 +29,7 @@ class UsuarioControle extends AbstractControle
     {
         $f = isset($_GET['function']) ? $_GET['function'] : "default";
 
+        session_start();
         switch ($f) {
             case 'fazerLogin':
                 $this->fazerLogin();
@@ -40,21 +44,23 @@ class UsuarioControle extends AbstractControle
                 $this->loginAcao();
                 break;
             case 'deslogar':
-                session_start();
                 unset($_SESSION['usuario']);
                 session_destroy();
                 $this->inicio();
                 break;
             case 'alteraDadosAcao':
-                session_start();
                 $this->alteraDadosAcao();
                 break;
             case 'alterarDados':
-                session_start();
                 $this->alterarDados();
                 break;
+            case 'detalharUsuario':
+                $this->detalharUsuario();
+                break;
+            case 'usuarioDetalhe':
+                $this->usuarioDetalhe();
+                break;
             case 'inicial':
-                session_start();
                 $this->inicial();
                 break;
             case 'listarUsuarios':
@@ -64,6 +70,7 @@ class UsuarioControle extends AbstractControle
                 $this->inicio();
                 break;
         }
+        session_write_close();
     }
 
     public function inicial()
@@ -249,15 +256,12 @@ class UsuarioControle extends AbstractControle
         $senha = isset($_POST["senha"]) ? $_POST["senha"] : FALSE;
 
         if (!$cpf || !$senha) {
-            //tratar erros
             echo 'Você não tem permissão para acessar essa página.';
         } else {
 
-            $usuarioManager = new UsuarioManager();
 
-            $usuario = $usuarioManager->validaUsuario($cpf, $senha);
+            $usuario = $this->usuarioManager->validaUsuario($cpf, $senha);
 
-            session_start();
             $_SESSION['usuario'] = $usuario;
 
             // Usuario Cidadao
@@ -273,9 +277,13 @@ class UsuarioControle extends AbstractControle
                 $this->listar();
 
             //Usuario Administrador Sistema
-            else if ($_SESSION['usuario']['id_tipo_usuario'] == 4)
+            else if ($_SESSION['usuario']['id_tipo_usuario'] == 4) {
                 $this->listarUsuarios();
-
+            }
+            else if ($_SESSION['usuario']['id_tipo_usuario'] == 5) {
+                echo "<script type=\"text/javascript\">alert('Usuário desativado! Por favor entre em contato com o suporte e solicite acesso.');</script>";
+                $this->loginAcao();
+            }
             else {
                 $msgLogin = false;
                 require('view/fazerLogin.php');
@@ -308,6 +316,31 @@ class UsuarioControle extends AbstractControle
             echo 'Você não tem permissão para acessar essa página.';
             exit();
         }
+    }
+
+    public function detalharUsuario(){
+        $tipos = $this->tipoUserManager->listaTipos();
+        $usuario = $this->usuarioManager->buscaInfoUsuario($_GET['cpf']);
+        require('view/detalheUsuario.php');
+    }
+
+    public function usuarioDetalhe(){
+        if($_POST['acao'] == "Desativar"){
+            $this->usuarioManager->desativaUsuario($_POST['cpf']);
+        }
+        elseif ($_POST['acao'] == "Alterar") {
+            $nomeAlterado = $_POST['nome'];
+            $enderecoAlterado = $_POST['endereco'];
+            $telefoneAlterado = $_POST['telefone'];
+            $emailAlterado = $_POST['email'];
+            $cpfAlterado = $_POST['cpf'];
+
+            $this->usuarioManager->alteraDados($cpfAlterado, $nomeAlterado, $enderecoAlterado, $telefoneAlterado, $emailAlterado);
+        }
+        elseif ($_POST['acao'] == "Salvar") {
+
+        }
+        $this->listarUsuarios();
     }
 
 }
