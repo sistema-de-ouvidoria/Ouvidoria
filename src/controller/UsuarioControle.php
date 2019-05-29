@@ -138,13 +138,13 @@ class UsuarioControle extends AbstractControle
                         if (strlen($senha1) >= 5) {
                             try {
                                 $this->usuarioManager->registrarUsuario($cpfCadastro, $nomeCadastro, $enderecoCadastro, $telefoneCadastro, $emailCadastro, $senha1, $tipo_usuario);
-                                $this->usuarioManager->registrarUsuario($cpfCadastro, $nomeCadastro, $enderecoCadastro, $telefoneCadastro, $emailCadastro, $senha1, $tipo_usuario);
                                 $assunto = "Seja bem vindo";
                                 $texto = "Seja bem vindo(a) " . $nomeCadastro . " ao nosso sistema de ouvidoria de Campo Grande.<br><br>
                                 Sua conta foi criada com o e-mail " . $emailCadastro . ".<br><br>
                                 Você pode fazer login através do nosso site ou clicando <a href='http://localhost/ouvidoria/src/index.php?section=UsuarioControle&function=loginAcao'>aqui</a>.";
                                 $emailDestino = $emailCadastro;
                                 $this->email->enviarEmail($emailDestino, $assunto, $texto);
+                                echo "<script type=\"text/javascript\">alert(\"Usuário cadastrado com sucesso.\");</script>";
                                 include 'view/fazerLogin.php';
                             } catch (Exception $e) {
                                 $msg = $e->getMessage();
@@ -418,6 +418,7 @@ class UsuarioControle extends AbstractControle
                 $this->detalharUsuario();
             } else {
                 $this->usuarioManager->delegarPrivilegios($_GET['cpf'], $_GET['privilegio']);
+                $this->listarUsuarios();
             }
         }
 

@@ -90,7 +90,7 @@
     </div>
     <label>Mostrar apenas minhas manifestações</label>
     <div class="onoffswitch">
-        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked onclick="mostrarMinhasManifestacoes()">
+        <input type="checkbox" onchange="window.location.href= name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked onclick="mostrarMinhasManifestacoes()">
         <label class="onoffswitch-label" for="myonoffswitch">
             <span class="onoffswitch-inner"></span>
             <span class="onoffswitch-switch"></span>
