@@ -73,10 +73,13 @@ if(!isset($_SESSION['CPF'])){
             <label for="setor">Setor Responsável:</label>
             <?php
             $tipoSelecionado = null;
+            if(isset($erroComboBox) && !$erroComboBox){
+                ?><span style='color:red;' role="alert">O órgão responsável deverá ser informado!</span> <?php
+            }
             echo "<select class='container mr-12' onchange='seleciona_orgao(this)' name = 'orgao' id='orgao'>";
             $tamanho = count($orgaos);
             if(isset($orgaos)){
-                echo "<option value = ''>Selecione um Orgão Publico</option>";
+                echo "<option value = 'null'>Selecione um Orgão Publico</option>";
                 for($i = 0; $i < $tamanho; $i++){
                     echo "<option id='orgao' value = {$orgaos[$i][0]}";
                     if($tipoSelecionado == $orgaos[$i][0]) {
@@ -85,7 +88,9 @@ if(!isset($_SESSION['CPF'])){
                     }
                     echo ">{$orgaos[$i][2]}</option>";
                 }
-            }
+            }?>
+            <input hidden value="<?php echo $manifestacao->id_manifestacao;?>">
+            <?php 
             echo "</select>"
             ?>
             <a class="btn btn-warning float-right mt-3" href="?section=ManifestacaoControle&function=encaminhar&id=<?=$manifestacao->id_manifestacao?>&org=" id="orgao_publico"><span class="fa fa-wrench"></span> Encaminhar</a>

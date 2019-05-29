@@ -82,11 +82,9 @@ class ManifestacaoManager
     public function manifestarInteresse(string $idManifestacao,string $idUsuario){
         return $this->factory->manifestarInteresse($idManifestacao,$idUsuario);
     }
-
     public function selecionaOuvidor(string $cpfOuvidor){
         return $this->factory->selecionaOuvidor($cpfOuvidor);
     }
-
     public function selecionaEmailInteressados(string $idManifestacao){
         return $this->factory->selecionaEmailInteressados($idManifestacao);
     }

@@ -99,25 +99,40 @@ class ManifestacaoFactory
         global $conexao;
 
         $manifestacao = array();
-        $query = "SELECT orgao_publico from historico where manifestacao = ".$id.";";
+        $query = "SELECT id_situacao from manifestacao where id_manifestacao = ".$id.";";
         $sql = mysqli_query($conexao,$query);
-        $checar = mysqli_fetch_assoc($sql);
-        if($checar){
-            $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem, nome_orgao_publico 
-			from manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
-			INNER JOIN historico h ON h.manifestacao = m.id_manifestacao
-			INNER JOIN orgaopublico o ON h.orgao_publico = o.id_orgao_publico
-			INNER JOIN situacao s ON s.id_situacao = m.id_situacao
-			WHERE id_manifestacao = " . $id . ";";
-        }else{
-            $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem 
-			from manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
-			INNER JOIN situacao s ON s.id_situacao = m.id_situacao
-			WHERE id_manifestacao = " . $id . ";";
+        $situacao = mysqli_fetch_array($sql);
+        $query = "SELECT resposta from manifestacao where id_manifestacao = ".$id.";";
+        $sql = mysqli_query($conexao,$query);
+        $checarResposta = mysqli_fetch_assoc($sql);
+
+        if($checarResposta['resposta'] == null){
+            if($situacao['id_situacao'] == 2){
+                $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem, nome_orgao_publico
+                from manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
+                INNER JOIN historico h ON h.manifestacao = m.id_manifestacao
+                INNER JOIN orgaopublico o ON h.orgao_publico = o.id_orgao_publico
+                INNER JOIN situacao s ON s.id_situacao = m.id_situacao
+                WHERE id_manifestacao = " . $id . ";";
+            }else {
+                $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem
+                from manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
+                INNER JOIN historico h ON h.manifestacao = m.id_manifestacao
+                INNER JOIN orgaopublico o ON h.orgao_publico = o.id_orgao_publico
+                INNER JOIN situacao s ON s.id_situacao = m.id_situacao
+                WHERE id_manifestacao = " . $id . ";";
+                
+            }
+        }else {
+            $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem, nome_orgao_publico,resposta 
+                from manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
+                INNER JOIN historico h ON h.manifestacao = m.id_manifestacao
+                INNER JOIN orgaopublico o ON h.orgao_publico = o.id_orgao_publico
+                INNER JOIN situacao s ON s.id_situacao = m.id_situacao
+                WHERE id_manifestacao = " . $id . ";";
         }
 
         $resultado = mysqli_query($conexao, $query);
-
         if ($resultado) {
             $manifestacao = mysqli_fetch_object($resultado);
 
@@ -213,7 +228,6 @@ class ManifestacaoFactory
         global $conexao;
         $query = "insert into interesse (idManifestacao,idUsuario) values ('"
             .$idManifestacao."','".$idUsuario."')";
-
         if(mysqli_query($conexao,$query))
             return true;
         else
@@ -315,7 +329,7 @@ class ManifestacaoFactory
             INNER JOIN situacao s ON s.id_situacao = m.id_situacao 
             WHERE m.sigilo = 0;";
 
-        try {
+            try {
             $resultado = mysqli_query($conexao, $query);
 
             if (mysqli_num_rows($resultado) > 0) {

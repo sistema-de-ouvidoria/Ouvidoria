@@ -145,7 +145,7 @@ class UsuarioControle extends AbstractControle
                                 Você pode fazer login através do nosso site ou clicando <a href='http://localhost/ouvidoria/src/index.php?section=UsuarioControle&function=loginAcao'>aqui</a>.";
                                 $emailDestino = $emailCadastro;
                                 $this->email->enviarEmail($emailDestino, $assunto, $texto);
-                                include 'view/cadastrarUsuario.php';
+                                include 'view/fazerLogin.php';
                             } catch (Exception $e) {
                                 $msg = $e->getMessage();
                             }
@@ -167,7 +167,6 @@ class UsuarioControle extends AbstractControle
                 $this->errosTelaCadastro($nomeCadastro, $cpfCadastro, $enderecoCadastro, $telefoneCadastro, $emailCadastro, $senha1, $senha2, $erro);
             }
         }
-        header('Location: view/cadastrarUsuario.php');
     }
 
     public function checaEmailUnico(string $emailUnico)

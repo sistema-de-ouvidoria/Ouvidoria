@@ -75,7 +75,7 @@
                 <a class="btn btn-danger float-right" href="?section=ManifestacaoControle&function=removerInteresse&idManifestacao=<?=$manifestacao->id_manifestacao?>"><span class="fa fa-times"></span> Deixar de receber notificações</a>
 			<?php }
 			else {?>
-                <a class="btn btn-info float-right" href="?section=ManifestacaoControle&function=manifestarInteresse&idManifestacao=<?=$manifestacao->id_manifestacao?>"><span class="fa fa-check"></span> Receber notificações</a>
+                <a class="btn btn-info float-right" href="?section=ManifestacaoControle&function=manifestarInteresse&idManifestacao=<?=$manifestacao->id_manifestacao?>"><span class="fa fa-check"></span> Manifestar Interesse</a>
 			<?php } ?>
 
             <a class="btn btn-success float-left" href="?section=ManifestacaoControle&function=acompanharManifestacaoAcao"><span class="fa fa-chevron-left"></span> Voltar</a>
