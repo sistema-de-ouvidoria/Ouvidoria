@@ -99,7 +99,13 @@ class ManifestacaoControle extends AbstractControle
     public function clicouLinkVerManifestacaoEmail()
     {
         $id = $_GET['id'];
-        require('view/fazerLogin.php');
+        if(!isset($_SESSION['usuario'])) {
+            require('view/fazerLogin.php');
+        }
+        else {
+            $this->detalharManifestacaoCidadao();
+        }
+
     }
 
     public function manifestarInteresse(){
@@ -214,10 +220,9 @@ class ManifestacaoControle extends AbstractControle
                     $texto = "Parabéns, sua manifestação foi enviada com sucesso!<br><br>
                     Prezado(a) <strong>".$nome_usuario."</strong> sua manifestação foi criada e será encaminhada para o órgão responsável que terá <strong>30 dias úteis</strong> para resposta.<br><br>
                     Seu <strong>protocolo de atendimento é ".$protocolo_manifestacao."</strong>
-                    Para acompanhar sua manifestação, <a href='http://localhost/ouvidoria/src/index.php?section=ManifestacaoControle&function=detalharManifestacaoCidadao&id=$protocolo_manifestacao'>clique aqui</a>";
+                    Para acompanhar sua manifestação, <a href='http://localhost/ouvidoria/src/index.php?section=ManifestacaoControle&function=clicouLinkVerManifestacaoEmail&id=$protocolo_manifestacao'>clique aqui</a>";
                     $emailDestino = $this->usuarioManager->selecionarEmail($cpf_usuario);
                     $emailDestino = join(",",$emailDestino);
-                    var_dump($emailDestino);
                     $this->email->enviarEmail($emailDestino,$assunto,$texto);
                     require('view/manifestacaoCriada.php');
                 }
