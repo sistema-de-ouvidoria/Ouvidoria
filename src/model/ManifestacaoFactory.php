@@ -285,4 +285,49 @@ class ManifestacaoFactory
         }
         return $email;
     }
+
+    public function selecionaNomeAdmin(string $cpfAdminPublico){
+        global $conexao;
+        $query = "select nome from usuario where cpf = " . $cpfAdminPublico . ";";
+
+        $sql = mysqli_query($conexao,$query);
+        $sql = mysqli_fetch_array($sql);
+        return $sql['nome'];
+    }
+
+    public function selecionaNomeOrgao(string $idManifestacao){
+        global $conexao;
+        $query = "SELECT o.nome_orgao_publico 
+        from manifestacao m 
+        INNER JOIN historico h ON h.manifestacao = m.id_manifestacao
+        INNER JOIN orgaopublico o ON h.orgao_publico = o.id_orgao_publico
+        WHERE id_manifestacao = " . $idManifestacao . ";";
+        $res = mysqli_query($conexao,$query);
+        $sql = mysqli_fetch_array($res);
+        return $sql['nome_orgao_publico'];
+    }
+
+    public function listaAcompanharManifestacao(){
+        global $conexao;
+
+        $query = "SELECT id_manifestacao, assunto, data_manifestacao, nome_tipo_manifestacao, nome_situacao, mensagem
+            from manifestacao m INNER JOIN tipomanifestacao t ON m.id_tipo_manifestacao = t.id_tipo_manifestacao
+            INNER JOIN situacao s ON s.id_situacao = m.id_situacao 
+            WHERE m.sigilo = 0;";
+
+        try {
+            $resultado = mysqli_query($conexao, $query);
+
+            if (mysqli_num_rows($resultado) > 0) {
+                $manifestacoes = mysqli_fetch_all($resultado);
+
+                return $manifestacoes;
+            } else
+                return NULL;
+
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
+            $result = false;
+        }
+    }
 }

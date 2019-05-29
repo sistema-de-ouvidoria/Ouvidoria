@@ -60,7 +60,7 @@ if(!isset($_SESSION['CPF'])){
     <?php if(!isset($usuario->nome)){?>
 
         <div>
-            <form action="?section=UsuarioControle&function=cadastrarUsuario" method="POST">
+            <form name="formularioCadastro" action="?section=UsuarioControle&function=cadastrarUsuario" method="POST">
                 <div class="form-group col-md-4">
                     <label>Nome:</label><input type="text" name="nomeCadastro" class="form-control" required oninvalid="setCustomValidity('O campo nome deve ser informado')" onchange="try{setCustomValidity('')}catch(e){}"/>
                 </div>
@@ -88,7 +88,7 @@ if(!isset($_SESSION['CPF'])){
         </div>
     <?php }else{ ?>
         <div>
-            <form action="?section=UsuarioControle&function=cadastrarUsuario" method="POST">
+            <form name="formularioCadastro" name="formularioCadastro" action="?section=UsuarioControle&function=cadastrarUsuario" method="POST">
                 <div class="form-group col-md-4">
                     <label>Nome:</label><input type="text" value="<?=$usuario->nome?>" name="nomeCadastro" class="form-control" required oninvalid="setCustomValidity('O campo nome deve ser informado')" onchange="try{setCustomValidity('')}catch(e){}"/>
                 </div>
@@ -122,5 +122,3 @@ if(!isset($_SESSION['CPF'])){
 
     </script>
 </body>
-
-<!--<button class="btn btn-outline-success btn-lg active float-right" role="button" aria-pressed="true"">Enviar</button>

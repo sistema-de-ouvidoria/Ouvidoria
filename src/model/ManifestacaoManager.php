@@ -53,7 +53,7 @@ class ManifestacaoManager
         return $resultado;
     }
 
-	public function selecionaManifestacaoCidadao(string $id)
+    public function selecionaManifestacaoCidadao(string $id)
     {
         $resultado = $this->factory->selecionarManifestacaoCidadao($id);
 
@@ -95,5 +95,16 @@ class ManifestacaoManager
         return $this->factory->selecionaOrgao($id_orgao_publico);
     }
 
+    public function selecionaNomeAdmin(string $cpfAdminPublico){
+        return $this->factory->selecionaNomeAdmin($cpfAdminPublico);
+    }
+
+    public function selecionaNomeOrgao(string $idManifestacao){
+        return $this->factory->selecionaNomeOrgao($idManifestacao);
+    }
+
+    public function listaAcompanharManifestacao(){
+        return $this->factory->listaAcompanharManifestacao();
+    }
 }
 

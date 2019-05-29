@@ -245,6 +245,7 @@ class ManifestacaoControle extends AbstractControle
 
         if ($this->manifestacaoManager->alteraManifestacaoAdmPublico($id, $resposta)) {
             $this->historicoManager->atualizaHistorico($adm_publico, $id);
+            $this->enviaEmailResponder($id,$adm_publico);
         }
 
         $this->listar();
@@ -259,6 +260,7 @@ class ManifestacaoControle extends AbstractControle
 
         $this->manifestacaoManager->recusaManifestacao($id);
         $this->historicoManager->atualizaHistoricoRecusa($adm_publico, $id, $data, $motivo);
+        $this->enviaEmailDoRecusar($id,$adm_publico);
         $this->listar();
     }
 
@@ -290,6 +292,33 @@ class ManifestacaoControle extends AbstractControle
         }
     }
 
+    public function enviaEmailDoRecusar(string $idManifestacao, string $cpfAdminPublico){
+        $nomeAdminPublico = $this->manifestacaoManager->selecionaNomeAdmin($cpfAdminPublico);
+        $nomeOrgao = $this->manifestacaoManager->selecionaNomeOrgao($idManifestacao);
+        $listaEmail = $this->manifestacaoManager->selecionaEmailInteressados($idManifestacao);
+        foreach ($listaEmail as $emails => $email) {
+            $assunto = "A manifestação " . $idManifestacao . " foi alterada";
+            $texto = "O administrador público <strong>". $nomeAdminPublico . "</strong> do órgão <strong>" . $nomeOrgao."</strong> recusou a manifestação <strong>" . $idManifestacao . "</strong>.<br><br>
+	        <strong>Motivo</strong>:A Manifestação foi encaminhada para o órgão errado.
+	        <br><br><br>Para acompanhar a manifestação, <a href='http://localhost/ouvidoria/src/index.php?section=ManifestacaoControle&function=clicouLinkVerManifestacaoEmail&id=$idManifestacao'>clique aqui</a>.";
+            $emailDestino = $email;
+
+            $this->email->enviarEmail($emailDestino,$assunto,$texto);
+        }
+    }
+
+    public function enviaEmailResponder(string $idManifestacao, string $cpfAdminPublico){
+        $nomeAdminPublico = $this->manifestacaoManager->selecionaNomeAdmin($cpfAdminPublico);
+        $listaEmail = $this->manifestacaoManager->selecionaEmailInteressados($idManifestacao);
+        $nomeOrgao = $this->manifestacaoManager->selecionaNomeOrgao($idManifestacao);
+        foreach ($listaEmail as $emails => $email) {
+            $assunto = "A manifestação " . $idManifestacao . " foi alterada";
+            $texto = "A manifestação <strong>" . $idManifestacao . " </strong> foi respondida pelo Administrador Público <strong>" . $nomeAdminPublico . " </strong> do órgão público <strong>" . $nomeOrgao . " </strong>.
+	        <br><br>Para acompanhar a manifestação, <a href='http://localhost/ouvidoria/src/index.php?section=ManifestacaoControle&function=clicouLinkVerManifestacaoEmail&id=$idManifestacao'>clique aqui</a>.";
+            $emailDestino = $email;
+            $this->email->enviarEmail($emailDestino,$assunto,$texto);
+        }
+    }
     public function detalharManifestacaoEscolha()
     {
         if($_GET['situacao'] == 'Aberta') {
