@@ -166,7 +166,7 @@ class ManifestacaoControle extends AbstractControle
                 $this->historicoManager->salvaHistoricoManifestacao($id_orgao_publico, $ouvidor, $id);
                 $this->enviaEmailDoEncaminhar($id, $ouvidor, $id_orgao_publico);
             }
-            echo "<script type=\"text/javascript\">alert(\"manifestação encaminhada com sucesso.\");</script>";
+            echo "<script type=\"text/javascript\">alert(\"Manifestação encaminhada com sucesso.\");</script>";
             $this->listar();
         }
     }
@@ -238,6 +238,7 @@ class ManifestacaoControle extends AbstractControle
                     $emailDestino = join(",", $emailDestino);
                     $this->email->enviarEmail($emailDestino, $assunto, $texto);
                     $this->manifestacaoManager->manifestarInteresse($protocolo_manifestacao, $cpf_usuario);
+                    echo "<script type=\"text/javascript\">alert(\"Manifestação criada com sucesso.\");</script>";
                     require('view/manifestacaoCriada.php');
                 }
 
@@ -260,7 +261,7 @@ class ManifestacaoControle extends AbstractControle
             if ($this->manifestacaoManager->alteraManifestacaoAdmPublico($id, $resposta)) {
                 $this->historicoManager->atualizaHistorico($adm_publico, $id);
                 $this->enviaEmailResponder($id, $adm_publico);
-                echo "<script type=\"text/javascript\">alert(\"manifestação respondida com sucesso.\");</script>";
+                echo "<script type=\"text/javascript\">alert(\"Manifestação respondida com sucesso.\");</script>";
                 $this->listar();
             }
         }

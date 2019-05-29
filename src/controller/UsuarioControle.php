@@ -253,6 +253,7 @@ class UsuarioControle extends AbstractControle
                                 $senha1 = $senhaAntigaConfirmacao;
                             }
                             $sucesso = $this->usuarioManager->alteraUsuario($cpfAlterado, $nomeAlterado, $enderecoAlterado, $telefoneAlterado, $emailAlterado, $senha1, $id);
+                            echo "<script type=\"text/javascript\">alert(\"O usuário foi alterado com sucesso.\");</script>";
                             $this->alteraDadosAcao();
                         } catch (Exception $e) {
                             $msg = $e->getMessage();
