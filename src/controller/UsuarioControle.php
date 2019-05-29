@@ -395,7 +395,7 @@ class UsuarioControle extends AbstractControle
     public function detalharUsuario()
     {
         $tipos = $this->tipoUserManager->listaTipos();
-        $usuario = $this->usuarioManager->buscaInfoUsuario($_GET['cpf']);
+        $usuario = $this->usuarioManager->buscaInfoUsuarioDetalhe($_GET['cpf']);
         require('view/detalheUsuario.php');
     }
 
@@ -410,11 +410,17 @@ class UsuarioControle extends AbstractControle
                 $cpfAlterado = $_POST['cpf'];
 
                 $this->usuarioManager->alteraDados($cpfAlterado, $nomeAlterado, $enderecoAlterado, $telefoneAlterado, $emailAlterado);
+                $this->listarUsuarios();
             }
         } else {
-            $this->usuarioManager->delegarPrivilegios($_GET['cpf'], $_GET['privilegio']);
+            if ($_GET['privilegio'] == null) {
+                echo "<script type=\"text/javascript\">alert('O privilégio deve ser informado!');</script>";
+                $this->detalharUsuario();
+            } else {
+                $this->usuarioManager->delegarPrivilegios($_GET['cpf'], $_GET['privilegio']);
+            }
         }
-        $this->listarUsuarios();
+
     }
 
 }

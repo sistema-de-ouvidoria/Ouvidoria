@@ -57,6 +57,11 @@ class UsuarioManager
         return $this->factory->buscaInfoUsuario($cpf);
     }
 
+    public function buscaInfoUsuarioDetalhe(string $cpf)
+    {
+        return $this->factory->buscaInfoUsuarioDetalhe($cpf);
+    }
+
     public function registrarUsuario($cpfCadastro, $nomeCadastro, $enderecoCadastro, $telefoneCadastro, $emailCadastro, $senha1, $id_tipo_user)
     {
         $usuario = new Usuario($cpfCadastro, $nomeCadastro, $enderecoCadastro, $telefoneCadastro, $emailCadastro, $senha1, $id_tipo_user);

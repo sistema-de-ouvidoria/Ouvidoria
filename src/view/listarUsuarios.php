@@ -43,9 +43,8 @@
             <th>Nome</th>
             <th>E-mail</th>
             <th>Telefone</th>
-            <th>Endereço</th>
+            <th>Privilégios</th>
             <th>Detalhar</th>
-            <th style="display:none;"></th>
         </tr>
         </thead>
         <tbody>
@@ -59,7 +58,6 @@
                     <td><?= $dados[$i][2] ?></td>
                     <td><?= $dados[$i][3] ?></td>
                     <td><?= $dados[$i][4] ?></td>
-                    <td style="display:none;"><?= $dados[$i][5] ?></td>
                     <?php if ($nvlAcesso == 4): ?>
                         <td><a class="btn btn-warning" href="?section=UsuarioControle&function=detalharUsuario&cpf=<?= $dados[$i][0] ?>">Detalhar</a></td>
                     <?php endif; ?>

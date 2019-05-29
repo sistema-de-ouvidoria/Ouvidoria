@@ -70,11 +70,11 @@ if(!isset($_SESSION['CPF'])){
         </div>
         <div class="form-group col-12">
             <label for="descricao">Descrição:</label>
-            <textarea name="mensagem" rows="6" class="form-control" maxlength="1000" readonly><?=$manifestacao->mensagem?></textarea>
+            <textarea id="descricao" name="descricao" rows="6" class="form-control" maxlength="1000" readonly><?=$manifestacao->mensagem?></textarea>
         </div>
         <div class="form-group col-12">
             <label for="resposta">Resposta:</label>
-            <textarea id="resposta" onchange="seleciona_resposta(this)" name="resposta" required rows="6" class="form-control" maxlength="1000" placeholder="Digite aqui sua resposta..."></textarea>
+            <textarea id="resposta" readonly name="resposta" rows="6" class="form-control" maxlength="1000"><?=$manifestacao->resposta?></textarea>
         </div>
         <div class="form-group col-12">
             <a class="btn btn-success float-left" href="?section=ManifestacaoControle&function=listar"><span class="fa fa-chevron-left"></span> Voltar</a>

@@ -115,12 +115,10 @@ class ManifestacaoFactory
                 INNER JOIN situacao s ON s.id_situacao = m.id_situacao
                 WHERE id_manifestacao = " . $id . ";";
             }else {
-                $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem
-                from manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
-                INNER JOIN historico h ON h.manifestacao = m.id_manifestacao
-                INNER JOIN orgaopublico o ON h.orgao_publico = o.id_orgao_publico
-                INNER JOIN situacao s ON s.id_situacao = m.id_situacao
-                WHERE id_manifestacao = " . $id . ";";
+                $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem 
+        from manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
+        INNER JOIN situacao s ON s.id_situacao = m.id_situacao
+        WHERE id_manifestacao = " . $id . ";";
                 
             }
         }else {
@@ -148,8 +146,8 @@ class ManifestacaoFactory
 
         $manifestacao = array();
 
-        $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem, nome_orgao_publico 
-        from manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
+        $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem, 
+        nome_orgao_publico, resposta FROM manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
         INNER JOIN historico h ON h.manifestacao = m.id_manifestacao
         INNER JOIN orgaopublico o ON h.orgao_publico = o.id_orgao_publico
         INNER JOIN situacao s ON s.id_situacao = m.id_situacao

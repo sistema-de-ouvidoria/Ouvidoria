@@ -72,10 +72,14 @@ if(!isset($_SESSION['CPF'])){
             <label for="descricao">Descrição:</label>
             <textarea name="mensagem" rows="6" class="form-control" maxlength="1000" readonly><?=$manifestacao->mensagem?></textarea>
         </div>
-            <div class="form-group col-12">
-                <label for="resposta">Resposta:</label>
-                <textarea id="resposta" onchange="seleciona_resposta(this)" name="resposta"rows="6"class="form-control" maxlength="1000" placeholder="Digite aqui sua resposta..."required></textarea>
-            </div>
+        <div class="form-group col-12">
+            <label for="resposta">Resposta:</label>
+            <textarea id="resposta" onchange="seleciona_resposta(this)"  name="resposta"rows="6"class="form-control" maxlength="1000" placeholder="Digite aqui sua resposta..." required></textarea>
+            <?php
+            if(isset($erroResposta) && !$erroResposta){
+                ?><span style='color:red;' role="alert">O campo resposta deve ser informado!</span> <?php
+            }?>
+        </div>
         <div class="form-group col-12">
             <a class="btn btn-success float-right" href="#" onClick="document.getElementById('form').submit();"><span class="fa fa-check"></span> Responder</a>
             <a class="btn btn-danger float-left" href="?section=ManifestacaoControle&function=recusarManifestacao&id=<?php echo $manifestacao->id_manifestacao; ?>"><span class="fa fa-times"></span> Rejeitar</a>

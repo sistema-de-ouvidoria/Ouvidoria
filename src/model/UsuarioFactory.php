@@ -80,6 +80,27 @@ class UsuarioFactory
         return $usuario;
     }
 
+    public function buscaInfoUsuarioDetalhe($cpf)
+    {
+        global $conexao;
+        try {
+            $query = "SELECT u.*, nome_tipo_usuario from usuario u
+            INNER JOIN tipousuario t ON u.id_tipo_usuario = t.id_tipo_usuario
+            where cpf = '$cpf'";
+            $resultado = mysqli_query($conexao, $query);
+
+            if ($resultado) {
+                $usuario = mysqli_fetch_object($resultado);
+            } else {
+                $resultado = false;
+            }
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
+            $resultado = false;
+        }
+        return $usuario;
+    }
+
     public function cadastrarUsuario($obj)
     {
         global $conexao;
@@ -218,8 +239,8 @@ class UsuarioFactory
         global $conexao;
         $usuarios = array();
 
-        $query = "SELECT cpf, nome, email, telefone, endereco
-            from usuario u";
+        $query = "SELECT cpf, nome, email, telefone, t.nome_tipo_usuario, endereco
+            from usuario u INNER JOIN tipousuario t ON u.id_tipo_usuario = t.id_tipo_usuario";
 
         try {
             $resultado = mysqli_query($conexao, $query);

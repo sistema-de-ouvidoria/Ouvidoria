@@ -39,24 +39,28 @@
 <div class="container mt-5">
         <form id="formularioUser" action="?section=UsuarioControle&function=usuarioDetalhe" class="row" method="POST">
             <div class="form-group col-6">
-                <label >CPF:</label>
-                <input name="cpf" value="<?=$usuario->cpf?>" readonly class="form-control">
+                <label for="cpf">CPF:</label>
+                <input id="cpf" name="cpf" value="<?=$usuario->cpf?>" readonly class="form-control">
             </div>
             <div class="form-group col-6">
-                <label>Telefone</label>
-                <input name="telefone" value="<?=$usuario->telefone?>" class="form-control">
+                <label for="telefone">Telefone:</label>
+                <input id="telefone" name="telefone" value="<?=$usuario->telefone?>" class="form-control">
             </div>
             <div class="form-group col-12">
-                <label for="assunto">Nome</label>
-                <input name="nome" value="<?=$usuario->nome?>" class="form-control">
+                <label for="nome">Nome:</label>
+                <input id="nome" name="nome" value="<?=$usuario->nome?>" class="form-control">
             </div>
             <div class="form-group col-12">
-                <label>Email</label>
-                <input name="email" value="<?=$usuario->email?>" class="form-control">
+                <label for="email">Email:</label>
+                <input id="email" name="email" value="<?=$usuario->email?>" class="form-control">
             </div>
             <div class="form-group col-12">
-                <label>Endereco</label>
-                <input name="endereco" value="<?=$usuario->endereco?>" class="form-control" >
+                <label for="endereco">Endereco:</label>
+                <input id="endereco" name="endereco" value="<?=$usuario->endereco?>" class="form-control" >
+            </div>
+            <div class="form-group col-12">
+                <label for="privilegios">Privilégios:</label>
+                <input id="privilegios" name="privilegios" value="<?=$usuario->nome_tipo_usuario?>" class="form-control" >
             </div>
             <input name="id" type="hidden" value="<?=$usuario->id_tipo_usuario?>" class="form-control" >
             <div class="form-group col-12">
@@ -84,9 +88,13 @@
                         <div class="col-sm-12 text-center">
                     <p><?php
                         $tipoSelecionado = null;
+                        if(isset($erroComboBox) && !$erroComboBox){
+                            ?><span style='color:red;' role="alert">O privilégio deve ser informado!</span> <?php
+                        }
                         echo "<select onchange='seleciona_orgao(this)' name = 'orgao' id='orgao' class='form-control'>";
                         $tamanho = count($tipos);
                         if(isset($tipos)){
+                            echo "<option value = 'null'>Selecione um Privilégio</option>";
                             for($i = 0; $i < $tamanho; $i = $i + 2){
                                 echo "<option id='privilegio' value = {$tipos[$i]}";
                                 if($tipoSelecionado == $tipos[$i]) {
