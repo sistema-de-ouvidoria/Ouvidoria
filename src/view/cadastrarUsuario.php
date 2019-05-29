@@ -118,7 +118,4 @@ if(!isset($_SESSION['CPF'])){
 
     <!-- FIM DA TELA DE CADASTRO -->
 
-    <script>
-
-    </script>
 </body>

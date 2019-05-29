@@ -48,6 +48,32 @@ class ManifestacaoFactory
         }
         return $idGerado;
     }
+    public function listarMinhasManifestacoes(string $cpf)
+    {
+        global $conexao;
+        $manifestacoes = array();
+
+
+        $query = "SELECT id_manifestacao, assunto, data_manifestacao, nome_tipo_manifestacao, nome_situacao, mensagem 
+            from manifestacao m INNER JOIN tipomanifestacao t ON m.id_tipo_manifestacao = t.id_tipo_manifestacao
+            INNER JOIN situacao s ON s.id_situacao = m.id_situacao 
+            WHERE m.cidadao_cpf = " . $cpf . ";";
+
+        try {
+            $resultado = mysqli_query($conexao, $query);
+
+            if (mysqli_num_rows($resultado) > 0) {
+                $manifestacoes = mysqli_fetch_all($resultado);
+
+                return $manifestacoes;
+            } else
+                return NULL;
+
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
+            $result = false;
+        }
+    }
 
     public function listarManifestacoes(string $acesso)
     {

@@ -36,6 +36,11 @@ class ManifestacaoManager
         return $this->factory->listarManifestacoes($nvlAcesso);
     }
 
+    public function listaMinhasManifestacoes($cpf)
+    {
+        return $this->factory->listarMinhasManifestacoes($cpf);
+    }
+
     public function alteraManifestacaoOuvidor($id)
     {
         return $this->factory->alterarManifestacaoOuvidor($id);

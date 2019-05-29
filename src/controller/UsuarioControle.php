@@ -400,18 +400,46 @@ class UsuarioControle extends AbstractControle
         require('view/detalheUsuario.php');
     }
 
+    public function detalharUsuarioComErro()
+    {
+        $erro = false;
+        $tipos = $this->tipoUserManager->listaTipos();
+        $usuario = $this->usuarioManager->buscaInfoUsuarioDetalhe($_GET['cpf']);
+        require('view/detalheUsuario.php');
+    }
+
     public function usuarioDetalhe()
     {
         if (isset($_POST['acao'])) {
            if ($_POST['acao'] == "Alterar") {
-                $nomeAlterado = $_POST['nome'];
-                $enderecoAlterado = $_POST['endereco'];
+                $nomeAlterado = $_POST['nomeAlteraDados'];
+                $enderecoAlterado = $_POST['enderecoAlteraDados'];
                 $telefoneAlterado = $_POST['telefone'];
-                $emailAlterado = $_POST['email'];
-                $cpfAlterado = $_POST['cpf'];
+                $emailAlterado = $_POST['emailAlteraDados'];
+                $cpfAlterado = $_POST['cpfAlteraDados'];
 
-                $this->usuarioManager->alteraDados($cpfAlterado, $nomeAlterado, $enderecoAlterado, $telefoneAlterado, $emailAlterado);
-                $this->listarUsuarios();
+               $emailBuscado = $this->usuarioManager->selecionarEmail($cpfAlterado);
+               if ($emailAlterado == $emailBuscado['email']) {
+                   $emailUnico = true;
+               } else {
+                   $emailUnico = $this->checaEmailUnico($emailAlterado);
+               }
+               if ($emailUnico) {
+                   try {
+                       $this->usuarioManager->alteraDados($cpfAlterado, $nomeAlterado, $enderecoAlterado, $telefoneAlterado, $emailAlterado);
+                       echo "<script type=\"text/javascript\">alert('O usuário foi alterado com sucesso!');</script>";
+                       $this->listarUsuarios();
+                   } catch (Exception $e) {
+                       $msg = $e->getMessage();
+                   }
+
+               }
+                else {
+                    $_GET['cpf'] = $cpfAlterado;
+                    $this->detalharUsuarioComErro();
+               }
+
+
             }
         } else {
             if ($_GET['privilegio'] == null) {

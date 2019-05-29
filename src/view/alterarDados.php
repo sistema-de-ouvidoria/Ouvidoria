@@ -58,7 +58,7 @@ if(!isset($_SESSION['CPF'])){
     <br>
     <form action="?section=UsuarioControle&function=alterarDados" method="POST" name="formulario">
         <div class="form-group col-md-4">
-            <label>Nome:</label><input type="text" name="nomeAlteraDados" value="<?=$usuario->nome?>"  class="form-control"/>
+            <label>Nome:</label><input  type="text" name="nomeAlteraDados" value="<?=$usuario->nome?>"  class="form-control"/>
         </div>
         <div class="form-group  col-md-4">
             <label>CPF:</label><input type="text" name="cpfAlteraDados" value="<?=$usuario->cpf?>" class="form-control" readonly />

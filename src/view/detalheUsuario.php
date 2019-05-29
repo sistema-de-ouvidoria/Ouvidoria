@@ -40,23 +40,24 @@
         <form id="formularioUser" action="?section=UsuarioControle&function=usuarioDetalhe" class="row" method="POST">
             <div class="form-group col-6">
                 <label for="cpf">CPF:</label>
-                <input id="cpf" name="cpf" value="<?=$usuario->cpf?>" readonly class="form-control">
+                <input id="cpf" name="cpfAlteraDados" value="<?=$usuario->cpf?>" readonly class="form-control">
             </div>
             <div class="form-group col-6">
                 <label for="telefone">Telefone:</label>
-                <input id="telefone" name="telefone" value="<?=$usuario->telefone?>" class="form-control">
+                <input id="telefone" name="telefone" required oninvalid="setCustomValidity('O campo telefone deve ser informado')" onchange="try{setCustomValidity('')}catch(e){}" value="<?=$usuario->telefone?>" class="form-control">
             </div>
             <div class="form-group col-12">
                 <label for="nome">Nome:</label>
-                <input id="nome" name="nome" value="<?=$usuario->nome?>" class="form-control">
+                <input id="nome" required oninvalid="setCustomValidity('O campo nome deve ser informado')" onchange="try{setCustomValidity('')}catch(e){}" name="nomeAlteraDados" value="<?=$usuario->nome?>" class="form-control">
             </div>
             <div class="form-group col-12">
                 <label for="email">Email:</label>
-                <input id="email" name="email" value="<?=$usuario->email?>" class="form-control">
+                <input id="email" name="emailAlteraDados" required oninvalid="setCustomValidity('O campo email deve ser informado')" onchange="try{setCustomValidity('')}catch(e){}" value="<?=$usuario->email?>" class="form-control">
+                <?php if(isset($erro) && !$erro){ echo "<span style='color:red;'>E-mail inserido já cadastrado</span>"; echo "<br>";}?>
             </div>
             <div class="form-group col-12">
                 <label for="endereco">Endereco:</label>
-                <input id="endereco" name="endereco" value="<?=$usuario->endereco?>" class="form-control" >
+                <input id="endereco" required oninvalid="setCustomValidity('O campo endereço deve ser informado')" onchange="try{setCustomValidity('')}catch(e){}" name="enderecoAlteraDados" value="<?=$usuario->endereco?>" class="form-control" >
             </div>
             <div class="form-group col-12">
                 <label for="privilegios">Privilégios:</label>

@@ -60,6 +60,9 @@ class ManifestacaoControle extends AbstractControle
             case 'criarManifestacaoAcao':
                 $this->criarManifestacaoAcao();
                 break;
+            case 'minhasManifestacoes':
+                $this->listarMinhasManifestacoes();
+                break;
             case 'acompanharManifestacaoAcao':
                 $this->acompanharManifestacaoAcao();
                 break;
@@ -104,6 +107,11 @@ class ManifestacaoControle extends AbstractControle
         require('view/fazerLogin.php');
     }
 
+    public function listarMinhasManifestacoes()
+    {
+        $dados = $this->manifestacaoManager->listaManifestacoes($_SESSION['usuario']['cpf']);
+        require('view/listarMinhasManifestacoes.php');
+    }
     public function manifestarInteresse()
     {
         $idUsuario = $_SESSION['usuario']['cpf'];

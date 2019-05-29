@@ -88,19 +88,9 @@
             <input type="text" name="consulta_protocolo" id="inputProtocolo" onkeyup="funcaoDeBuscaProtocolo()" class="form-control"/>
         </div>
     </div>
-    <label>Mostrar apenas minhas manifestações</label>
-    <div class="onoffswitch">
-        <input type="checkbox" onchange="window.location.href= name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked onclick="mostrarMinhasManifestacoes()">
-        <label class="onoffswitch-label" for="myonoffswitch">
-            <span class="onoffswitch-inner"></span>
-            <span class="onoffswitch-switch"></span>
 
-        <!-- Botão que o victor mandou no grupo 
-        <div>
-        <input checked type="checkbox" data-toggle="toggle" data-size="small" data-onstyle="primary" data-offstyle="danger" data-style="ios">
-    </div>
--->
-        </label>
+    <div class="onoffswitch">
+        <a class="btn btn-primary" href="?section=ManifestacaoControle&function=minhasManifestacoes">Mostrar apenas minhas manifestações</a>
     </div>
     <table id="minhaTabela" class="table-hover table-striped table-bordered" data-searching="false">
         <thead>
