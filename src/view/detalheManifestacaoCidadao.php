@@ -58,7 +58,7 @@
         </div>
         <div class="form-group col-6">
             <label for="setor">Setor Responsável:</label>
-            <input id="setor" value="<?php if(isset($manifestacao->nome_orgao_publico)) echo '$manifestacao->nome_orgao_publico'; else
+            <input id="setor" value="<?php if(isset($manifestacao->nome_orgao_publico)) echo $manifestacao->nome_orgao_publico; else
 			echo 'Esta manifestação ainda não foi encaminhada'?>" readonly class="form-control"/>
         </div>
         <div class="form-group col-12">
@@ -72,13 +72,13 @@
         <div class="form-group col-12">
 
 			<?php if($checaInteresse == 1){?>
-                <a class="btn btn-danger float-middle" href="?section=ManifestacaoControle&function=removerInteresse&idManifestacao=<?=$manifestacao->id_manifestacao?>"><span class="fa fa-check"></span>Deixar de receber notificações</a>
+                <a class="btn btn-danger float-right" href="?section=ManifestacaoControle&function=removerInteresse&idManifestacao=<?=$manifestacao->id_manifestacao?>"><span class="fa fa-times"></span> Deixar de receber notificações</a>
 			<?php }
 			else {?>
-                <a class="btn btn-info float-left" href="?section=ManifestacaoControle&function=manifestarInteresse&idManifestacao=<?=$manifestacao->id_manifestacao?>"><span class="fa fa-check"></span>Receber notificações</a>
+                <a class="btn btn-info float-right" href="?section=ManifestacaoControle&function=manifestarInteresse&idManifestacao=<?=$manifestacao->id_manifestacao?>"><span class="fa fa-check"></span> Receber notificações</a>
 			<?php } ?>
 
-            <a class="btn btn-success float-right" href="?section=ManifestacaoControle&function=acompanharManifestacaoAcao"><span class="fa fa-check"></span>Voltar</a>
+            <a class="btn btn-success float-left" href="?section=ManifestacaoControle&function=acompanharManifestacaoAcao"><span class="fa fa-chevron-left"></span> Voltar</a>
         </div>
     </form>
 </div>

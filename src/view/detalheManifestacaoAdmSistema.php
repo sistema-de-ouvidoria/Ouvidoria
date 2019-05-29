@@ -42,12 +42,11 @@ if(!isset($_SESSION['CPF'])){
 <!--FIM MENU SUPERIOR -->
 
 <!-- TELA DE CADASTRO -->
-
 <div class="container mt-3">
-    <form class="row" action="?section=ManifestacaoControle&function=encaminhar&id=<?=$manifestacao->id_manifestacao?>" method="GET">
+    <form id="form" class="row" action="?section=ManifestacaoControle&function=responder" method="post">
         <div class="form-group col-6">
             <label for="protocolo">Protocolo:</label>
-            <input value="<?=$manifestacao->id_manifestacao?>" id="protocolo" readonly class="form-control">
+            <input value="<?=$manifestacao->id_manifestacao?>" name="protocolo" id="protocolo" readonly class="form-control">
         </div>
         <div class="form-group col-6">
             <label for="data">Data de Criação:</label>
@@ -65,39 +64,22 @@ if(!isset($_SESSION['CPF'])){
             <label for="situacao">Situação:</label>
             <input id="situacao" class="form-control" value="<?=$manifestacao->nome_situacao?>" readonly>
         </div>
+        <div class="form-group col-6">
+            <label for="setor">Setor Responsável:</label>
+            <input id="setor" value="<?=$manifestacao->nome_orgao_publico?>" readonly class="form-control"/>
+        </div>
         <div class="form-group col-12">
             <label for="descricao">Descrição:</label>
             <textarea name="mensagem" rows="6" class="form-control" maxlength="1000" readonly><?=$manifestacao->mensagem?></textarea>
         </div>
         <div class="form-group col-12">
-            <label for="setor">Setor Responsável:</label>
-            <?php
-            $tipoSelecionado = null;
-            echo "<select class='container mr-12' onchange='seleciona_orgao(this)' name = 'orgao' id='orgao'>";
-            $tamanho = count($orgaos);
-            if(isset($orgaos)){
-                echo "<option value = ''>Selecione um Orgão Publico</option>";
-                for($i = 0; $i < $tamanho; $i++){
-                    echo "<option id='orgao' value = {$orgaos[$i][0]}";
-                    if($tipoSelecionado == $orgaos[$i][0]) {
-                        echo "selected = 'selected'";
-                        $tipoSelecionado = $orgaos[$i][0];
-                    }
-                    echo ">{$orgaos[$i][2]}</option>";
-                }
-            }
-            echo "</select>"
-            ?>
-            <a class="btn btn-warning float-right mt-3" href="?section=ManifestacaoControle&function=encaminhar&id=<?=$manifestacao->id_manifestacao?>&org=" id="orgao_publico"><span class="fa fa-wrench"></span> Encaminhar</a>
+            <label for="resposta">Resposta:</label>
+            <textarea id="resposta" onchange="seleciona_resposta(this)" name="resposta" required rows="6" class="form-control" maxlength="1000" placeholder="Digite aqui sua resposta..."></textarea>
+        </div>
+        <div class="form-group col-12">
+            <a class="btn btn-success float-left" href="?section=ManifestacaoControle&function=listar"><span class="fa fa-chevron-left"></span> Voltar</a>
         </div>
     </form>
 </div>
-
-<script>
-    function seleciona_orgao(el) {
-        var $lnk = document.getElementById("orgao_publico");
-        $lnk.href = $lnk.href.replace(/orgao=(.*)/, 'orgao=') + el.value;
-    }
-</script>
 
 </body>

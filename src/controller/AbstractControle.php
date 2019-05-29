@@ -1,6 +1,7 @@
 <?php
 namespace Ouvidoria\controller;
 
+require('model/Email.php');
 require('model/ManifestacaoManager.php');
 require('model/AnexoManager.php');
 require('model/TipoManifestacaoManager.php');

@@ -7,11 +7,13 @@ use Ouvidoria\model\manager\ManifestacaoManager;
 use Ouvidoria\model\manager\OrgaoPublicoManager;
 use Ouvidoria\model\manager\TipoManifestacaoManager;
 use Ouvidoria\model\manager\UsuarioManager;
+use Ouvidoria\model\Email;
 
 class ManifestacaoControle extends AbstractControle
 {
     public function __construct()
     {
+        $this->email = new Email();
         $this->manifestacaoManager = new ManifestacaoManager();
         $this->anexoManager = new Anexomanager();
         $this->tipoManager = new TipoManifestacaoManager();
@@ -36,6 +38,9 @@ class ManifestacaoControle extends AbstractControle
             case 'detalharManifestacaoAdmPublico':
                 $this->detalharManifestacaoAdmPublico();
                 break;
+            case 'detalharManifestacaoEscolha':
+                $this->detalharManifestacaoEscolha();
+                break;
             case 'encaminhar':
                 $this->encaminhar();
                 break;
@@ -57,12 +62,15 @@ class ManifestacaoControle extends AbstractControle
             case 'acompanharManifestacaoAcao':
                 $this->acompanharManifestacaoAcao();
                 break;
-			case 'manifestarInteresse':
-				$this->manifestarInteresse();
-				break;
-			case 'removerInteresse':
-				$this->removerInteresse();
-				break;
+            case 'manifestarInteresse':
+                $this->manifestarInteresse();
+                break;
+            case 'removerInteresse':
+                $this->removerInteresse();
+                break;
+            case 'clicouLinkVerManifestacaoEmail':
+                $this->clicouLinkVerManifestacaoEmail();
+                break;
             default:
                 $userControl = new UsuarioControle();
                 $userControl->inicio();
@@ -75,19 +83,45 @@ class ManifestacaoControle extends AbstractControle
         $idUsuario = $_SESSION['usuario']['cpf'];
         $idManifestacao = $_GET['idManifestacao'];
         $resultado = $this->manifestacaoManager->removerInteresse($idManifestacao,$idUsuario);
+        $id = $idManifestacao;
+        $manifestacao = $this->manifestacaoManager->selecionaManifestacaoCidadao($idManifestacao);
         $checaInteresse = 0;
-        $this->acompanharManifestacaoAcao();
+        $idUsuario = $_SESSION['usuario']['cpf'];
+
+        $idManifestacao = $manifestacao->id_manifestacao;
+        if($this->manifestacaoManager->checaInteresse($idManifestacao,$idUsuario)){
+            $checaInteresse = 1;
+        }
+        $manifestacao = $this->manifestacaoManager->selecionaManifestacaoCidadao($idManifestacao);
+        require('view/detalheManifestacaoCidadao.php');
+    }
+
+    public function clicouLinkVerManifestacaoEmail()
+    {
+        $id = $_GET['id'];
+        require('view/fazerLogin.php');
     }
 
     public function manifestarInteresse(){
         $idUsuario = $_SESSION['usuario']['cpf'];
         $idManifestacao = $_GET['idManifestacao'];
         $result = $this->manifestacaoManager->manifestarInteresse($idManifestacao,$idUsuario);
+        $id = $idManifestacao;
+        $manifestacao = $this->manifestacaoManager->selecionaManifestacaoCidadao($idManifestacao);
+        $checaInteresse = 0;
+        $idUsuario = $_SESSION['usuario']['cpf'];
+
+        $idManifestacao = $manifestacao->id_manifestacao;
+        if($this->manifestacaoManager->checaInteresse($idManifestacao,$idUsuario)){
+            $checaInteresse = 1;
+        }
+        $manifestacao = $this->manifestacaoManager->selecionaManifestacaoCidadao($idManifestacao);
+        require('view/detalheManifestacaoCidadao.php');
     }
 
     public function acompanharManifestacaoAcao(){
-		$this->listarAcompanharManifestacao();
-	}
+        $this->listarAcompanharManifestacao();
+    }
 
     public function listarAcompanharManifestacao()
     {
@@ -128,6 +162,7 @@ class ManifestacaoControle extends AbstractControle
 
             if ($this->manifestacaoManager->alteraManifestacaoOuvidor($id)) {
                 $this->historicoManager->salvaHistoricoManifestacao($id_orgao_publico, $ouvidor, $id);
+                $this->enviaEmailDoEncaminhar($id,$ouvidor,$id_orgao_publico);
             }
             $this->listar();
         }
@@ -175,6 +210,15 @@ class ManifestacaoControle extends AbstractControle
                 if ($idGerado != null) {
                     $nome_usuario = $this->usuarioManager->buscaUsuario($cpf_usuario);
                     $protocolo_manifestacao = $idGerado;
+                    $assunto = "Manifestacação enviada com sucesso";
+                    $texto = "Parabéns, sua manifestação foi enviada com sucesso!<br><br>
+                    Prezado(a) <strong>".$nome_usuario."</strong> sua manifestação foi criada e será encaminhada para o órgão responsável que terá <strong>30 dias úteis</strong> para resposta.<br><br>
+                    Seu <strong>protocolo de atendimento é ".$protocolo_manifestacao."</strong>
+                    Para acompanhar sua manifestação, <a href='http://localhost/ouvidoria/src/index.php?section=ManifestacaoControle&function=detalharManifestacaoCidadao&id=$protocolo_manifestacao'>clique aqui</a>";
+                    $emailDestino = $this->usuarioManager->selecionarEmail($cpf_usuario);
+                    $emailDestino = join(",",$emailDestino);
+                    var_dump($emailDestino);
+                    $this->email->enviarEmail($emailDestino,$assunto,$texto);
                     require('view/manifestacaoCriada.php');
                 }
 
@@ -215,15 +259,48 @@ class ManifestacaoControle extends AbstractControle
 
     public function detalharManifestacaoCidadao()
     {
-		$checaInteresse = 0;
-		$idUsuario = $_SESSION['usuario']['cpf'];
         $manifestacao = $this->manifestacaoManager->selecionaManifestacaoCidadao($_GET['id']);
-		$idManifestacao = $manifestacao->id_manifestacao;
-		if($this->manifestacaoManager->checaInteresse($idManifestacao,$idUsuario)){
-			$checaInteresse = 1;
-		}
+        $checaInteresse = 0;
+        $idUsuario = $_SESSION['usuario']['cpf'];
+
+        $idManifestacao = $manifestacao->id_manifestacao;
+        if($this->manifestacaoManager->checaInteresse($idManifestacao,$idUsuario)){
+            $checaInteresse = 1;
+        }
         $manifestacao = $this->manifestacaoManager->selecionaManifestacaoCidadao($_GET['id']);
         require('view/detalheManifestacaoCidadao.php');
+    }
+
+    public function enviaEmailDoEncaminhar(string $idManifestacao, string $cpfOuvidor,string $id_orgao_publico){
+        $nomeOuvidor = $this->manifestacaoManager->selecionaOuvidor($cpfOuvidor);
+        $listaEmail = $this->manifestacaoManager->selecionaEmailInteressados($idManifestacao);
+        $nomeOrgao = $this->manifestacaoManager->selecionaOrgao($id_orgao_publico);
+        foreach ($listaEmail as $emails => $email) {
+            $assunto = "A manifestação " . $idManifestacao . " foi alterada";
+            $texto = "A manifestação <strong>" . $idManifestacao . " </strong>foi encaminhada para o órgão público <strong>" . $nomeOrgao['nome_orgao_publico'] . " </strong> pelo ouvidor <strong>" . $nomeOuvidor['nome'] . "</strong>.
+            <br><br>Para acompanhar a manifestação, <a href='http://localhost/ouvidoria/src/index.php?section=ManifestacaoControle&function=clicouLinkVerManifestacaoEmail&id=$idManifestacao'>clique aqui</a>.
+            <br><br><br><br><br><br><i>Esta é uma mensagem automática</i>";
+            $emailDestino = $email;
+            $this->email->enviarEmail($emailDestino,$assunto,$texto);
+        }
+    }
+
+    public function detalharManifestacaoEscolha()
+    {
+        if($_GET['situacao'] == 'Aberta') {
+            $manifestacao = $this->manifestacaoManager->selecionaManifestacaoOuvidor($_GET['id']);
+            $orgaos = $this->orgaoManager->listaOrgaosPublico();
+            require('view/detalheManifestacaoOuvidor.php');
+        }
+        elseif($_GET['situacao'] == 'Encaminhada') {
+            $manifestacao = $this->manifestacaoManager->selecionaManifestacaoAdmPublico($_GET['id']);
+            require('view/detalheManifestacaoAdmPublico.php');
+        }
+        elseif($_GET['situacao'] == 'Fechada') {
+            $manifestacao = $this->manifestacaoManager->selecionaManifestacaoAdmPublico($_GET['id']);
+            require('view/detalheManifestacaoAdmSistema.php');
+        }
+
     }
 
 }

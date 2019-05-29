@@ -73,6 +73,9 @@
                     <?php elseif ($nvlAcesso == 3): ?>
                         <td><a class="btn btn-warning"
                                href="?section=ManifestacaoControle&function=detalharManifestacaoAdmPublico&id=<?= $dados[$i][0] ?>">Detalhar</a></td>
+                    <?php elseif ($nvlAcesso == 4): ?>
+                        <td><a class="btn btn-warning"
+                               href="?section=ManifestacaoControle&function=detalharManifestacaoEscolha&id=<?=$dados[$i][0]?>&situacao=<?=$dados[$i][4]?>">Detalhar</a></td>
                     <?php endif; ?>
                 </tr>
             <?php endfor;

@@ -23,12 +23,12 @@ require ('model/Conexao.php');
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 
-    <!-- ESTILOS PARA ESTA PÁGINA -->
-    <!-- Nesse caso, este estilo é apenas para inserir imagens -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+        <!-- ESTILOS PARA ESTA PÁGINA -->
+        <!-- Nesse caso, este estilo é apenas para inserir imagens -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
-    <!-- JAVASCRIPT E JQUERY -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <!-- JAVASCRIPT E JQUERY -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 </head>
@@ -70,11 +70,12 @@ if(!isset($_SESSION['CPF'])){
             <?php if(isset($emailUnico) && !$emailUnico){ echo "<span style='color:red;'>E-mail inserido já cadastrado</span>"; echo "<br>";}?>
         </div>
         <div class="form-group col-md-4">
-            <input type="hidden" value="<?=$usuario->senha?>">
+
             <label>Senha atual:</label><input type="password" id="senhaAntigaAlteraDados" name="senhaAntigaAlteraDados" required="required" class="form-control" />
-            <?php if(isset($senhaDiferenteBanco) && !$senhaDiferenteBanco){ echo "<span style='color:red;'>Senha diferente da cadastrada</span>";echo "<br>";} ?>
+            <?php if(isset($senhaDiferenteBanco) && !$senhaDiferenteBanco){ echo "<span style='color:red;'>Senha digitada não confere</span>";echo "<br>";} ?>
             <label>Nova senha:</label><input type="password" id="senhaNovaAlteraDados" name="senhaNovaAlteraDados" class="form-control" />
-            <?php if(isset($senhaMenor) && !$senhaMenor){ echo "<span style='color:red;'>O campo senha não pode conter menos de 5 caracteres</span>";echo "<br>";} ?>
+
+            <?php if(isset($senhaMenor) && $senhaMenor){ echo "<span style='color:red;'>O campo nova senha não pode conter menos de 5 caracteres</span>";echo "<br>";} ?>
             <label>Confirme a nova senha:</label><input id="senhaNovaConfirmacaoAlteraDados" name="senhaNovaConfirmacaoAlteraDados" type="password" class="form-control" />
             <?php if(isset($senhaIgual) && !$senhaIgual)echo "<span style='color:red;'>A confirmação de senha não confere</span>";?>
         </div>
@@ -88,5 +89,3 @@ if(!isset($_SESSION['CPF'])){
 <!-- FIM DA TELA DE CADASTRO -->
 
 </body>
-
-<!--<button class="btn btn-outline-success btn-lg active float-right" role="button" aria-pressed="true"">Enviar</button>

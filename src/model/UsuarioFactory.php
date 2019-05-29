@@ -237,21 +237,16 @@ class UsuarioFactory
         }
     }
 
-    public function desativarUsuario($cpf)
+    public function delegarPrivilegios(String $cpf, string $id)
     {
         global $conexao;
 
-        try {
-            $query = "UPDATE usuario SET  id_tipo_usuario = '" . 5 . "' where cpf = '" . $cpf . "'";
+        $query = "UPDATE usuario SET id_tipo_usuario = '" . $id . "' WHERE cpf = " . $cpf . ";";
 
-            if (mysqli_query($conexao, $query)) {
-                return true;
-            } else
-                return false;
-        } catch (PDOException $exc) {
-            echo $exc->getMessage();
-            $resultado = false;
-        }
+        if (mysqli_query($conexao, $query))
+            return true;
+        else
+            return false;
     }
 
 }

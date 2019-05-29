@@ -3,7 +3,6 @@ namespace Ouvidoria;
 
 use Ouvidoria\controller\UsuarioControle;
 use Ouvidoria\controller\ManifestacaoControle;
-use Ouvidoria\controller\MainControle;
 
 class App {
     const USUARIO = 'UsuarioControle';
@@ -15,7 +14,6 @@ class App {
 
     private function handleRequest (){
         $section = isset($_GET['section']) ? $_GET['section'] : 'default';
-
         switch ($section){
             case self::USUARIO:
                 new UsuarioControle();
@@ -24,6 +22,7 @@ class App {
                 new ManifestacaoControle();
                 break;
             default:
+                session_start();
                 require('view/telaInicial.php');
                 break;
         }

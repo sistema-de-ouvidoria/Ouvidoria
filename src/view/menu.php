@@ -25,7 +25,7 @@ if (isset($_SESSION['usuario']['id_tipo_usuario'])) {
             <?php if ($nivelAcesso > 0 && $nivelAcesso < 5) { ?>
                 <li class="nav-item"><a class="nav-link" href="?section=ManifestacaoControle&function=criarManifestacaoAcao">Criar Manifestação</a>
                 </li> <?php } ?>
-            <?php if ($nivelAcesso > 0) { ?>
+            <?php if ($nivelAcesso > 0 && $nivelAcesso < 5) { ?>
                 <li class="nav-item"><a class="nav-link" href="?section=ManifestacaoControle&function=acompanharManifestacaoAcao">Acompanhar manifestação</a>
                 </li> <?php } ?>
             <?php if ($nivelAcesso == 0 || $nivelAcesso == 5) { ?>

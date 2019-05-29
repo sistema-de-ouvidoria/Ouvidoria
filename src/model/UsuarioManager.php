@@ -88,8 +88,9 @@ class UsuarioManager
         return $this->factory->listarUsuarios();
     }
 
-    public function desativaUsuario(string $cpf)
+
+    public function delegarPrivilegios(string $cpf, string $id)
     {
-        return $this->factory->desativarUsuario($cpf);
+        $this->factory->delegarPrivilegios($cpf, $id);
     }
 }

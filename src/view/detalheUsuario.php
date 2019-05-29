@@ -37,7 +37,7 @@
 <br>
 <br>
 <div class="container mt-5">
-        <form id="formularioUser" action="?section=UsuarioControle&function=usuarioDetalhe&cpf=<?=$usuario->cpf?>" class="row" method="POST">
+        <form id="formularioUser" action="?section=UsuarioControle&function=usuarioDetalhe" class="row" method="POST">
             <div class="form-group col-6">
                 <label >CPF:</label>
                 <input name="cpf" value="<?=$usuario->cpf?>" readonly class="form-control">
@@ -60,8 +60,7 @@
             </div>
             <input name="id" type="hidden" value="<?=$usuario->id_tipo_usuario?>" class="form-control" >
             <div class="form-group col-12">
-                <input name="acao" type="submit" value="Desativar" class="btn btn-danger col-2 float-left">
-                <button name="delegarPrivilegios" type="button" class="btn btn-info col-2 float-middle" data-toggle="modal" data-target="#myModal"> Delegar Previlégios</button>
+                <button name="delegarPrivilegios" type="button" class="btn btn-info col-2 float-left" data-toggle="modal" data-target="#myModal"><span class="fa fa-wrench"></span> Delegar Previlégios</button>
                 <input name="acao" type="submit" class="btn btn-success col-2 float-right" value="Alterar">
             </div>
         </form>
@@ -85,17 +84,22 @@
                         <div class="col-sm-12 text-center">
                     <p><?php
                         $tipoSelecionado = null;
-                        echo "<select class='form-control' name = 'privilegio'>";
+                        echo "<select onchange='seleciona_orgao(this)' name = 'orgao' id='orgao' class='form-control'>";
                         $tamanho = count($tipos);
                         if(isset($tipos)){
                             for($i = 0; $i < $tamanho; $i = $i + 2){
-                                echo "<option value = {$tipos[$i]}";
-                                if($tipoSelecionado == $tipos[$i])
+                                echo "<option id='privilegio' value = {$tipos[$i]}";
+                                if($tipoSelecionado == $tipos[$i]) {
                                     echo "selected = 'selected'";
+                                    $tipoSelecionado = $tipos[$i];
+                                    $_SESSION['tipo'] = $tipos[$i];
+                                }
                                 echo ">{$tipos[$i+1]}</option>";
+
                             }
                         }
                         echo "</select>"
+
                         ?></p>
                         </div>
                     </div>
@@ -103,13 +107,18 @@
                 <div class="modal-footer">
                     <div class="container-fluid">
                         <div class="col-sm-12 text-center">
-                            <input name="acao" type="submit" class="btn btn-success" value="Salvar" data-dismiss="modal">
+                            <a href="?section=UsuarioControle&function=usuarioDetalhe&cpf=<?=$usuario->cpf?>&privilegio=<?=$tipoSelecionado?>" class="btn btn-success" id="orgao_publico">Salvar</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+<script>
+    function seleciona_orgao(el) {
+        var $lnk = document.getElementById("orgao_publico");
+        $lnk.href = $lnk.href.replace(/orgao=(.*)/, 'orgao=') + el.value;
+    }
+</script>
 </div>
 </body>

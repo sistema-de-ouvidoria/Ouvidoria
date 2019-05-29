@@ -44,7 +44,7 @@
             <div class="col-lg-4">
             <h3>Fazer Login</h3>
 
-            <form action="index.php?section=UsuarioControle&function=fazerLogin" method="POST">
+            <form action="?section=UsuarioControle&function=fazerLogin<?php if(isset($id) && $id) echo "&id=".$id;?>" method="POST">
                 <label>CPF:</label>
                 <input name="cpf" type="number" onkeypress="return somenteNumerosCPF(event)" id="cpf" class="form-control" maxlength="11" required oninvalid="setCustomValidity('O campo CPF não pode estar vazio')" onchange="try{setCustomValidity('')}catch(e){}"/>
                 <br>

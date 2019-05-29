@@ -242,4 +242,47 @@ class ManifestacaoFactory
         }else
             return false;
     }
+
+    public function selecionaOuvidor(string $cpfOuvidor){
+        global $conexao;
+        $query = "select nome from usuario where cpf = " . $cpfOuvidor . ";";
+        $resultado = mysqli_query($conexao,$query);
+        $checar = mysqli_fetch_assoc($resultado);
+        if($checar){
+            return $checar;
+        }
+        else
+            return false;
+    }
+    public function selecionaOrgao(string $id_orgao_publico){
+        global $conexao;
+        $query = "select nome_orgao_publico from orgaopublico where id_orgao_publico = " . $id_orgao_publico . ";";
+
+        $resultado = mysqli_query($conexao,$query);
+        $checar = mysqli_fetch_assoc($resultado);
+        if($checar){
+            return $checar;
+        }
+        else
+            return false;
+    }
+    public function selecionaEmailInteressados(string $idManifestacao){
+        global $conexao;
+        $email = array();
+        $listaCpf = array();
+
+        $query1 = "select idUsuario from interesse where idManifestacao = " . $idManifestacao . ";";
+
+        $sql1 = mysqli_query($conexao,$query1);
+        while($row=mysqli_fetch_array($sql1)){
+            array_push($listaCpf, $row['idUsuario']);
+        };
+        foreach ($listaCpf as $cpfs => $cpf) {
+            $query2 = "select email from usuario where cpf = " . $cpf . ";";
+            $sql2 = mysqli_query($conexao,$query2);
+            $sql2 = mysqli_fetch_assoc($sql2);
+            array_push($email, $sql2['email']);
+        }
+        return $email;
+    }
 }
