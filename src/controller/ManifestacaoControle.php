@@ -109,7 +109,7 @@ class ManifestacaoControle extends AbstractControle
 
     public function listarMinhasManifestacoes()
     {
-        $dados = $this->manifestacaoManager->listaManifestacoes($_SESSION['usuario']['cpf']);
+        $dados = $this->manifestacaoManager->listaMinhasManifestacoes($_SESSION['usuario']['cpf']);
         require('view/listarMinhasManifestacoes.php');
     }
     public function manifestarInteresse()
