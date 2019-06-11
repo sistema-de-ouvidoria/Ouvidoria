@@ -37,6 +37,9 @@ if (isset($_SESSION['usuario']['id_tipo_usuario'])) {
             <?php if ($nivelAcesso == 4) { ?>
                 <li class="nav-item"><a class="nav-link" href="?section=UsuarioControle&function=listarUsuarios">Listar Usuários</a>
                 </li> <?php } ?>
+            <?php if ($nivelAcesso == 2 || $nivelAcesso == 4) { ?>
+                <li class="nav-item"><a class="nav-link" href="?section=NoticiaControle&function=listarNoticias">Notícias</a>
+                </li> <?php } ?>
         </ul>
     </div>
 

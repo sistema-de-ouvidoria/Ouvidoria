@@ -3,10 +3,12 @@ namespace Ouvidoria;
 
 use Ouvidoria\controller\UsuarioControle;
 use Ouvidoria\controller\ManifestacaoControle;
+use Ouvidoria\controller\NoticiaControle;
 
 class App {
     const USUARIO = 'UsuarioControle';
     const MANIFESTACAO = 'ManifestacaoControle';
+    const NOTICIA = 'NoticiaControle';
 
     public function __construct (){
         $this->handleRequest ();
@@ -20,6 +22,9 @@ class App {
                 break;
             case self:: MANIFESTACAO:
                 new ManifestacaoControle();
+                break;
+            case self:: NOTICIA:
+                new NoticiaControle();
                 break;
             default:
                 session_start();

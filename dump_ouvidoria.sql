@@ -252,6 +252,24 @@ VALUES ('12345678910', 1, 'Joao da Silva', 'Rua Lima Souza, 234', '999999999', '
        ('12345678913', 4, 'Joana da Silva', 'Rua Lima Souza, 237', '999999999', 'joana@gmail.com', '12345');
 COMMIT;
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `usuario`
+--
+
+DROP TABLE IF EXISTS `noticia`;
+CREATE TABLE IF NOT EXISTS `noticia`
+(
+    `id_noticia` int(11) NOT NULL AUTO_INCREMENT,
+    `titulo` VARCHAR (50)      NOT NULL,
+    `subtitulo` VARCHAR(100)  NOT NULL,
+    `descricao` LONGTEXT NOT NULL,
+    `data_publicacao` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id_noticia`)
+);
+
+
 /*!40101 SET CHARACTER_SET_CLIENT = @OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS = @OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;

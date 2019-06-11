@@ -9,6 +9,7 @@ require('model/UsuarioManager.php');
 require('model/OrgaoPublicoManager.php');
 require('model/HistoricoManager.php');
 require('model/TipoUsuarioManager.php');
+require('model/NoticiaManager.php');
 
 abstract class AbstractControle
 {
