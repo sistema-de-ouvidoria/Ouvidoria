@@ -98,4 +98,8 @@ class UsuarioManager
     {
         $this->factory->delegarPrivilegios($cpf, $id);
     }
+
+    public function alteraSenha(string $cpf, string $senha){
+        return $this->factory->alteraSenha($cpf,$senha);
+    }   
 }

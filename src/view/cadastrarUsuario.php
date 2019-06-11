@@ -76,7 +76,7 @@ if(!isset($_SESSION['CPF'])){
                 </div>
                 <div class="form-group col-md-4">
                     <label>Senha:</label><input type="password" id="senhaCadastro" required name="senhaCadastro" class="form-control" />
-                    <?php if(isset($senhaMenor) && $senhaMenor){ echo "<span style='color:red;'>O campo senha não pode conter menos de 5 caracteres</span>";echo "<br>";} ?>
+                    <?php if(isset($senhaMenor) && !$senhaMenor){ echo "<span style='color:red;'>O campo senha não pode conter menos de 5 caracteres</span>";echo "<br>";} ?>
                     <label>Confirme a senha:</label><input id="senhaConfirmacaoCadastro" name="senhaConfirmacaoCadastro" type="password" class="form-control" required oninvalid="setCustomValidity('O campo Confirmar senha deve ser informado')" onchange="try{setCustomValidity('')}catch(e){}"/>
                     <?php if(isset($senhaIgual) && !$senhaIgual)echo "<span style='color:red;'>A confirmação de senha não confere</span>";?>
                 </div>

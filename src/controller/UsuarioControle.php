@@ -33,6 +33,15 @@ class UsuarioControle extends AbstractControle
         $f = isset($_GET['function']) ? $_GET['function'] : "default";
         session_start();
         switch ($f) {
+            case 'recuperarSenhaAcao':
+                $this->recuperarSenhaAcao();
+                break;
+            case 'recuperarSenha':
+                $this->recuperarSenha();
+                break;
+            case 'redefinirSenha':
+                $this->redefinirSenha();
+                break;
             case 'fazerLogin':
                 $this->fazerLogin();
                 break;
@@ -68,6 +77,9 @@ class UsuarioControle extends AbstractControle
             case 'listarUsuarios':
                 $this->listarUsuarios();
                 break;
+            case 'recuperarSenhaBotao':
+                $this->recuperarSenhaBotao();
+                break;
             default:
                 $this->inicio();
                 break;
@@ -78,6 +90,74 @@ class UsuarioControle extends AbstractControle
     public function inicial()
     {
         require('view/telaInicial.php');
+    }
+
+    public function recuperarSenhaAcao(){
+        require('view/recuperarSenha.php');
+    }
+
+    public function recuperarSenha(){
+        echo "teste";
+        if(isset($_POST['enviado'])){
+            $cpf = $_POST['cpf'];
+            $cpfValidado = $this->usuarioManager->checaCPF($cpf);
+            $email = $this->usuarioManager->selecionarEmail($cpf);
+            if($cpfValidado){
+                $assunto = "Recuperação de senha";
+                                $texto = "Recebemos uma solicitação para redefinir a senha de sua conta.<br><br>
+                                Para redefinir sua senha, use o botão abaixo. Isso levará você para uma página onde você pode criar e confirmar uma nova senha.<br><br>
+                                <a href='http://localhost/ouvidoria/src/index.php?section=UsuarioControle&function=recuperarSenhaBotao&cpf=".$cpf."'>Redifinar Senha</a>.";
+                                $emailDestino = $email['email'];
+                                $this->email->enviarEmail($emailDestino, $assunto, $texto);
+                echo "<script type=\"text/javascript\">alert(\"Um link para recuperação de senha foi enviado para o e-mail cadastrado.\");</script>";
+                include 'view/recuperarSenha.php';
+            }
+        }
+    }
+
+    public function recuperarSenhaBotao(){
+        $_SESSION['redefinirSenha']['cpf'] = $_GET['cpf'];
+        require ('view/recuperarSenhaFormulario.php');
+    }
+
+    public function redefinirSenha(){
+        if(isset($_POST['enviado'])){
+            $senha = $_POST['senha'];
+            $cpf = $_SESSION['redefinirSenha']['cpf'];
+            $senhaConfirmacao = $_POST['senhaConfirmacao'];
+            $senhaValidada = $this->comparaSenhas($senha,$senhaConfirmacao);
+            if($senhaValidada){
+                if(strlen($senha) >= 5){
+                    $verifica = $this->usuarioManager->alteraSenha($cpf,$senha);
+                    if($verifica){
+                        echo "<script type=\"text/javascript\">alert(\"Senha alterada com sucesso!\");</script>";
+                        require('view/fazerLogin.php');
+                    }
+                    else{
+                        echo "<script type=\"text/javascript\">alert(\"Algo deu errado, favor tentar novamente!\");</script>";
+                        require('view/recuperarSenhaFormulario.php');
+                    }
+                }else
+                {//Senha menor que 5 caracteres
+                    $erro = 1;
+                    $this->erroRecuperarSenhaFormulario($senha,$cpf,$erro);
+                }
+            }else{//Senhas diferentes
+                $erro = 2;
+                $this->erroRecuperarSenhaFormulario($senha,$cpf,$erro);
+            }
+        }
+    }
+
+
+
+    public function erroRecuperarSenhaFormulario(string $senha, string $cpf, int $erro){
+        if($erro == 1){
+            $senhaMenor = false;
+        }else if($erro == 2){
+            $senhaIgual = false;
+        }
+        include('view/recuperarSenhaFormulario.php');
     }
 
     public function alteraDadosAcao()
@@ -150,7 +230,7 @@ class UsuarioControle extends AbstractControle
                                 $msg = $e->getMessage();
                             }
                         } else {
-                            $erro = 5;
+                            $erro = 5;//Senha menor que 5 caracteres
                             $this->errosTelaCadastro($nomeCadastro, $cpfCadastro, $enderecoCadastro, $telefoneCadastro, $emailCadastro, $senha1, $senha2, $erro);
                         }
 
@@ -190,7 +270,7 @@ class UsuarioControle extends AbstractControle
         } elseif ($erro == 4) {
             $senhaDiferenteBanco = false;
         } elseif ($erro == 5) {
-            $senhaMenor = true;
+            $senhaMenor = false;
         }
         $usuario = array();
         $usuario = (object)$usuario;
@@ -214,7 +294,7 @@ class UsuarioControle extends AbstractControle
         } elseif ($erro == 4) {
             $senhaDiferenteBanco = false;
         } elseif ($erro == 5) {
-            $senhaMenor = true;
+            $senhaMenor = false;
         }
         $usuario = array();
         $usuario = (object)$usuario;
@@ -247,12 +327,13 @@ class UsuarioControle extends AbstractControle
             }
             if ($emailUnico) {
                 if ($this->usuarioManager->verificaSenhaAntiga($senhaAntigaConfirmacao, $cpfAlterado)) {
-                    if(empty($senha1) && empty($senha2)){
+                    if(!empty($senha1) && !empty($senha2)){
                         try {
                             if ($senha1 == "") {
                                 $senha1 = $senhaAntigaConfirmacao;
                             }
                             $sucesso = $this->usuarioManager->alteraUsuario($cpfAlterado, $nomeAlterado, $enderecoAlterado, $telefoneAlterado, $emailAlterado, $senha1, $id);
+                            echo "teste";
                             echo "<script type=\"text/javascript\">alert(\"O usuário foi alterado com sucesso.\");</script>";
                             $this->alteraDadosAcao();
                         } catch (Exception $e) {

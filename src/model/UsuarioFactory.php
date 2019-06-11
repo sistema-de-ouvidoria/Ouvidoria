@@ -224,7 +224,7 @@ class UsuarioFactory
             if (mysqli_query($conexao, $query))
                 $resultado = mysqli_query($conexao, $query);
             $resultado = mysqli_fetch_assoc($resultado);
-            if ($resultado == null)
+            if ($resultado != null)
                 return true;
             else
                 return false;
@@ -267,6 +267,17 @@ class UsuarioFactory
         if (mysqli_query($conexao, $query))
             return true;
         else
+            return false;
+    }
+
+    public function alteraSenha(String $cpf, String $senha){
+        global $conexao;
+
+        $query = "UPDATE usuario SET senha = '".$senha."' where cpf = ".$cpf." ;";
+        echo $query;    
+        if(mysqli_query($conexao,$query)){
+            return true;
+        }else
             return false;
     }
 
