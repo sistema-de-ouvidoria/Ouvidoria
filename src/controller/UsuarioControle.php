@@ -5,6 +5,7 @@ namespace Ouvidoria\controller;
 use Ouvidoria\model\manager\AnexoManager;
 use Ouvidoria\model\manager\HistoricoManager;
 use Ouvidoria\model\manager\ManifestacaoManager;
+use Ouvidoria\model\manager\NoticiaManager;
 use Ouvidoria\model\manager\OrgaoPublicoManager;
 use Ouvidoria\model\manager\TipoManifestacaoManager;
 use Ouvidoria\model\manager\TipoUsuarioManager;
@@ -23,6 +24,7 @@ class UsuarioControle extends AbstractControle
         $this->tipoUserManager = new TipoUsuarioManager();
         $this->usuarioManager = new UsuarioManager();
         $this->orgaoManager = new OrgaoPublicoManager();
+        $this->noticiaManager = new NoticiaManager();
         $this->historicoManager = new HistoricoManager();
         $this->inicializador();
 
@@ -89,6 +91,7 @@ class UsuarioControle extends AbstractControle
 
     public function inicial()
     {
+        $noticias = $this->noticiaManager->listaNoticiasTelaInicial();
         require('view/telaInicial.php');
     }
 
@@ -184,6 +187,7 @@ class UsuarioControle extends AbstractControle
 
     public function inicio()
     {
+        $noticias = $this->noticiaManager->listaNoticiasTelaInicial();
         require('view/telaInicial.php');
     }
 

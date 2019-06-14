@@ -18,9 +18,14 @@ class NoticiaManager
         return $this->factory->listarNoticias();
     }
 
-    public function salvaNoticia($titulo, $subtitulo, $descricao)
+    public function listaNoticiasTelaInicial()
     {
-        $noticia = new Noticia($titulo, $subtitulo, $descricao);
+        return $this->factory->listarNoticiasTelaInicial();
+    }
+
+    public function salvaNoticia($titulo, $subtitulo, $descricao, $id_imagem)
+    {
+        $noticia = new Noticia($titulo, $subtitulo, $descricao, $id_imagem);
 
         return $this->factory->salvarNoticia($noticia);
     }

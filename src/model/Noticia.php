@@ -10,6 +10,7 @@ class Noticia
     protected $titulo;
     protected $subtitulo;
     protected $descricao;
+    protected $id_imagem;
     protected $data_publicacao;
 
     /**
@@ -20,11 +21,12 @@ class Noticia
      * @param $descricao
      * @param $data_publicacao
      */
-    public function __construct($titulo, $subtitulo, $descricao)
+    public function __construct($titulo, $subtitulo, $descricao, $id_imagem)
     {
         $this->titulo = $titulo;
         $this->subtitulo = $subtitulo;
         $this->descricao = $descricao;
+        $this->id_imagem = $id_imagem;
     }
 
     /**
@@ -105,6 +107,22 @@ class Noticia
     public function setDataPublicacao($data_publicacao): void
     {
         $this->data_publicacao = $data_publicacao;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdImagem()
+    {
+        return $this->id_imagem;
+    }
+
+    /**
+     * @param mixed $id_imagem
+     */
+    public function setIdImagem($id_imagem): void
+    {
+        $this->id_imagem = $id_imagem;
     }
 
 }

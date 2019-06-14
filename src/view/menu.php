@@ -18,7 +18,7 @@ if (isset($_SESSION['usuario']['id_tipo_usuario'])) {
         <ul class="navbar-nav mr-auto">
 
             <?php if ($nivelAcesso > 0 && $nivelAcesso < 5) { ?>
-                <li class="nav-item"><a class="nav-link" href="?section=UsuarioControle&function=inicial">Página Inicial</a>
+                <li class="nav-item"><a class="nav-link" href="?section=&function=inicial">Página Inicial</a>
                 </li> <?php } else { ?>
                 <li class="nav-item"><a class="nav-link" href="?section=UsuarioControle&function=">Página Inicial</a></li>
             <?php } ?>
@@ -39,6 +39,9 @@ if (isset($_SESSION['usuario']['id_tipo_usuario'])) {
                 </li> <?php } ?>
             <?php if ($nivelAcesso == 2 || $nivelAcesso == 4) { ?>
                 <li class="nav-item"><a class="nav-link" href="?section=NoticiaControle&function=listarNoticias">Notícias</a>
+                </li> <?php } ?>
+            <?php if ($nivelAcesso == 0 || $nivelAcesso == 5) { ?>
+                <li class="nav-item"><a class="nav-link" href="?section=UsuarioControle&function=recuperarSenhaAcao">Recuperar Senha</a>
                 </li> <?php } ?>
         </ul>
     </div>

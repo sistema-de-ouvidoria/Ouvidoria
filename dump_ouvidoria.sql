@@ -255,7 +255,7 @@ COMMIT;
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuario`
+-- Estrutura da tabela `noticia`
 --
 
 DROP TABLE IF EXISTS `noticia`;
@@ -266,10 +266,23 @@ CREATE TABLE IF NOT EXISTS `noticia`
     `subtitulo` VARCHAR(100)  NOT NULL,
     `descricao` LONGTEXT NOT NULL,
     `data_publicacao` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id_noticia`)
+    `id_imagem` int(11) NOT NULL,
+    PRIMARY KEY (`id_noticia`),
+    KEY `fk_noticia_imagem` (`id_imagem`)
 );
 
+--
+-- Estrutura da tabela `imagem`
+--
 
+DROP TABLE IF EXISTS `imagem`;
+CREATE TABLE IF NOT EXISTS `imagem`
+(
+    `id_imagem` int(11) NOT NULL AUTO_INCREMENT,
+    `nome_imagem` varchar(255) DEFAULT NULL,
+    `caminho_imagem` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`id_imagem`)
+);
 /*!40101 SET CHARACTER_SET_CLIENT = @OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS = @OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;

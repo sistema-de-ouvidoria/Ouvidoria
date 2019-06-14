@@ -41,19 +41,24 @@
 
 <!-- TELA DE CADASTRO -->
 <div class="container mt-4">
-    <form id="form" class="row" action="?section=NoticiaControle&function=cadastrarNoticia" method="post">
+    <form id="form" enctype="multipart/form-data" class="row" action="?section=NoticiaControle&function=cadastrarNoticia" method="post">
         <div class="form-group col-12">
             <label for="titulo">Título:</label>
             <input name="titulo" id="titulo" required class="form-control">
         </div>
         <div class="form-group col-12">
             <label for="subtitulo">Subtítulo:</label>
-            <input id="subtitulo" name="subtitulo" class="form-control" required>
+            <input id="subtitulo" maxlength="250" name="subtitulo" class="form-control" required>
         </div>
         <div class="form-group col-12">
             <label for="editor">Descrição:</label>
             <textarea id="editor" name="editor" required oninvalid="setCustomValidity('O campo sua descrição não pode estar vazio')" onchange="try{setCustomValidity('')}catch(e){}"></textarea>
         </div>
+        <div class="form-group col-12">
+            <label for="imagem">Imagem da manchete:</label>
+            <input name="imagem" type="file" />
+        </div>
+
         <div class="form-group col-12">
             <input name="sent" type="submit" class="btn btn-success col-2 float-right" value="Salvar">
         </div>

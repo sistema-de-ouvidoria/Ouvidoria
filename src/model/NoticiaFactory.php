@@ -2,7 +2,6 @@
 namespace Ouvidoria\model\factory;
 
 require("Conexao.php");
-
 require_once("Noticia.php");
 
 class NoticiaFactory
@@ -30,16 +29,43 @@ class NoticiaFactory
         }
     }
 
+    public function listarNoticiasTelaInicial()
+    {
+        global $conexao;
+        $noticias = array();
+
+        $query = "SELECT id_noticia, titulo, subtitulo, nome_imagem FROM noticia n
+        INNER JOIN imagem i ON n.id_imagem = i.id_imagem
+        ORDER BY n.data_publicacao DESC
+        LIMIT 4";
+
+        try {
+            $resultado = mysqli_query($conexao, $query);
+
+            if (mysqli_num_rows($resultado) > 0) {
+                $noticias = mysqli_fetch_all($resultado);
+
+                return $noticias;
+            } else
+                return NULL;
+
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
+            $result = false;
+        }
+    }
+
     public function salvarNoticia($obj)
     {
         global $conexao;
-        $manifestacao = $obj;
+        $noticia = $obj;
 
         try {
-            $query = "INSERT INTO noticia (titulo, subtitulo, descricao) VALUES ('"
-                . $manifestacao->getTitulo() . "','"
-                . $manifestacao->getSubtitulo() . "','"
-                . $manifestacao->getDescricao() . "')";
+            $query = "INSERT INTO noticia (titulo, subtitulo, descricao, id_imagem) VALUES ('"
+                . $noticia->getTitulo() . "','"
+                . $noticia->getSubtitulo() . "','"
+                . $noticia->getDescricao() . "',"
+                . $noticia->getIdImagem() . ")";
 
             if (mysqli_query($conexao, $query)) {
                 mysqli_insert_id($conexao);

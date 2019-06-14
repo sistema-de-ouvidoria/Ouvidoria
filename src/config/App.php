@@ -4,6 +4,7 @@ namespace Ouvidoria;
 use Ouvidoria\controller\UsuarioControle;
 use Ouvidoria\controller\ManifestacaoControle;
 use Ouvidoria\controller\NoticiaControle;
+use Ouvidoria\model\manager\NoticiaManager;
 
 class App {
     const USUARIO = 'UsuarioControle';
@@ -11,6 +12,7 @@ class App {
     const NOTICIA = 'NoticiaControle';
 
     public function __construct (){
+        $this->noticiaManager = new NoticiaManager();
         $this->handleRequest ();
     }
 
@@ -28,6 +30,7 @@ class App {
                 break;
             default:
                 session_start();
+                $noticias = $this->noticiaManager->listaNoticiasTelaInicial();
                 require('view/telaInicial.php');
                 break;
         }
