@@ -11,6 +11,7 @@
 
     <!-- CSS -->
     <link rel="shortcut icon" href="logo.jpg"/>
+    <link rel="stylesheet" href="style.css">
 
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -52,7 +53,8 @@
         </div>
         <div class="form-group col-12">
             <label for="editor">Descrição:</label>
-            <textarea id="editor" name="editor" required oninvalid="setCustomValidity('O campo sua descrição não pode estar vazio')" onchange="try{setCustomValidity('')}catch(e){}"></textarea>
+            <textarea id="editor" name="editor" required></textarea>
+            <?php if(isset($msgDescricao) && !$msgDescricao): ?> <span style='color:red;' role="alert">O campo descrição não pode estar vazio!</span> <br> <?php endif; ?>
         </div>
         <div class="form-group col-12">
             <label for="imagem">Imagem da manchete:</label>

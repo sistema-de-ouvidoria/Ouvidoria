@@ -18,6 +18,7 @@
     <!-- Nesse caso, este estilo é apenas para inserir imagens -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="shortcut icon" href="logo.jpg"/>
+    <link rel="stylesheet" href="style.css">
 
     <!-- JAVASCRIPT E JQUERY -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -32,7 +33,7 @@
 <!--INICIO DO FORMULÁRIO -->
 
 <br>
-    <div class="container mt-4" align="center">
+    <div class="container mt-2" align="center">
         <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -43,39 +44,41 @@
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
                     <a href="?section=NoticiaControle&function=verNoticia&id=<?=$noticias[0][0]?>">
-                    <img class="d-block w-100" style="opacity: 0.7" src="arquivos/<?=$noticias[0][3]?>" alt="Primeiro Slide">
+                        <img class="d-block w-100 img-carousel" src="arquivos/<?=$noticias[0][3]?>" alt="Primeiro Slide">
+
+                        <div class="carousel-caption">
+                            <h4 class="carousel-font title"><?=$noticias[0][1]?></h4>
+                            <p class="carousel-font subtitle"><?=$noticias[0][2]?></p>
+                        </div>
                     </a>
-                    <div class="carousel-caption">
-                        <h4 class="" style="text-shadow: 1px 1px black"><?=$noticias[0][1]?></h4>
-                        <p style="text-shadow: 1px 1px black"><strong><?=$noticias[0][2]?></strong></p>
-                    </div>
                 </div>
                 <div class="carousel-item">
                     <a href="?section=NoticiaControle&function=verNoticia&id=<?=$noticias[1][0]?>">
-                    <img class="d-block w-100" src="arquivos/<?=$noticias[1][3]?>" alt="Segundo Slide">
+                        <img class="d-block w-100 img-carousel" src="arquivos/<?=$noticias[1][3]?>" alt="Segundo Slide">
+
+                        <div class="carousel-caption d-none d-md-block">
+                            <h4 class="carousel-font title"><?=$noticias[1][1]?></h4>
+                            <p class="carousel-font subtitle"><?=$noticias[1][2]?></p>
+                        </div>
                     </a>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h4 class="" style="text-shadow: 1px 1px black"><?=$noticias[1][1]?></h4>
-                        <p style="text-shadow: 1px 1px black"><?=$noticias[1][2]?></p>
-                    </div>
                 </div>
                 <div class="carousel-item">
                     <a href="?section=NoticiaControle&function=verNoticia&id=<?=$noticias[2][0]?>">
-                    <img class="d-block w-100" src="arquivos/<?=$noticias[2][3]?>" alt="Terceiro Slide">
+                        <img class="d-block w-100 img-carousel" src="arquivos/<?=$noticias[2][3]?>" alt="Terceiro Slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h4 class="carousel-font title"><?=$noticias[2][1]?></h4>
+                            <p class="carousel-font subtitle"><?=$noticias[2][2]?></p>
+                        </div>
                     </a>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h4 class="" style="text-shadow: 1px 1px black"><?=$noticias[2][1]?></h4>
-                        <p style="text-shadow: 1px 1px black"><?=$noticias[2][2]?></p>
-                    </div>
                 </div>
                 <div class="carousel-item">
                     <a href="?section=NoticiaControle&function=verNoticia&id=<?=$noticias[3][0]?>">
-                    <img class="d-block w-100" src="arquivos/<?=$noticias[3][3]?>" alt="Terceiro Slide">
+                        <img class="d-block w-100 img-carousel" src="arquivos/<?=$noticias[3][3]?>" alt="Quarto Slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h4 class="carousel-font title"><?=$noticias[3][1]?></h4>
+                            <p class="carousel-font subtitle"><?=$noticias[3][2]?></p>
+                        </div>
                     </a>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h4 class="" style="text-shadow: 1px 1px black"><?=$noticias[3][1]?></h4>
-                        <p style="text-shadow: 1px 1px black"><?=$noticias[3][2]?></p>
-                    </div>
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -88,7 +91,7 @@
             </a>
         </div>
         <div class="form-group mt-3">
-            <a href="?section=NoticiaControle&function=listarNoticias" type="submit" class="btn btn-primary col-2 float-right">Ver mais notícias...</a>
+            <a href="?section=NoticiaControle&function=listarTodasNoticias" type="submit" class="btn btn-primary col-2 float-right">Ver mais notícias...</a>
         </div>
     </div>
 </body>

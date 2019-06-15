@@ -1,0 +1,37 @@
+.carousel-font {
+    text-shadow: 1px 1px 3px black;
+    font-family: opensans,opensans-bastian,Arial,sans-serif;
+
+}
+
+.title {
+    font-weight: 600;
+    font-size: 26px;
+}
+
+.subtitle {
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.img-carousel {
+    opacity: 1;
+    height: 550px;
+    border-radius: 2px;
+    border: 1px solid black;
+    position: relative;
+    filter: brightness(75%);
+}
+
+body {
+    background-color: #fafafa;
+}
+
+div.msg{
+    text-align: center;
+    margin-left:10px;
+    font-size: 30px;
+}
+strong.sucesso{
+    color: green;
+}

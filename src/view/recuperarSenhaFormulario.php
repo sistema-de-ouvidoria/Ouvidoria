@@ -15,9 +15,9 @@ require ('model/Conexao.php');
 
     <!-- CSS -->
     <link rel="shortcut icon" href="logo.jpg"/>
-
+    <link rel="stylesheet" href="style.css">
     <!-- SCRIPTS -->
-    <script type="text/javascript" src="script.js" /></script>
+    <script type="text/javascript" src="script.js"></script>
 
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">

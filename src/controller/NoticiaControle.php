@@ -31,6 +31,9 @@ class NoticiaControle extends AbstractControle
             case 'cadastrarNoticia':
                 $this->cadastrarNoticia();
                 break;
+            case 'verNoticia':
+                $this->verNoticia();
+                break;
             default:
                 $this->inicio();
                 break;
@@ -86,32 +89,50 @@ class NoticiaControle extends AbstractControle
                             $subtitulo = $_POST['subtitulo'];
                             $descricao = $_POST['editor'];
 
-                            try {
-                                $this->noticiaManager->salvaNoticia($titulo, $subtitulo, $descricao, $id_imagem);
-                                require('view/criarNoticia.php');
-                            } catch (Exception $e) {
-                                $sucess = false;
-                                $msg = $e->getMessage();
+                            if($descricao) {
+                                try {
+                                    $this->noticiaManager->salvaNoticia($titulo, $subtitulo, $descricao, $id_imagem);
+                                    $this->listarNoticias();
+                                } catch (Exception $e) {
+                                    $sucess = false;
+                                    $msg = $e->getMessage();
+                                }
+                            }
+                            else {
+                                $msgDescricao = false;
+                                require ('view/criarNoticia.php');
                             }
                         }
                     }
-                    else
-                        echo 'Erro ao salvar o arquivo. Aparentemente você não tem permissão de escrita.<br />';
+                    else {
+                        echo "<script type=\"text/javascript\">alert(\"Erro ao salvar o arquivo. Aparentemente você não tem permissão de escrita.\");</script>";
+                        require('view/criarNoticia.php');
+                    }
                 }
-                else
-                    echo 'Você poderá enviar apenas arquivos "*.jpg;*.jpeg;*.gif;*.png"<br />';
+                else {
+                    echo "<script type=\"text/javascript\">alert(\"Você poderá enviar apenas arquivos \'*.jpg;*.jpeg;*.gif;*.png.\");</script>";
+                    require('view/criarNoticia.php');
+                }
             }
-            else
-                echo 'Você não enviou nenhum arquivo!';
-
+            else {
+                echo "<script type=\"text/javascript\">alert(\"Você não enviou nenhum arquivo!\");</script>";
+                require('view/criarNoticia.php');
+            }
         }
         else {
-            echo "<script type=\"text/javascript\">alert(\"A notícia não foi salva!\");window.location.href=\"view/criarNoticia.php\";</script>";
+            echo "<script type=\"text/javascript\">alert(\"A notícia não foi salva!\");</script>";
+            require ('view/criarNoticia.php');
         }
     }
 
     public function cadastrarNoticiaAcao()
     {
         require('view/criarNoticia.php');
+    }
+
+    public function verNoticia()
+    {
+        $noticia = $this->noticiaManager->selecionarNoticia($_GET['id']);
+        require('view/verNoticia.php');
     }
 }

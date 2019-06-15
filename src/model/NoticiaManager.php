@@ -30,4 +30,9 @@ class NoticiaManager
         return $this->factory->salvarNoticia($noticia);
     }
 
+    public function selecionarNoticia($id)
+    {
+        return $this->factory->selecionarNoticia($id);
+    }
+
 }

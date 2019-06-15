@@ -29,6 +29,27 @@ class NoticiaFactory
         }
     }
 
+    public function selecionarNoticia($id)
+    {
+        global $conexao;
+
+        $noticia = array();
+
+        $query = "SELECT id_noticia, titulo, subtitulo, descricao, nome_imagem FROM noticia n
+        INNER JOIN imagem i ON n.id_imagem = i.id_imagem
+        WHERE id_noticia = " . $id .";";
+
+        $resultado = mysqli_query($conexao, $query);
+
+        if ($resultado) {
+            $noticia = mysqli_fetch_object($resultado);
+
+            return $noticia;
+        } else {
+            return null;
+        }
+
+    }
     public function listarNoticiasTelaInicial()
     {
         global $conexao;
