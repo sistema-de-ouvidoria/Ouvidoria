@@ -102,4 +102,7 @@ class UsuarioManager
     public function alteraSenha(string $cpf, string $senha){
         return $this->factory->alteraSenha($cpf,$senha);
     }   
+    public function desativaUsuario(String $cpf){
+        return $this->factory->desativaUsuario($cpf);
+    }
 }

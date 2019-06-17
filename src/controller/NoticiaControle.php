@@ -92,6 +92,7 @@ class NoticiaControle extends AbstractControle
                         // tenta mover o arquivo para o destino
 
                         if (move_uploaded_file($_FILES['imagem']['tmp_name'], $destino . $novoNome . "." . $extensao)) {
+                            $id_imagem = $this->imagemManager->salvaImagem($novoNome, $destino);
                             try {
                                 $this->noticiaManager->salvaNoticia($titulo, $subtitulo, $descricao, $id_imagem);
                                 echo "<script type=\"text/javascript\">alert(\"Notícia criada com sucesso!\");</script>";

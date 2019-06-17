@@ -79,6 +79,9 @@ class UsuarioControle extends AbstractControle
             case 'listarUsuarios':
                 $this->listarUsuarios();
                 break;
+            case 'desativaUsuario':
+                $this->desativaUsuario();
+                break;
             case 'recuperarSenhaBotao':
                 $this->recuperarSenhaBotao();
                 break;
@@ -215,7 +218,7 @@ class UsuarioControle extends AbstractControle
             $senha2 = $_POST['senhaConfirmacaoCadastro'];
             $senhaValidada = $this->comparaSenhas($senha1, $senha2);
             $tipo_usuario = 1;
-            if ($cpfValidado) {//Verifica se o CPF existe
+            if (!$cpfValidado) {//Verifica se o CPF existe
                 if ($senhaValidada) {//Verifica se as senhas são iguais
                     $emailUnico = $this->checaEmailUnico($emailCadastro);
                     if ($emailUnico) {//Verifica se o email já foi cadastrado
@@ -330,29 +333,19 @@ class UsuarioControle extends AbstractControle
                 $emailUnico = $this->checaEmailUnico($emailAlterado);
             }
             if ($emailUnico) {
+                echo "entrou email unico";
                 if ($this->usuarioManager->verificaSenhaAntiga($senhaAntigaConfirmacao, $cpfAlterado)) {
-                    if(!empty($senha1) && !empty($senha2)){
-                        try {
-                            if ($senha1 == "") {
-                                $senha1 = $senhaAntigaConfirmacao;
-                            }
-                            $sucesso = $this->usuarioManager->alteraUsuario($cpfAlterado, $nomeAlterado, $enderecoAlterado, $telefoneAlterado, $emailAlterado, $senha1, $id);
-                            echo "teste";
+                    echo "entrou verifica senha antiga";
+                    if((!empty($senha1) && !empty($senha2)) && $this->comparaSenhas($senha1, $senha2)){
+                        if(strlen($senha1) >= 5 ){
+                            try {
+                                    $sucesso = $this->usuarioManager->alteraUsuario($cpfAlterado, $nomeAlterado, $enderecoAlterado, $telefoneAlterado, $emailAlterado, $senha1, $id);
                             echo "<script type=\"text/javascript\">alert(\"O usuário foi alterado com sucesso.\");</script>";
                             $this->alteraDadosAcao();
                         } catch (Exception $e) {
                             $msg = $e->getMessage();
-                        }
-                    }   else {
-                        if (isset($senha1) && isset($senha2) && $this->comparaSenhas($senha1, $senha2)) {
-                            if(strlen($senha1) >= 5 ){
-                                try {
-                                    $sucesso = $this->usuarioManager->alteraUsuario($cpfAlterado, $nomeAlterado, $enderecoAlterado, $telefoneAlterado, $emailAlterado, $senha1, $id);
-                                    $this->alteraDadosAcao();
-                                } catch (Exception $e) {
-                                    $msg = $e->getMessage();
-                                }
-                            }else {
+                            }
+                        }else {
                                 $erro = 5;
                                 $this->errosTelaAlterarDados($nomeAlterado, $cpfAlterado, $enderecoAlterado, $telefoneAlterado, $emailAlterado, $senha1, $senha2, $erro);
                             }
@@ -360,7 +353,7 @@ class UsuarioControle extends AbstractControle
                         }else{
                             $erro = 2;//Senha não confere
                             $this->errosTelaAlterarDados($nomeAlterado, $cpfAlterado, $enderecoAlterado, $telefoneAlterado, $emailAlterado, $senha1, $senha2, $erro);
-                        }}
+                        }
                 }else {
                     $erro = 4;//Senha não confere com a salva no banco de dados
                     $this->errosTelaAlterarDados($nomeAlterado, $cpfAlterado, $enderecoAlterado, $telefoneAlterado, $emailAlterado, $senha1, $senha2, $erro);
@@ -478,6 +471,15 @@ class UsuarioControle extends AbstractControle
         }
     }
 
+    public function desativaUsuario(){
+        $cpf = $_GET['cpf'];
+        if($this->usuarioManager->desativaUsuario($cpf)){
+            echo "<script type=\"text/javascript\">alert('O usuário foi desativado com sucesso!');</script>";
+        }else
+            echo "<script type=\"text/javascript\">alert('Não foi possível desativar este usuário!');</script>";
+        $this->listarUsuarios();
+    }
+
     public function detalharUsuario()
     {
         $tipos = $this->tipoUserManager->listaTipos();
@@ -531,6 +533,7 @@ class UsuarioControle extends AbstractControle
                 echo "<script type=\"text/javascript\">alert('O privilégio deve ser informado!');</script>";
                 $this->detalharUsuario();
             } else {
+                echo "<script type=\"text/javascript\">alert('Privilégios do usuário alterado com sucesso!');</script>";
                 $this->usuarioManager->delegarPrivilegios($_GET['cpf'], $_GET['privilegio']);
                 $this->listarUsuarios();
             }

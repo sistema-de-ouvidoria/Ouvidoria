@@ -97,7 +97,7 @@
                         $tamanho = count($tipos);
                         if(isset($tipos)){
                             echo "<option value = 'null'>Selecione um Privilégio</option>";
-                            for($i = 0; $i < $tamanho; $i = $i + 2){
+                            for($i = 0; $i < $tamanho-2; $i = $i + 2){
                                 echo "<option id='privilegio' value = {$tipos[$i]}";
                                 if($tipoSelecionado == $tipos[$i]) {
                                     echo "selected = 'selected'";
