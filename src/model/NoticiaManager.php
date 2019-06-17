@@ -18,6 +18,11 @@ class NoticiaManager
         return $this->factory->listarNoticias();
     }
 
+    public function listaTodasNoticias()
+    {
+        return $this->factory->listarTodasNoticias();
+    }
+
     public function listaNoticiasTelaInicial()
     {
         return $this->factory->listarNoticiasTelaInicial();
@@ -33,6 +38,11 @@ class NoticiaManager
     public function selecionarNoticia($id)
     {
         return $this->factory->selecionarNoticia($id);
+    }
+
+    public function excluirNoticia($id)
+    {
+        return $this->factory->excluirNoticia($id);
     }
 
 }

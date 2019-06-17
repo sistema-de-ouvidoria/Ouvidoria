@@ -26,15 +26,33 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 </head>
 <body>
-<?php include('menu.php'); ?>
-<div class="noticia"><div class="hora">19:01</div>
-    <a class="foto" href="https://www.campograndenews.com.br/cidades/interior/governo-autoriza-obra-de-rs-871-mil-para-recuperar-avenida-interditada" target="_self">
-        <img alt="" src="" width="76" height="57">
-    </a>
-    <div class="canal">Dourados</div>
-    <h2 class="titulo">
-        <a href="https://www.campograndenews.com.br/cidades/interior/governo-autoriza-obra-de-rs-871-mil-para-recuperar-avenida-interditada" target="_self">Governo autoriza obra de R$ 871 mil para recuperar Avenida interditada</a>
-    </h2><p class="resumo">O governo do Estado, por meio da Agesul (Agência Estadual de Gestão de Empreendimentos) autorizou o início das obras de recuperação da Avenida Presidente Vagas, em Dourados –a 233 km de Campo Grande....</p>
-</div>
+<?php include('menu.php');?>
+<section id="content-section">
+    <h1 class="borderHeading">
+        Últimas notícias
+    </h1>
+    <div class="tile-list-1">
+        <div class="tileItem">
+            <hr/>
+            <?php
+            $i = 0;
+            if (!is_null($noticias)) {
+                for ($i = 0; $i < count($noticias); $i++): ?>
+            <div class="span10 tileContent">
+                <h2 class="tileHeadline">
+                    <a href="?section=NoticiaControle&function=verNoticia&id=<?=$noticias[$i][4]?>"><?=$noticias[$i][0]?></a>
+                </h2>
+                <a href="?section=NoticiaControle&function=verNoticia&id=<?=$noticias[$i][4]?>">
+                    <img src="arquivos/<?=$noticias[$i][1]?>" alt="Imagem da noticia" height="86" width="128" class="tileImage">
+                </a>
+                <span class="description"><?=$noticias[$i][2]?></span>
+                <p><?=$noticias[$i][3]?></p>
+            </div>
+            <hr/>
+            <?php endfor;
+            } ?>
+        </div>
+    </div>
+</section>
 </body>
 </html>

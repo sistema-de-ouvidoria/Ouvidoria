@@ -54,8 +54,8 @@
                     <td><?= $noticias[$i][1] ?></td>
                     <td><?= $noticias[$i][2] ?></td>
                     <td><?= $noticias[$i][4] ?></td>
-                    <td><a class="btn btn-warning" href="?section=UsuarioControle&function=detalharNoticia&id=<?= $noticias[$i][0] ?>">Detalhar</a>
-                    <a class="btn btn-danger" href="?section=UsuarioControle&function=excluirNoticia&id=<?= $noticias[$i][0] ?>">Excluir</a></td>
+                    <td><a class="btn btn-warning" href="?section=NoticiaControle&function=detalharNoticia&id=<?= $noticias[$i][0] ?>">Detalhar</a>
+                    <a class="btn btn-danger" href="?section=NoticiaControle&function=excluirNoticia&id=<?= $noticias[$i][0] ?>">Excluir</a></td>
                 </tr>
             <?php endfor;
         } ?>

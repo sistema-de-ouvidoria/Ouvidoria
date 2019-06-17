@@ -21,12 +21,48 @@ class NoticiaFactory
 
                 return $noticias;
             } else
-                return NULL;
+                return null;
 
         } catch (PDOException $exc) {
             echo $exc->getMessage();
-            $result = false;
+            return null;
         }
+    }
+
+    public function listarTodasNoticias()
+    {
+        global $conexao;
+        $noticias = array();
+
+        $query = "SELECT titulo, i.nome_imagem, subtitulo, data_publicacao, id_noticia FROM noticia n
+        INNER JOIN imagem i ON n.id_imagem = i.id_imagem";
+
+        try {
+            $resultado = mysqli_query($conexao, $query);
+
+            if (mysqli_num_rows($resultado) > 0) {
+                $noticias = mysqli_fetch_all($resultado);
+
+                return $noticias;
+            } else
+                return null;
+
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
+            return null;
+        }
+    }
+
+    public function excluirNoticia($id)
+    {
+        global $conexao;
+
+        $query = "DELETE FROM noticia WHERE id_noticia = " . $id .";";
+
+        $resultado = mysqli_query($conexao, $query);
+
+        return $resultado;
+
     }
 
     public function selecionarNoticia($id)

@@ -30,7 +30,6 @@
 
 <section>
     <h1><?=$noticia->titulo?></h1>
-    <img src="arquivos/<?=$noticia->nome_imagem?>">
     <p><?=$noticia->subtitulo?></p>
     <?=$noticia->descricao?>
 </section>
