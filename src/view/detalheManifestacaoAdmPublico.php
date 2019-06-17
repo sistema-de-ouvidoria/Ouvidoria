@@ -83,7 +83,7 @@ if(!isset($_SESSION['CPF'])){
         </div>
         <div class="form-group col-12">
             <a class="btn btn-success float-right" href="#" onClick="document.getElementById('form').submit();"><span class="fa fa-check"></span> Responder</a>
-            <a class="btn btn-danger float-left" href="?section=ManifestacaoControle&function=recusarManifestacao&id=<?php echo $manifestacao->id_manifestacao; ?>"><span class="fa fa-times"></span> Rejeitar</a>
+            <button name="recusarManifestacao" type="button" class="btn btn-danger   col-2 float-left" data-toggle="modal" data-target="#myModal"><span class="fa fa-wrench"></span>Rejeitar manifestação</button>
         </div>
     </form>
 </div>
@@ -93,5 +93,42 @@ if(!isset($_SESSION['CPF'])){
         $lnk.href = $lnk.href.replace(/resposta=(.*)/, 'resposta=') + el.value;
     }
 </script>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="container-fluid">
+                        <div class="col-sm-12 text-center">
+                            <h5 class="modal-title text-center">Descreva o motivo</h5>
+                        </div>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+            <div class="modal-body">
+                <form method="POST" action="?section=ManifestacaoControle&function=recusarManifestacao">
+                <div class="container-fluid">
+                        <div class="col-sm-12 text-center">
+                        <textarea id="motivoRejeicao" name="motivoRejeicao"rows="6"class="form-control" maxlength="1000" placeholder="Motivo da rejeição" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="container-fluid">
+                        <div class="col-sm-12 text-center">
+                            <input id="idManifestacao" name="idManifestacao" hidden="hidden" value="<?php echo $manifestacao->id_manifestacao;?>">
+                            <input name="recusarManifestacao" type="submit" class="btn btn-danger text-center" value="Rejeitar">
+                            
+                        </div>
+                    </div>
+                </div>
+                </form>    
+                
+            </div>
+        </div>
+    </div>
+
+
 
 </body>

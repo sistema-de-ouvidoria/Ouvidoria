@@ -237,11 +237,11 @@ class ManifestacaoFactory
             return false;
     }
 
-    public function recusaManifestacao($id)
+    public function recusaManifestacao(String $id)
     {
         global $conexao;
         $query = "UPDATE manifestacao SET id_situacao = '1' where id_manifestacao = " . $id . ";";
-
+        
         if (mysqli_query($conexao, $query))
             return true;
         else

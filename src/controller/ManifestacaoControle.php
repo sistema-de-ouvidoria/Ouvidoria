@@ -284,12 +284,14 @@ class ManifestacaoControle extends AbstractControle
 
     public function recusarManifestacao()
     {
-        $id = $_GET['id'];
+        $motivo = $_POST['motivoRejeicao'];
+        var_dump($motivo);
+        $id = $_POST['idManifestacao'];
+        echo $id;
         $adm_publico = $_SESSION['usuario']['cpf'];
         $data = date('Y/m/d');
-        $motivo = "Recusado";
 
-        $this->manifestacaoManager->recusaManifestacao($id);
+        $this->manifestacaoManager->recusaManifestacao($adm_publico,$id,$data,$motivo);
         $this->historicoManager->atualizaHistoricoRecusa($adm_publico, $id, $data, $motivo);
         $this->enviaEmailDoRecusar($id, $adm_publico);
         $this->listar();

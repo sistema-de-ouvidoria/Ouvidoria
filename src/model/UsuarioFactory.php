@@ -273,12 +273,20 @@ class UsuarioFactory
     public function alteraSenha(String $cpf, String $senha){
         global $conexao;
 
-        $query = "UPDATE usuario SET senha = '".$senha."' where cpf = ".$cpf." ;";
-        echo $query;    
+        $query = "UPDATE usuario SET senha = '".$senha."' where cpf = ".$cpf." ;";   
         if(mysqli_query($conexao,$query)){
             return true;
         }else
             return false;
     }
 
-}
+    public function desativaUsuario(String $cpf){
+        global $conexao;
+
+        $query = "UPDATE usuario set id_tipo_usuario = 5 where cpf = ".$cpf.";";
+        if(mysqli_query($conexao,$query)){
+            return true;
+        }else
+            return false;
+        }
+    }

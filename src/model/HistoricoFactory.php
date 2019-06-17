@@ -35,7 +35,7 @@ class HistoricoFactory {
             return false;
     }
 
-    public function atualizarHistoricoRecusa($adm_publico, $protocolo, $data, $motivo) {
+    public function atualizarHistoricoRecusa(String $adm_publico,String $id, String $data, String $motivo) {
         global $conexao;
 
         $query = "UPDATE historico SET adm_publico = '". $adm_publico ."', respondida = 0, data_rejeicao = '". $data."', motivo = '". $motivo."' WHERE manifestacao = " . $protocolo . ";";
