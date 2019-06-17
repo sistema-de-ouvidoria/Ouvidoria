@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title>Detalhe Manifestação</title>
+    <title>Criar Notícia</title>
     <meta charset="utf-8">
     <meta http-equiv=”content-type” content="text/html;" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
