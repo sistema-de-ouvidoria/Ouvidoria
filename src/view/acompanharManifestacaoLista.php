@@ -117,19 +117,7 @@
                     <td><?= $dados[$i][3] ?></td>
                     <td><?= $dados[$i][4] ?></td>
                     <td style="display:none;"><?= $dados[$i][5] ?></td>
-                    <?php if($nvlAcesso == 1): ?>
-                        <td><a class="btn btn-warning"
-                               href="?section=ManifestacaoControle&function=detalharManifestacaoCidadao&id=<?= $dados[$i][0] ?>">Detalhar</a></td>
-                    <?php elseif ($nvlAcesso == 2): ?>
-                        <td><a class="btn btn-warning"
-                               href="?section=ManifestacaoControle&function=detalharManifestacaoOuvidor&id=<?= $dados[$i][0] ?>">Detalhar</a></td>
-                    <?php elseif ($nvlAcesso == 3): ?>
-                        <td><a class="btn btn-warning"
-                               href="?section=ManifestacaoControle&function=detalharManifestacaoAdmPublico&id=<?= $dados[$i][0] ?>">Detalhar</a></td>
-                    <?php elseif ($nvlAcesso == 4): ?>
-                        <td><a class="btn btn-warning"
-                               href="?section=ManifestacaoControle&function=detalharManifestacaoEscolha&id=<?=$dados[$i][0]?>&situacao=<?=$dados[$i][4]?>">Detalhar</a></td>
-                    <?php endif; ?>
+                    <td><a class="btn btn-warning" href="?section=ManifestacaoControle&function=detalharManifestacaoCidadao&id=<?= $dados[$i][0] ?>">Detalhar</a></td>
                 </tr>
             <?php endfor;
         } ?>

@@ -42,7 +42,8 @@
             <th>Titulo</th>
             <th>Subtitulo</th>
             <th>Data da publicação</th>
-            <th>Ações</th>
+            <th>Detalhar</th>
+            <th>Excluir</th>
         </tr>
         </thead>
         <tbody>
@@ -54,8 +55,8 @@
                     <td><?= $noticias[$i][1] ?></td>
                     <td><?= $noticias[$i][2] ?></td>
                     <td><?= $noticias[$i][4] ?></td>
-                    <td><a class="btn btn-warning" href="?section=NoticiaControle&function=detalharNoticia&id=<?= $noticias[$i][0] ?>">Detalhar</a>
-                    <a class="btn btn-danger" href="?section=NoticiaControle&function=excluirNoticia&id=<?= $noticias[$i][0] ?>">Excluir</a></td>
+                    <td><a class="btn btn-warning" href="?section=NoticiaControle&function=detalharNoticia&id=<?= $noticias[$i][0] ?>">Detalhar</a></td>
+                    <td><a class="btn btn-danger" href="?section=NoticiaControle&function=excluirNoticia&id=<?= $noticias[$i][0] ?>">Excluir</a></td>
                 </tr>
             <?php endfor;
         } ?>

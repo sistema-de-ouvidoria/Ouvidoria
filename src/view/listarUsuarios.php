@@ -47,7 +47,7 @@
             <th>Telefone</th>
             <th>Privilégios</th>
             <th>Detalhar</th>
-            <th>Desatviar</th>
+            <th>Desativar</th>
         </tr>
         </thead>
         <tbody>
@@ -63,7 +63,7 @@
                     <td><?= $dados[$i][4] ?></td>
                     <?php if ($nvlAcesso == 4): ?>
                         <td><a class="btn btn-warning" href="?section=UsuarioControle&function=detalharUsuario&cpf=<?= $dados[$i][0] ?>">Detalhar</a></td>
-                        <td><a class="btn btn-warning" href="?section=UsuarioControle&function=desativaUsuario&cpf=<?= $dados[$i][0] ?>">Desativar</a></td>
+                        <td><a class="btn btn-danger" href="?section=UsuarioControle&function=desativaUsuario&cpf=<?= $dados[$i][0] ?>">Desativar</a></td>
                     <?php endif; ?>
                 </tr>
             <?php endfor;

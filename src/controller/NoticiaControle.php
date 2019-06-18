@@ -41,7 +41,7 @@ class NoticiaControle extends AbstractControle
                 $this->verNoticia();
                 break;
             case 'excluirNoticia':
-                $this->excuirNoticia();
+                $this->excluirNoticia();
                 break;
             default:
                 $this->inicio();
@@ -58,8 +58,16 @@ class NoticiaControle extends AbstractControle
 
     public function listarNoticias()
     {
-        $noticias = $this->noticiaManager->listaNoticias();
-        require('view/listarNoticias.php');
+        $nvlAcesso = isset($_SESSION['usuario']['id_tipo_usuario']) ? $_SESSION['usuario']['id_tipo_usuario'] : null;
+
+        if (!is_null($nvlAcesso)) {
+            $noticias = $this->noticiaManager->listaNoticias();
+            require('view/listarNoticias.php');
+        }
+        else {
+            echo 'Você não tem permissão para acessar essa página.';
+            exit();
+        }
     }
 
     public function cadastrarNoticia()
@@ -142,16 +150,18 @@ class NoticiaControle extends AbstractControle
         require('view/verNoticia.php');
     }
 
-    public function excuirNoticia()
+    public function excluirNoticia()
     {
         $this->noticiaManager->excluirNoticia($_GET['id']);
         $this->listarNoticias();
+
     }
 
     public function listarTodasNoticias()
     {
         $noticias = $this->noticiaManager->listaTodasNoticias();
         require('view/verTodasNoticias.php');
+
     }
 
     private function detalharNoticia()

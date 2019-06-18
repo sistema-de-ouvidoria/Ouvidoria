@@ -52,7 +52,7 @@ class ManifestacaoControle extends AbstractControle
                 $this->responderManifestacao();
                 break;
             case 'listar':
-                $this->listar($_SESSION['usuario']['id_tipo_usuario']);
+                $this->listar();
                 break;
             case 'recusarManifestacao':
                 $this->recusarManifestacao();
@@ -76,8 +76,6 @@ class ManifestacaoControle extends AbstractControle
                 $this->clicouLinkVerManifestacaoEmail();
                 break;
             default:
-                $userControl = new UsuarioControle();
-                $userControl->inicio();
                 break;
         }
         session_write_close();
@@ -109,8 +107,15 @@ class ManifestacaoControle extends AbstractControle
 
     public function listarMinhasManifestacoes()
     {
-        $dados = $this->manifestacaoManager->listaMinhasManifestacoes($_SESSION['usuario']['cpf']);
-        require('view/listarMinhasManifestacoes.php');
+        $nvlAcesso = isset($_SESSION['usuario']['id_tipo_usuario']) ? $_SESSION['usuario']['id_tipo_usuario'] : null;
+
+        if (!is_null($nvlAcesso)) {
+            $dados = $this->manifestacaoManager->listaMinhasManifestacoes($_SESSION['usuario']['cpf']);
+            require('view/listarMinhasManifestacoes.php');
+        } else {
+            echo 'Você não tem permissão para acessar essa página.';
+            exit();
+        }
     }
     public function manifestarInteresse()
     {
@@ -137,16 +142,32 @@ class ManifestacaoControle extends AbstractControle
 
     public function listarAcompanharManifestacao()
     {
-        $nvlAcesso = 1;
-        $dados = $this->manifestacaoManager->listaAcompanharManifestacao();
-        require('view/acompanharManifestacaoLista.php');
+
+        $nvlAcesso = isset($_SESSION['usuario']['id_tipo_usuario']) ? $_SESSION['usuario']['id_tipo_usuario'] : null;
+
+        if (!is_null($nvlAcesso)) {
+            $dados = $this->manifestacaoManager->listaAcompanharManifestacao();
+            require('view/acompanharManifestacaoLista.php');
+        } else {
+            echo 'Você não tem permissão para acessar essa página.';
+            exit();
+        }
 
     }
 
     public function criarManifestacaoAcao()
     {
-        $listaTipos = $this->tipoManager->listaTipos();
-        require('view/criarManifestacao.php');
+        $nvlAcesso = isset($_SESSION['usuario']['id_tipo_usuario']) ? $_SESSION['usuario']['id_tipo_usuario'] : null;
+
+        if (!is_null($nvlAcesso)) {
+            $listaTipos = $this->tipoManager->listaTipos();
+            require('view/criarManifestacao.php');
+        } else {
+            echo 'Você não tem permissão para acessar essa página.';
+            exit();
+        }
+
+
     }
 
     public function listar()
