@@ -27,11 +27,15 @@
 </head>
 <body>
 <?php include('menu.php'); ?>
-
-<section>
-    <h1><?=$noticia->titulo?></h1>
-    <p><?=$noticia->subtitulo?></p>
+<div class="container">
+    <br>
+    <br>
+    <h1 class="display-4" align="center"><?=$noticia->titulo?></h1>
+    <h3 class="text-justify" style="color: gray"> <?=$noticia->subtitulo?></h3>
+    <br>
+    <img src="arquivos/<?=$noticia->nome_imagem?>" class="img-thumbnail rounded mx-auto d-block" style="width: 500px; height: auto;">
+    <br>
     <?=$noticia->descricao?>
-</section>
+</div>
 </body>
 </html>
