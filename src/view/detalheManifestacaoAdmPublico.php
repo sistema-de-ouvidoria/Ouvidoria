@@ -66,7 +66,7 @@ if(!isset($_SESSION['CPF'])){
         <div class="form-group col-6">
             <label for="anexo">Anexo:</label>
             <?php
-            $x = (empty($manifestacao->id_anexo)) ? 'sem-anexo' : $manifestacao->id_anexo;
+            $x = (empty($manifestacao->id_anexo)) ? 'error.php' : $manifestacao->id_anexo;
             ?>
             <br>
             <a href="arquivos/<?=$x?>"><span style="font-size: 26px" class="anx glyphicon glyphicon-download-alt"></span></a>
