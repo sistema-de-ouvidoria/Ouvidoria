@@ -134,7 +134,7 @@ class ManifestacaoFactory
 
         if($checarResposta['resposta'] == null){
             if($situacao['id_situacao'] == 2){
-                $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem, nome_orgao_publico
+                $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem, nome_orgao_publico, id_anexo
                 from manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
                 INNER JOIN historico h ON h.manifestacao = m.id_manifestacao
                 INNER JOIN orgaopublico o ON h.orgao_publico = o.id_orgao_publico
@@ -173,7 +173,7 @@ class ManifestacaoFactory
         $manifestacao = array();
 
         $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem, 
-        nome_orgao_publico, resposta FROM manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
+        nome_orgao_publico, resposta, id_anexo FROM manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
         INNER JOIN historico h ON h.manifestacao = m.id_manifestacao
         INNER JOIN orgaopublico o ON h.orgao_publico = o.id_orgao_publico
         INNER JOIN situacao s ON s.id_situacao = m.id_situacao
@@ -196,7 +196,7 @@ class ManifestacaoFactory
 
         $manifestacao = array();
 
-        $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem 
+        $query = "SELECT id_manifestacao, data_manifestacao, assunto, nome, nome_situacao, mensagem, id_anexo 
         from manifestacao m INNER JOIN usuario u ON  m.cidadao_cpf = u.cpf
         INNER JOIN situacao s ON s.id_situacao = m.id_situacao
         WHERE id_manifestacao = " . $id . ";";

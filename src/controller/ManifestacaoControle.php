@@ -249,6 +249,7 @@ class ManifestacaoControle extends AbstractControle
                 $caminho = "C:/wamp64/www/Ouvidoria/src/arquivos/";
 
                 if (move_uploaded_file($_FILES['anexo']['tmp_name'], $caminho . $idAnexo . "." . $extensao)) {
+                    $idAnexo = $idAnexo . "." . $extensao;
                     $this->anexoManager->salvaAnexo($idAnexo, $caminho, $nome_anexo);
                 }
             }
