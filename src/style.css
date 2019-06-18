@@ -88,3 +88,18 @@ strong.sucesso{
 .anx {
     font-size: 25px;
 }
+.font-title {
+    font-size: 22px;
+}
+
+hr {
+    background-color: #A9A9A9;
+}
+
+.container-margin {
+    margin-left: 18px;
+}
+.time {
+     font-size: 14px;
+    margin-top: 75px;
+}

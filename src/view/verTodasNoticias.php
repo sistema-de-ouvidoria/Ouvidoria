@@ -27,32 +27,33 @@
 </head>
 <body>
 <?php include('menu.php');?>
-<section id="content-section">
-    <h1 class="borderHeading col-md-6">
-        Últimas notícias
-    </h1>
-    <div class="tile-list-1">
-        <div class="tileItem">
-            <hr/>
-            <?php
-            $i = 0;
-            if (!is_null($noticias)) {
-                for ($i = 0; $i < count($noticias); $i++): ?>
-            <div class="span10 tileContent col-md-9">
-                <h2 class="tileHeadline">
-                    <a href="?section=NoticiaControle&function=verNoticia&id=<?=$noticias[$i][4]?>"><?=$noticias[$i][0]?></a>
-                </h2>
-                <a href="?section=NoticiaControle&function=verNoticia&id=<?=$noticias[$i][4]?>">
+<br>
+
+<div class="container-fluid mt-3">
+
+    <h1 style="color: #1d75b3">Ultimas notícias</h1>
+    <hr>
+    <section id="content-section">
+    <?php
+    $i = 0;
+    if (!is_null($noticias)) {
+    for ($i = 0; $i < count($noticias); $i++): ?>
+        <div class="container-margin">
+            <div class="row">
+                <div class="col-">
                     <img src="arquivos/<?=$noticias[$i][1]?>" alt="Imagem da noticia" height="86" width="128" class="tileImage">
-                </a>
-                <span class="description"><?=$noticias[$i][2]?></span>
-                <p><?=$noticias[$i][3]?></p>
+                </div>
+                <div class="col-9">
+                    <h1><a class="font-title" href="?section=NoticiaControle&function=verNoticia&id=<?=$noticias[$i][4]?>"><?=$noticias[$i][0]?></a></h1>
+                    <p><?=$noticias[$i][2]?></p>
+                </div>
+                <span class="time"><?=$noticias[$i][3]?></span>
             </div>
-            <hr/>
-            <?php endfor;
-            } ?>
         </div>
-    </div>
-</section>
+        <hr/>
+    <?php endfor;
+    } ?>
+    </section>
+</div>
 </body>
 </html>
