@@ -158,8 +158,6 @@ class UsuarioControle extends AbstractControle
         }
     }
 
-
-
     public function erroRecuperarSenhaFormulario(string $senha, string $cpf, int $erro){
         if($erro == 1){
             $senhaMenor = false;

@@ -180,7 +180,6 @@ class NoticiaControle extends AbstractControle
         require('view/detalharNoticia.php');
     }
 
-
     public function alterarNoticia()
     {
         if (isset($_POST['sent'])) {

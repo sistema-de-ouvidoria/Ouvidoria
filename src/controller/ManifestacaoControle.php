@@ -117,6 +117,7 @@ class ManifestacaoControle extends AbstractControle
             exit();
         }
     }
+
     public function manifestarInteresse()
     {
         $idUsuario = $_SESSION['usuario']['cpf'];
