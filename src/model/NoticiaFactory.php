@@ -125,7 +125,6 @@ class NoticiaFactory
                 . $noticia->getIdImagem() . ")";
 
             if (mysqli_query($conexao, $query)) {
-                mysqli_insert_id($conexao);
                 return true;
             } else {
                 return false;
@@ -136,4 +135,25 @@ class NoticiaFactory
         }
     }
 
+    public function alterarNoticia($titulo, $subtitulo, $descricao, $id)
+    {
+        global $conexao;
+
+        try {
+            $query = "UPDATE noticia SET titulo = '"
+                . $titulo . "', subtitulo = '"
+                . $subtitulo . "', descricao = '"
+                . $descricao . "'WHERE id_noticia = "
+                . $id . ";";
+
+            if (mysqli_query($conexao, $query)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
+            return false;
+        }
+    }
 }

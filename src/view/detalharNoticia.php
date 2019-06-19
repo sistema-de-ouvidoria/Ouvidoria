@@ -42,7 +42,7 @@
 
 <!-- TELA DE CADASTRO -->
 <div class="container mt-4">
-    <form id="form" enctype="multipart/form-data" class="row" action="?section=NoticiaControle&function=cadastrarNoticia" method="post">
+    <form id="form" enctype="multipart/form-data" class="row" action="?section=NoticiaControle&function=alterarNoticia" method="post">
         <div class="form-group col-6">
             <label for="titulo">Título:</label>
             <input name="titulo" value="<?=$noticia->titulo?>" id="titulo" required class="form-control">
@@ -57,8 +57,9 @@
         <div class="form-group col-12">
             <label for="editor">Descrição:</label>
             <textarea id="editor" name="editor" required><?=$noticia->descricao?></textarea>
+            <?php if(isset($msgDescricao) && !$msgDescricao): ?> <span style='color:red;' role="alert">O campo descrição não pode estar vazio!</span> <br> <?php endif; ?>
         </div>
-
+        <input value="<?=$noticia->id_noticia?>" type="hidden" name="id" class="form-control" required>
         <div class="form-group col-12">
             <input name="sent" type="submit" class="btn btn-success col-2 float-right" value="Alterar">
         </div>

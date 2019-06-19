@@ -25,6 +25,9 @@ class NoticiaControle extends AbstractControle
             case 'detalharNoticia':
                 $this->detalharNoticia();
                 break;
+            case 'alterarNoticia':
+                $this->alterarNoticia();
+                break;
             case 'listarNoticias':
                 $this->listarNoticias();
                 break;
@@ -168,5 +171,38 @@ class NoticiaControle extends AbstractControle
     {
         $noticia = $this->noticiaManager->selecionarNoticia($_GET['id']);
         require('view/detalharNoticia.php');
+    }
+
+    private function detalharNoticiaErro($id, $msg)
+    {
+        $noticia = $this->noticiaManager->selecionarNoticia($id);
+        $msgDescricao = $msg;
+        require('view/detalharNoticia.php');
+    }
+
+
+    public function alterarNoticia()
+    {
+        if (isset($_POST['sent'])) {
+            $titulo = $_POST['titulo'];
+            $subtitulo = $_POST['subtitulo'];
+            $descricao = $_POST['editor'];
+            $id = $_POST['id'];
+
+            if ($descricao) {
+                $this->noticiaManager->alterarNoticia($titulo, $subtitulo, $descricao, $id);
+                echo "<script type=\"text/javascript\">alert(\"Notícia alterada com sucesso!\");</script>";
+                $this->listarNoticias();
+            }
+            else {
+                $msg = false;
+                $this->detalharNoticiaErro($id, $msg);
+            }
+        }
+        else {
+            echo "<script type=\"text/javascript\">alert(\"A notícia não foi alterada!\");</script>";
+            require ('view/criarNoticia.php');
+        }
+
     }
 }

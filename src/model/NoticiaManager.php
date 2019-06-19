@@ -35,6 +35,11 @@ class NoticiaManager
         return $this->factory->salvarNoticia($noticia);
     }
 
+    public function alterarNoticia($titulo, $subtitulo, $descricao, $id)
+    {
+        return $this->factory->alterarNoticia($titulo, $subtitulo, $descricao, $id);
+    }
+
     public function selecionarNoticia($id)
     {
         return $this->factory->selecionarNoticia($id);
