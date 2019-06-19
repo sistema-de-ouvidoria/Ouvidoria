@@ -45,7 +45,7 @@
     <form id="form" enctype="multipart/form-data" class="row" action="?section=NoticiaControle&function=cadastrarNoticia" method="post">
         <div class="form-group col-12">
             <label for="titulo">Título:</label>
-            <input name="titulo" id="titulo" required class="form-control">
+            <input name="titulo" id="titulo" maxlength="100" required class="form-control">
         </div>
         <div class="form-group col-12">
             <label for="subtitulo">Subtítulo:</label>

@@ -262,8 +262,8 @@ DROP TABLE IF EXISTS `noticia`;
 CREATE TABLE IF NOT EXISTS `noticia`
 (
     `id_noticia` int(11) NOT NULL AUTO_INCREMENT,
-    `titulo` VARCHAR (50)      NOT NULL,
-    `subtitulo` VARCHAR(100)  NOT NULL,
+    `titulo` VARCHAR (100)      NOT NULL,
+    `subtitulo` VARCHAR(250)  NOT NULL,
     `descricao` LONGTEXT NOT NULL,
     `data_publicacao` DATETIME DEFAULT CURRENT_TIMESTAMP,
     `id_imagem` int(11) NOT NULL,
