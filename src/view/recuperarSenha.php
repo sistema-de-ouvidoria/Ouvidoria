@@ -43,6 +43,7 @@
             <form action="?section=UsuarioControle&function=recuperarSenha<?php if(isset($id) && $id) echo "&id=".$id;?>" method="POST">
                 <label>CPF:</label>
                 <input name="cpf" type="number" onkeypress="return somenteNumerosCPF(event)" id="cpf" class="form-control" maxlength="11" required oninvalid="setCustomValidity('O campo CPF não pode estar vazio')" onchange="try{setCustomValidity('')}catch(e){}"/>
+                <?php if (isset($cpfNaoExiste) && $cpfNaoExiste) echo "<span style='color:red;'>CPF não encontrado!</span>";?>
                 <br>
                 <br>
                 <input type="submit" name="enviado" value="Enviar" class="btn btn-outline-success btn-lg active float-right"/>

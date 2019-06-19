@@ -103,7 +103,6 @@ class UsuarioControle extends AbstractControle
     }
 
     public function recuperarSenha(){
-        echo "teste";
         if(isset($_POST['enviado'])){
             $cpf = $_POST['cpf'];
             $cpfValidado = $this->usuarioManager->checaCPF($cpf);
@@ -117,6 +116,10 @@ class UsuarioControle extends AbstractControle
                                 $this->email->enviarEmail($emailDestino, $assunto, $texto);
                 echo "<script type=\"text/javascript\">alert(\"Um link para recuperação de senha foi enviado para o e-mail cadastrado.\");</script>";
                 include 'view/recuperarSenha.php';
+            }
+            else{
+                $cpfNaoExiste = true;
+                require ('view/recuperarSenha.php');
             }
         }
     }
